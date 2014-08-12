@@ -771,7 +771,7 @@ class LicenseSelector
     if choices? and choices.length > 0
       licenses = []
       for choice in _.flatten(choices)
-        license = @licenses[license] if _.isString(choice)
+        license = @licenses[choice] if _.isString(choice)
         licenses.push license
       @licensesList.update(licenses)
     # if (@licensesList.availableLicenses.length == 1)
