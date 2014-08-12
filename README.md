@@ -1,9 +1,10 @@
-License Selector
-==========
+# License Selector
 
 JQuery plugin for easy selection of various licenses
 
-# Development #
+[See demo](https://ufal.github.io/lindat-license-selector)
+
+## Development
 
     > npm install
     > grunt start
