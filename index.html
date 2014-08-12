@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>License Selector</title>
+
+    <!-- dependencies -->
+    <script type="text/javascript" src="vendor/jquery.js"></script>
+    <script type="text/javascript" src="vendor/lodash.js"></script>
+
+    <!-- implementation -->
+    <script type="text/javascript" src="lib/license-selector.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $('<a href="#!">Click to open selector</a>')
+          .appendTo('body')
+          .licenseSelector({onLicenseSelected : function (license) {
+            $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
+            console.log(license)
+        }}).click();
+      });
+    </script>
+
+    <link rel="stylesheet" href="lib/license-selector.css">
+    <!-- <link rel="stylesheet" href="vendor/css/bootstrap.min.css"> -->
+    <style>
+      pre {
+        display: block;
+        padding: 9.5px;
+        margin: 0 0 10px;
+        font-size: 13px;
+        line-height: 1.42857143;
+        color: #333;
+        word-break: break-all;
+        word-wrap: break-word;
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+  </body>
+</html>

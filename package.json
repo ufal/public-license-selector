@@ -1,0 +1,20 @@
+{
+  "name": "LicenseSelector",
+  "version": "0.0.1",
+  "repository": "https://github.com/ufal/lindat-license-selector",
+  "dependencies": {},
+  "devDependencies": {
+    "coffee-script": "~1.6.3",
+    "connect-livereload": "^0.4.0",
+    "express": "~3.4.0",
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.8",
+    "grunt-coffeelint": "0.0.6",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-connect": "~0.7.0",
+    "grunt-contrib-watch": "^0.6.1"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}
