@@ -1,7 +1,15 @@
 {
   "name": "LicenseSelector",
+  "title": "License Selector",
   "version": "0.0.1",
-  "repository": "https://github.com/ufal/lindat-license-selector",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ufal/lindat-license-selector.git"
+  },
+  "description": "JQuery plugin for easy selection of various licenses",
+  "homepage": "http://ufal.github.io/lindat-license-selector",
+  "package": false,
+  "bower": true,
   "dependencies": {},
   "devDependencies": {
     "coffee-script": "~1.6.3",
@@ -12,9 +20,23 @@
     "grunt-coffeelint": "0.0.6",
     "grunt-contrib-coffee": "~0.7.0",
     "grunt-contrib-connect": "~0.7.0",
-    "grunt-contrib-watch": "^0.6.1"
+    "grunt-contrib-watch": "^0.6.1",
+    "projectz": "^0.3.15"
   },
   "engines": {
     "node": ">=0.8.0"
+  },
+  "author": "2014 Institute of Formal and Applied Linguistics (http://ufal.mff.cuni.cz)",
+  "maintainers": [
+    "Michal Sedlák <sedlak@ufal.mff.cuni.cz>"
+  ],
+  "contributors": [
+    "m1ch4ls (https://github.com/m1ch4ls)"
+  ],
+  "license": {
+    "type": "MIT"
+  },
+  "bugs": {
+    "url": "https://github.com/ufal/lindat-license-selector/issues"
   }
 }
