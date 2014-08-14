@@ -59,25 +59,26 @@
   line-height: 1.5;
 }
 
-.ls-history-progress, .ls-history-next, .ls-history-prev {
+.ls-history-progress, .ls-history-next, .ls-history-prev, .ls-restart {
   float: left;
   height: 20px;
   line-height: 20px;
 }
 
 .ls-history .ls-history-progress span {
-  display: block;
+  transition: 0.2s;
+  display: inline-block;
   float: left;
   height: 20px;
   line-height: 20px;
   margin: 0 1px;
-  background: green;
+  background: #111;
   width: 10px;
   cursor: pointer;
 }
 
 .ls-history .ls-history-progress span:hover, .ls-history .ls-history-progress span.ls-active {
-  background: blue;
+  background: #3db3e5;
 }
 
 .ls-question {

@@ -410,41 +410,54 @@ QuestionDefinitions =
 class History
 
   constructor: (@parent, @licenseSelector) ->
-    @current = 0
+    @current = -1
     @historyStack = []
     @prevButton = $('<button/>')
       .addClass('ls-history-prev')
+      .attr('title', 'Previous question')
+      .append($('<span/>').addClass('icon-left'))
       .click => @go(@current - 1)
 
     @nextButton = $('<button/>')
       .addClass('ls-history-next')
+      .attr('title', 'Next question')
+      .append($('<span/>').addClass('icon-right'))
       .click => @go(@current + 1)
 
     @restartButton = $('<button/>')
       .addClass('ls-restart')
+      .attr('title', 'Start again')
       .append($('<span/>').addClass('icon-ccw'))
       .append(' Start again')
       .click => @licenseSelector.restart()
 
     @progress = $('<div/>').addClass('ls-history-progress')
-    # @progress.append($('<span/>'))
-    # @progress.append($('<span/>'))
-    # @progress.append($('<span/>'))
-    # @progress.append($('<span/>'))
     $('<div/>').addClass('ls-history')
       .append(@restartButton)
-      # .append(@prevButton)
-      # .append(@progress)
-      # .append(@nextButton)
+      .append(@prevButton)
+      .append(@progress)
+      .append(@nextButton)
       .appendTo(@parent)
     @update()
 
   go: (point) ->
     @current = point
+    @licenseSelector.setState _.clone @historyStack[@current]
+
+    #console.log @current
     @update()
+    return
+
+  reset: ->
+    @current = -1;
+    @historyStack = []
+    @update()
+    return
 
   update: ->
     progressBarBlocks = @progress.children()
+    # remove class ls-active from all children
+    # then get @current and addClass 'ls-active'
     if progressBarBlocks.size() > 0
       activeBlock = progressBarBlocks.removeClass('ls-active').get(@current)
       $(activeBlock).addClass('ls-active') if activeBlock?
@@ -454,28 +467,26 @@ class History
     return
 
   pushState: (state) ->
+    # shallow clone of the state
+    state = _.clone state
+
     # Trim stack if needed
-    @historyStack = @history.slice(0, @current) if @historyStack.length > @current + 1
-    @historyStack.push(state)
     @current += 1
+    @historyStack = @historyStack.slice(0, @current) if @historyStack.length > @current
+    @historyStack.push(state)
+
+    #console.log @historyStack
 
     # trim progress bar
     progressBarBlocks = @progress.children().size()
     index = @current + 1
     if progressBarBlocks > index
-      @progress.children(":gt(#{@index})").remove()
+      @progress.children().slice(index).remove()
     else
       that = @
       @progress.append($('<span/>').click -> that.go(that.progress.children().index(@)))
     @update()
     return
-
-  popState: ->
-    state = @historyStack.pop()
-    @current -= 1
-    @progress.children(':last').remove()
-    @update()
-    return state
 
 class Question
 
@@ -757,7 +768,15 @@ class LicenseSelector
 
   restart: ->
     @licensesList.update(@licenses)
+    @historyModule.reset()
+    @state = {}
     @goto @options.start
+    return
+
+  setState: (state) ->
+    @state = state
+    @licensesList.update(state.licenses)
+    @goto @state.question, false
     return
 
   selectLicense: (license, force = false) ->
@@ -787,11 +806,12 @@ class LicenseSelector
   goto: (where, safeState = true) ->
     @questionModule.show()
     @state.question = where
+    @state.licenses ?= @licenses
     @state.finished = false
     func = @questions[where]
     func.call(@)
 
-    #@historyModule.saveState(@state) if safeState
+    @historyModule.pushState(@state) if safeState
     return
 
   question: (text) ->
