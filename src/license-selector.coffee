@@ -631,10 +631,14 @@ class Search
       )
       .on 'input', => @licenseList.filter(@textbox.val())
 
-    container = $('<div/>')
+    @container = $('<div/>')
       .addClass('ls-search')
       .append(@textbox)
       .appendTo(@parent)
+
+  hide: -> @container.hide()
+
+  show: -> @container.show()
 
 class LicenseList
   comperator = (obj, text) ->
@@ -662,9 +666,13 @@ class LicenseList
     el.data 'license', license
     return el
 
-  hide: -> @container.hide()
+  hide: ->
+    @parent.hide()
+    @licenseSelector.searchModule.hide()
 
-  show: -> @container.show()
+  show: ->
+    @parent.show()
+    @licenseSelector.searchModule.show()
 
   filter: (newterm) ->
     if (newterm isnt @term)
