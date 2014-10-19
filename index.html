@@ -11,12 +11,36 @@
     <script type="text/javascript" src="lib/license-selector.js"></script>
     <script type="text/javascript">
       $(function() {
-        $('<a href="#!">Click to open selector</a>')
+        $('<p><a href="#!">Click to open selector</a></p>')
           .appendTo('body')
           .licenseSelector({onLicenseSelected : function (license) {
             $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
             console.log(license)
-        }}).click();
+          }
+        }).click();
+        
+        $('<p><a href="#!">Click to open selector with modified options</a></p>')
+          .appendTo('body')
+          .licenseSelector({
+            licenses: {
+              'abc-license': {
+                name: 'ABC license',
+                priority: 1,
+                available: true,
+                url: 'http://www.example.com/abc-license',
+                description: 'This is ABC license inserted as a test',
+                categories: ['data', 'abc']
+              },
+              'cc-by': {
+                description: 'Modified description ...'
+              }
+            },
+            start: 'DataCopyrightable',
+            onLicenseSelected : function (license) {
+              $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
+              console.log(license)
+            }
+          });
       });
     </script>
 

@@ -668,7 +668,7 @@ class LicenseList
 
   createElement: (license) ->
     el = $ '<li />'
-    select = (e) => 
+    select = (e) =>
       return if e.target && $(e.target).is('button, a')
       @selectLicense(license, el)
       @licenseSelector.selectLicense license
@@ -887,9 +887,20 @@ class LicenseSelector
     @state.licenses = _.clone @licensesList.availableLicenses
 
 
-$.fn.licenseSelector = (options) ->
+$.fn.licenseSelector = (options, args...) ->
   return @each ->
-    ls = new LicenseSelector(LicenseDefinitions, QuestionDefinitions, options)
+    if args.length > 0
+      throw new Error('Method has to be a string') unless _.isString(options)
+      ls = $(this).data('license-selector')
+      method = ls[options]
+      throw new Error("Method #{options} does't exists") unless method?
+      return method.apply(ls, args)
+    
+    licenses = _.merge(LicenseDefinitions, options.licenses)
+    questions = _.merge(QuestionDefinitions, options.questions)
+    delete options.questions
+    delete options.licenses
+    ls = new LicenseSelector(licenses, questions, options)
     $(this).data('license-selector', ls)
     $(this).click (e) ->
       ls.modal.show()
