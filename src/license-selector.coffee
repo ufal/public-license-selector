@@ -551,7 +551,7 @@ class Question
     label = $('<label/>').append(checkbox)
     span = $('<span/>')
     for license in option.licenses
-      span.append($('<span/>').text(license.name))
+      span.append($('<span/>').addClass('ls-license-name').text(license.name))
     label.append(span).appendTo($('<li/>').appendTo(@options))
     return
 

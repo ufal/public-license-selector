@@ -47,6 +47,10 @@
   cursor: not-allowed;
 }
 
+.ls-license-name {
+  display: block;
+}
+
 .ls-history {
   height: 20px;
   line-height: 20px;
