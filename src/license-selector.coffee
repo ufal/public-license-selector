@@ -29,8 +29,8 @@ LicenseDefinitions =
     name: 'Creative Commons Attribution (CC-BY)'
     priority: 1
     available: true
-    url: 'http://creativecommons.org/licenses/by/4.0/'
-    description: 'This is the ‘standard’ creative commons license that gives others maximum freedom to do what they want with your work.'
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+    description: 'This is the standard creative commons license that gives others maximum freedom to do what they want with your work.'
     categories: ['data', 'by']
 
   'odc-by':
@@ -45,7 +45,7 @@ LicenseDefinitions =
     name: 'Creative Commons Attribution-ShareAlike (CC-BY-SA)'
     priority: 1
     available: true
-    url: 'https://creativecommons.org/licenses/by-sa/4.0'
+    url: 'http://creativecommons.org/licenses/by-sa/3.0/'
     description: 'This creative commons license is very similar to the regular Attribution license, but requires you to release all derivative works under this same license.'
     categories: ['data', 'by', 'sa']
 
@@ -61,15 +61,15 @@ LicenseDefinitions =
     name: 'Creative Commons Attribution-NoDerivs (CC-BY-ND)'
     priority: 1
     available: true
-    url: 'https://creativecommons.org/licenses/by-nd/4.0'
-    description: 'The no derivatives creative commons license is straightforward; you can take a work released under this license and re-distribute it but you can’t change it.'
+    url: 'http://creativecommons.org/licenses/by-nd/3.0/'
+    description: 'The no derivatives creative commons license is straightforward; you can take a work released under this license and re-distribute it but you cannot change it.'
     categories: ['data', 'by', 'nd']
 
   'cc-by-nc':
     name: 'Creative Commons Attribution-NonCommercial (CC-BY-NC)'
     priority: 1
     available: true
-    url: 'https://creativecommons.org/licenses/by-nc/4.0'
+    url: 'http://creativecommons.org/licenses/by-nc/3.0/'
     description: 'A creative commons license that bans commercial use.'
     categories: ['data', 'by', 'nc']
 
@@ -77,7 +77,7 @@ LicenseDefinitions =
     name: 'Creative Commons Attribution-NonCommercial-ShareAlike (CC-BY-NC-SA)'
     priority: 1
     available: true
-    url: 'https://creativecommons.org/licenses/by-nc-sa/4.0'
+    url: 'http://creativecommons.org/licenses/by-nc-sa/3.0/'
     description: 'A creative commons license that bans commercial use and requires you to release any modified works under this license.'
     categories: ['data', 'by', 'nc', 'sa']
 
@@ -85,11 +85,19 @@ LicenseDefinitions =
     name: 'Creative Commons Attribution-NonCommercial-NoDerivs (CC-BY-NC-ND)'
     priority: 1
     available: true
-    url: 'https://creativecommons.org/licenses/by-nc-nd/4.0'
+    url: 'http://creativecommons.org/licenses/by-nc-nd/3.0/'
     description: 'The most restrictive creative commons license. This only allows people to download and share your work for no commercial gain and for no other purposes.'
     categories: ['data', 'by', 'nc', 'nd']
 
-  'perl-artistic':
+  'perl-artistic-1':
+    name: 'Artistic License 1.0'
+    priority: 2
+    available: true
+    url: 'http://opensource.org/licenses/Artistic-Perl-1.0'
+    description: 'NOTE: This license has been superseded by the Artistic License, Version 2.0. This is a license for software packages with the intent of giving the original copyright holder some measure of control over his software while still remaining open source. It is flexible and allows you to distribute or sell modified versions as long as you fulfill one of various conditions. Look at section 4 in the full text for a better explanation.'
+    categories: ['software', 'perl']
+
+  'perl-artistic-2':
     name: 'Artistic License 2.0'
     priority: 1
     available: true
@@ -109,7 +117,7 @@ LicenseDefinitions =
     name: 'GNU General Public License 2 (GPL-2.0)'
     priority: 10
     available: false
-    url: 'http://opensource.org/licenses/GPL-2.0'
+    url: 'http://www.gnu.org/licenses/gpl-2.0.html'
     description: 'Standard GNU GPL version 2 but without support for later versions i.e. you cannot relicense under GPL 3.'
     categories: ['software', 'gpl', 'copyleft', 'strong']
 
@@ -189,7 +197,7 @@ LicenseDefinitions =
     name: 'The MIT License (MIT)'
     priority: 1
     available: true
-    url: 'http://opensource.org/licenses/MIT'
+    url: 'http://opensource.org/licenses/mit-license.php'
     description: 'A short, permissive software license. Basically, you can do whatever you want as long as you include the original copyright and license.'
     categories: ['software', 'permissive']
 
@@ -449,7 +457,7 @@ class History
     return
 
   reset: ->
-    @current = -1;
+    @current = -1
     @historyStack = []
     @update()
     return
