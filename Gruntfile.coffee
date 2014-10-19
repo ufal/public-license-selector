@@ -2,10 +2,7 @@ LIVERELOAD_PORT = 35729
 lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT })
 
 module.exports = (grunt) ->
-  grunt.loadNpmTasks('grunt-contrib-coffee')
-  grunt.loadNpmTasks('grunt-coffeelint')
-  grunt.loadNpmTasks('grunt-contrib-connect')
-  grunt.loadNpmTasks('grunt-contrib-watch')
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks)
 
   grunt.initConfig
     pkg: grunt.file.readJSON('package.json')
@@ -17,7 +14,13 @@ module.exports = (grunt) ->
       livereload:
         options:
           livereload: LIVERELOAD_PORT
-        files: ['*.html', '*.coffee']
+        files: ['*.html', 'lib/*.js', 'lib/*.css']
+
+    open:
+      dev:
+        path: 'http://localhost:1337'
+        options:
+          openOn: 'connect.livereload.listening'
 
     coffee:
       # prototype:
@@ -49,7 +52,7 @@ module.exports = (grunt) ->
           port: 1337
           hostname: 'localhost'
           livereload: LIVERELOAD_PORT
-          middleware: (connect) =>
+          middleware: (connect) ->
             connect.static.mime.define(
               'image/svg+xml': ['svg']
               'application/x-font-ttf' : ['ttf']
@@ -66,5 +69,5 @@ module.exports = (grunt) ->
     rm('lib')
 
   grunt.registerTask('lint', ['coffeelint'])
-  grunt.registerTask('start', ['default', 'connect:livereload', 'watch'])
+  grunt.registerTask('start', ['default', 'open:dev', 'connect:livereload', 'watch'])
   grunt.registerTask('default', ['coffee', 'lint'])
