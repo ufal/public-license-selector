@@ -667,6 +667,7 @@ class LicenseList
   createElement: (license) ->
     el = $ '<li />'
     select = (e) => 
+      return if e.target && $(e.target).is('button, a')
       @selectLicense(license, el)
       @licenseSelector.selectLicense license
       e.preventDefault()
@@ -675,6 +676,7 @@ class LicenseList
       .append($('<span/>').addClass('ls-select').text('Select'))
       .append($('<span/>').addClass('ls-confirm').text('Confirm'))
       .click(select)
+    el.click(select)
     h = $('<h4 />').text(license.name)
     h.append($('<a/>').attr({
       href: license.url
