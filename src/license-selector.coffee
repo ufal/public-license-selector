@@ -459,6 +459,7 @@ class History
   reset: ->
     @current = -1
     @historyStack = []
+    @progress.empty()
     @update()
     return
 
@@ -471,7 +472,7 @@ class History
       $(activeBlock).addClass('ls-active') if activeBlock?
 
     @nextButton.attr('disabled', @historyStack.length == 0 || @historyStack.length == @current + 1)
-    @prevButton.attr('disabled', @current == 0)
+    @prevButton.attr('disabled', @current <= 0)
     return
 
   pushState: (state) ->
@@ -488,11 +489,12 @@ class History
     # trim progress bar
     progressBarBlocks = @progress.children().size()
     index = @current + 1
-    if progressBarBlocks > index
-      @progress.children().slice(index).remove()
-    else
-      that = @
-      @progress.append($('<span/>').click -> that.go(that.progress.children().index(@)))
+    if progressBarBlocks != index
+      if progressBarBlocks > index
+        @progress.children().slice(index).remove()
+      else
+        that = @
+        @progress.append($('<span/>').click -> that.go(that.progress.children().index(@)))
     @update()
     return
 
