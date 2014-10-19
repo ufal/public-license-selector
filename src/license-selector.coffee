@@ -656,7 +656,10 @@ class LicenseList
   constructor: (@parent, @licenseSelector) ->
     @availableLicenses = _.where @licenseSelector.licenses, { available: true }
     @list = $('<ul />')
+    @error = $('<div/>').addClass('ls-not-found').append($('<h4/>').text('No license found')).append('Try change the search criteria or start the questionnaire again.')
+    @error.hide()
     @container = $('<div class="ls-license-list" />')
+      .append(@error)
       .append(@list)
       .appendTo(@parent)
     @update()
@@ -738,6 +741,11 @@ class LicenseList
         else
           @list.prepend el
         previous = el
+
+    if @list.children().size() == 0
+      @error.show()
+    else
+      @error.hide()
     return
 
   has: (category) ->
