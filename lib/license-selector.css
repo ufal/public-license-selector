@@ -57,6 +57,14 @@
   margin-bottom: 15px;
 }
 
+.ls-history > button {
+  margin: 0 2px;
+}
+
+.ls-history > button:first-child {
+  margin: 0 2px 0 0;
+}
+
 .license-selector .ls-restart, .license-selector .ls-history-next, .license-selector .ls-history-prev {
   padding: 1px 5px;
   font-size: 12px;
