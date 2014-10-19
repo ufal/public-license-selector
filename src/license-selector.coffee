@@ -666,13 +666,22 @@ class LicenseList
 
   createElement: (license) ->
     el = $ '<li />'
+    select = (e) => 
+      @selectLicense(license, el)
+      @licenseSelector.selectLicense license
+      e.preventDefault()
+ 
     chooseButton = $('<button/>')
       .append($('<span/>').addClass('ls-select').text('Select'))
       .append($('<span/>').addClass('ls-confirm').text('Confirm'))
-      .click =>
-        @selectLicense(license, el)
-        @licenseSelector.selectLicense license
-    el.append($('<h4 />').text(license.name).append(chooseButton))
+      .click(select)
+    h = $('<h4 />').text(license.name)
+    h.append($('<a/>').attr({
+      href: license.url
+      target: '_blank'
+    }).addClass('ls-button').text('See full text')) if license.url
+    h.append(chooseButton)
+    el.append(h)
     el.append($('<p />').text(license.description)) unless _.isEmpty(license.description)
     el.data 'license', license
     return el

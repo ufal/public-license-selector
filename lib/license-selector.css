@@ -205,7 +205,7 @@
   color: #777;
 }
 
-.ls-license-list li button {
+.ls-license-list li button, .ls-license-list li .ls-button {
   display: none;
   padding: 1px 5px;
   font-size: 12px;
@@ -214,7 +214,7 @@
   vertical-align: middle;
 }
 
-.ls-license-list li:hover button, .ls-license-list li.ls-active button {
+.ls-license-list li:hover button, .ls-license-list li.ls-active button, .ls-license-list li:hover .ls-button, .ls-license-list li.ls-active .ls-button {
   display: inline-block;
 }
 
