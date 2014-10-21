@@ -20,7 +20,10 @@
     "grunt-coffeelint": "0.0.13",
     "grunt-contrib-coffee": "~0.12.0",
     "grunt-contrib-connect": "~0.8.0",
+    "grunt-contrib-less": "^0.11.4",
+    "grunt-contrib-uglify": "^0.6.0",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-lesslint": "^1.1.12",
     "grunt-open": "^0.2.3",
     "matchdep": "^0.3.0",
     "projectz": "^0.3.15"

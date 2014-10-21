@@ -1,0 +1,313 @@
+@import 'variables';
+@import 'mixins';
+@import 'modal';
+
+/* Font icons by http://fontello.com/ */
+
+@font-face {
+  font-family: 'ls-icons';
+  src: url('../vendor/fonts/ls-icons.eot?42991147');
+  src: url('../vendor/fonts/ls-icons.eot?42991147#iefix') format('embedded-opentype'),
+       url('../vendor/fonts/ls-icons.svg?42991147#ls-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ls-icons';
+  src: data-uri('../vendor/fonts/ls-icons.woff') format('woff'),
+       data-uri('../vendor/fonts/ls-icons.ttf') format('truetype');
+}
+
+.license-selector {
+
+  .modal();
+
+  font: 14px/1.4 Helvetica Neue, sans-serif;
+  color: @textColor;
+  line-height: 1.3;
+
+  h2, h3, h4 {
+    font-weight: 500;
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 22px;
+  }
+
+  h4 {
+    font-size: 20px;
+  }
+
+  p {
+    margin: 0 0 10px;
+  }
+
+  button, a.ls-button {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 0; // For input.btn
+    font-size: @baseFontSize;
+    line-height: @baseLineHeight;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    .button-background(@btnBackground, @btnBackgroundHighlight, @grayDark, 0 1px 1px rgba(255,255,255,.75));
+    border: 1px solid @btnBorder;
+    *border: 0; // Remove the border to prevent IE7's black border on input:focus
+    border-bottom-color: darken(@btnBorder, 10%);
+    .border-radius(@baseBorderRadius);
+    .box-shadow(~"inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05)");
+
+    // Hover/focus state
+    &:hover,
+    &:focus {
+      color: @grayDark;
+      text-decoration: none;
+      background-position: 0 -15px;
+
+      // transition is only when going to hover/focus, otherwise the background
+      // behind the gradient (there for IE<=9 fallback) gets mismatched
+      .transition(background-position .1s linear);
+    }
+
+    // Active state
+    &.active,
+    &:active {
+      background-image: none;
+      outline: 0;
+      .box-shadow(~"inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05)");
+    }
+
+    // Disabled state
+    &.disabled,
+    &[disabled] {
+      cursor: default;
+      background-image: none;
+      .opacity(65);
+      .box-shadow(none);
+    }
+  }
+
+  .icon(@content) {
+    &:before {
+      content: @content;
+      font-family: "ls-icons";
+      font-style: normal;
+      font-weight: normal;
+      speak: none;
+
+      display: inline-block;
+      text-decoration: inherit;
+      width: 1em;
+      margin-right: .2em;
+      text-align: center;
+      /* opacity: .8; */
+
+      /* For safety - reset parent styles, that can break glyph codes*/
+      font-variant: normal;
+      text-transform: none;
+
+      /* fix buttons height, for twitter bootstrap */
+      line-height: 1em;
+
+      /* Animation center compensation - margins should be symmetric */
+      /* remove if not needed */
+      margin-left: .2em;
+
+      /* you can be more comfortable with increased icons size */
+      /* font-size: 120%; */
+
+      /* Uncomment for 3D effect */
+      /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+    }
+  }
+
+  .icon-left { .icon('\e800'); } /* '' */
+  .icon-right { .icon('\e801'); } /* '' */
+  .icon-ccw { .icon('\e802'); } /* '' */
+
+  .ls-license-name {
+    display: block;
+  }
+
+  .ls-history {
+    height: 20px;
+    margin-bottom: 15px;
+  }
+
+  .ls-history > button {
+    margin: 0 2px;
+  }
+
+  .ls-history > button:first-child {
+    margin: 0 2px 0 0;
+  }
+
+  .ls-restart, .ls-history-next, .ls-history-prev {
+    padding: @paddingSmall;
+    font-size: @fontSizeSmall;
+    .border-radius(@borderRadiusSmall);
+  }
+
+  .ls-history-progress, .ls-history-next, .ls-history-prev, .ls-restart {
+    float: left;
+  }
+
+  .ls-history .ls-history-progress button {
+    padding: @paddingSmall;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin: 0 1px;
+    font-size: @fontSizeSmall;
+    .border-radius(@borderRadiusSmall);
+
+    &.ls-active {
+      .button-background(@btnPrimaryBackground, @btnPrimaryBackgroundHighlight);
+    }
+  }
+
+  .ls-question {
+    padding: 15px;
+    border-radius: 4px;
+    background: #eee;
+    /*margin-bottom: 10px;*/
+    border: 1px solid #ccc;
+  }
+
+  .ls-question-answers button {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .ls-question-options {
+    margin-bottom: 5px;
+  }
+
+  .ls-question-options ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ls-question-options label {
+    position: relative;
+    font-weight: normal;
+    display: inline-block;
+    margin-bottom: 5px;
+    padding-left: 20px;
+    cursor: pointer;
+  }
+
+  .ls-question-options input[type=checkbox] {
+    position: absolute;
+    margin: 4px 0 0 -20px;
+    padding: 0;
+  }
+
+  .ls-question-error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+
+  .ls-question-error h4, .ls-not-found h4 {
+    color: #a94442;
+    font-weight: bold;
+    margin: 5px 0 5px 0;
+  }
+
+  /* Taken from bootstrap http://getbootstrap.com/css/#forms */
+
+  .ls-search {
+    padding: 10px 0 0 0;
+
+    input {
+      display: block;
+      width: 100%;
+      height: 34px;
+      padding: 6px 12px;
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #555;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      .box-shadow(inset 0 1px 1px rgba(0,0,0,0.075));
+      .transition(border-color ease-in-out 0.15s,-webkit-box-shadow ease-in-out 0.15s);
+      box-sizing: border-box;
+
+      &:focus {
+        border-color: #3db3e5;
+        outline: 0;
+        .box-shadow(inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6));
+      }
+    }
+  }
+
+  .ls-license-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ls-license-list li {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 5px 0;
+    cursor: pointer;
+  }
+
+  .ls-license-list h4 {
+    position: relative;
+    margin: 5px 0 5px 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .ls-license-list li p {
+    color: #777;
+  }
+
+  .ls-license-list li button, .ls-license-list li .ls-button {
+    display: none;
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 0 0 2px 7px;
+    vertical-align: middle;
+  }
+
+  .ls-license-list li:hover button, .ls-license-list li.ls-active button, .ls-license-list li:hover .ls-button, .ls-license-list li.ls-active .ls-button {
+    display: inline-block;
+  }
+
+  .ls-license-list li:hover p, .ls-license-list li.ls-active p {
+    color: inherit;
+  }
+
+  .ls-license-list li .ls-confirm, .ls-license-list li.ls-active .ls-select {
+    display: none;
+  }
+
+  .ls-license-list li.ls-active {
+    border: 2px solid @linkColor;
+  }
+
+  .ls-license-list li.ls-active .ls-confirm, .ls-license-list li .ls-select {
+    display: inline-block;
+  }
+}

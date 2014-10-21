@@ -11,6 +11,9 @@ module.exports = (grunt) ->
       coffee:
         files: ['src/*.coffee', '*.coffee']
         tasks: ['coffee']
+      less:
+        files: ['src/*.less']
+        tasks: ['less:dev']
       livereload:
         options:
           livereload: LIVERELOAD_PORT
@@ -21,6 +24,13 @@ module.exports = (grunt) ->
         path: 'http://localhost:1337'
         options:
           openOn: 'connect.livereload.listening'
+
+    less:
+      dev:
+        options:
+          paths: ['src/']
+        files:
+          'lib/license-selector.css': 'src/license-selector.less'
 
     coffee:
       # prototype:
@@ -34,6 +44,9 @@ module.exports = (grunt) ->
         src: ['*.coffee']
         dest: 'lib'
         ext: '.js'
+
+    lesslint:
+      src: ['src/*.less']
 
     coffeelint:
       options:
@@ -70,4 +83,4 @@ module.exports = (grunt) ->
 
   grunt.registerTask('lint', ['coffeelint'])
   grunt.registerTask('start', ['default', 'open:dev', 'connect:livereload', 'watch'])
-  grunt.registerTask('default', ['coffee', 'lint'])
+  grunt.registerTask('default', ['coffee', 'less:dev', 'lint'])

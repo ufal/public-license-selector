@@ -494,7 +494,7 @@ class History
         @progress.children().slice(index).remove()
       else
         that = @
-        @progress.append($('<span/>').click -> that.go(that.progress.children().index(@)))
+        @progress.append($('<button/>').html('&nbsp;').click -> that.go(that.progress.children().index(@)))
     @update()
     return
 
@@ -577,10 +577,10 @@ class Modal
     if width < MODAL_MAX_WIDTH
       currentMaxWidth = width - (margin * 2)
       leftMargin = currentMaxWidth / 2
-      closeButtonMarginRight = if width > MODAL_SMALL_BREAKPOINT then '-' + Math.floor(currentMaxWidth / 2) else 10
+      closeButtonMarginRight = '-' + Math.floor(currentMaxWidth / 2)
       stylesheet.html("""
-        .license-selector .ls-modal { max-width: #{currentMaxWidth}px; margin-left: -#{leftMargin}px;}
-        .license-selector .ls-modal-close:after { margin-right: -#{closeButtonMarginRight}px !important; }
+        .license-selector .ls-modal { max-width: #{currentMaxWidth}px !important; margin-left: -#{leftMargin}px !important;}
+        .license-selector .ls-modal-close:after { margin-right: #{closeButtonMarginRight}px !important; }
       """)
     else
       currentMaxWidth = MODAL_MAX_WIDTH - (margin * 2)
@@ -674,7 +674,7 @@ class LicenseList
       @licenseSelector.selectLicense license
       e.preventDefault()
       e.stopPropagation()
- 
+
     chooseButton = $('<button/>')
       .append($('<span/>').addClass('ls-select').text('Select'))
       .append($('<span/>').addClass('ls-confirm').text('Confirm'))
@@ -896,7 +896,7 @@ $.fn.licenseSelector = (options, args...) ->
       method = ls[options]
       throw new Error("Method #{options} does't exists") unless method?
       return method.apply(ls, args)
-    
+
     licenses = _.merge(LicenseDefinitions, options.licenses)
     questions = _.merge(QuestionDefinitions, options.questions)
     delete options.questions
