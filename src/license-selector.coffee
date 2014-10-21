@@ -673,6 +673,7 @@ class LicenseList
       @selectLicense(license, el)
       @licenseSelector.selectLicense license
       e.preventDefault()
+      e.stopPropagation()
  
     chooseButton = $('<button/>')
       .append($('<span/>').addClass('ls-select').text('Select'))
