@@ -831,9 +831,11 @@ class LicenseSelector
         license = @licenses[choice] if _.isString(choice)
         licenses.push license
       @licensesList.update(licenses)
+      @state.licenses = licenses
     # if (@licensesList.availableLicenses.length == 1)
     #   @licensesList.selectLicense(@licensesList.availableLicenses[0])
     @state.finished = true
+    @historyModule.pushState(@state)
     @questionModule.finished()
     return
 
@@ -842,10 +844,12 @@ class LicenseSelector
     return
 
   goto: (where, safeState = true) ->
-    @questionModule.show()
-    @state.question = where
-    @state.licenses ?= @licenses
-    @state.finished = false
+    @questionModule.show() unless @state.finished
+    @questionModule.hide() if @state.finished
+    if safeState
+      @state.question = where
+      @state.licenses ?= @licenses
+      @state.finished = false
     func = @questions[where]
     func.call(@)
 
