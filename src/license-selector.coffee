@@ -272,7 +272,7 @@ QuestionDefinitions =
     @no -> @goto 'EnsureLicensing'
 
   AllowDerivativeWorks: ->
-    @question 'Do you allow others to make defivative works?'
+    @question 'Do you allow others to make derivative works?'
     @yes ->
       @exclude 'nd'
       @goto 'ShareAlike'
@@ -299,7 +299,7 @@ QuestionDefinitions =
         @goto 'CommercialUse'
 
   CommercialUse: ->
-    @question 'Do you allow others to make commercial use of you data'
+    @question 'Do you allow others to make commercial use of you data?'
     @yes ->
       @exclude 'nc'
       if @only 'by'
