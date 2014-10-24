@@ -426,7 +426,7 @@ class Tooltip
     _.extend(@, options) if options
     @container = $(@container) if @container && !(@container instanceof $)
     @hovered = false
-    _.bindAll(@, ['onMouseover', 'onMouseout'])
+    _.bindAll(@, ['onEvenIn', 'onEventOut'])
     @buildContainer().setElement(el).setAnchor(anchor)
 
   buildContainer: ->
@@ -443,8 +443,10 @@ class Tooltip
     @$anchor.css('position', null) if @$anchor
     @$anchor = if anchor instanceof $ then anchor else $(anchor)
     @$anchor.on(
-      mouseover: @onMouseover
-      mouseout: @onMouseout
+      focusin: @onEvenIn
+      mouseenter: @onEvenIn
+      mouseleave: @onEventOut
+      focusout: @onEventOut
     ).css('position', 'relative')
     @
 
@@ -494,16 +496,18 @@ class Tooltip
   destroy: ->
     @hide()
     @$anchor.off
-      mouseover: @onMouseover
-      mouseout: @onMouseout
+      focusin: @onEvenIn
+      mouseenter: @onEvenIn
+      mouseleave: @onEventOut
+      focusout: @onEventOut
     @
 
-  onMouseover: ->
+  onEvenIn  : ->
     return if (@hovered)
     @hovered = true
     @show()
 
-  onMouseout: ->
+  onEventOut: ->
     return unless (@hovered)
     @hovered = false
     @hide()
