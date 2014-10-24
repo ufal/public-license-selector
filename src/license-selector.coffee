@@ -544,7 +544,8 @@ class History
 
   go: (point) ->
     @current = point
-    @licenseSelector.setState _.clone @historyStack[@current]
+    state = _.cloneDeep @historyStack[@current]
+    @licenseSelector.setState state
     @update()
     return
 
@@ -570,6 +571,13 @@ class History
     state = @historyStack[@current]
     state.answer = text
     return
+
+  setOptionSelected: (option, value) ->
+    return if @current == -1
+    state = @historyStack[@current]
+    state.options[option].selected = value
+    return
+
 
   update: ->
     progressBarBlocks = @progress.children()
@@ -602,7 +610,7 @@ class History
 
   pushState: (state) ->
     # shallow clone of the state
-    state = _.clone state
+    state = _.cloneDeep state
 
     # Trim stack if needed
     @current += 1
@@ -658,8 +666,8 @@ class Question
     button = $('<button />')
       .text(answer.text)
       .click(-> answer.action())
-      .attr('disabled', answer.disabled())
-    @element.on('update-answers', -> button.attr('disabled', answer.disabled()))
+      .prop('disabled', answer.disabled())
+    @element.on('update-answers', -> button.prop('disabled', answer.disabled()))
     @answers.append(button)
     return
 
@@ -667,11 +675,15 @@ class Question
     @options.show()
     @licenseSelector.licensesList.hide()
     element = @element
+    self = @
 
     checkbox = $('<input/>')
       .attr('type', 'checkbox')
+      .prop('checked', option.selected)
       .click(->
         option.selected = this.checked
+        index = self.licenseSelector.state.options.indexOf(option)
+        self.licenseSelector.historyModule.setOptionSelected(index, option.selected)
         element.trigger('update-answers')
       )
     label = $('<label/>').append(checkbox)
@@ -938,8 +950,17 @@ class LicenseSelector
 
   setState: (state) ->
     @state = state
+    @questionModule.setQuestion(state.questionText)
+    @questionModule.show() unless @state.finished
+    @questionModule.hide() if @state.finished
+
+    if state.options
+      for option in state.options
+        @questionModule.addOption(option)
+    for answer in state.answers
+      @questionModule.addAnswer(answer)
+
     @licensesList.update(state.licenses)
-    @goto @state.question, false
     return
 
   selectLicense: (license, force = false) ->
@@ -982,24 +1003,30 @@ class LicenseSelector
   question: (text) ->
     # setting question also resets the whole module
     @questionModule.setQuestion(text)
+    delete @state.options
+    delete @state.answers
+    @state.answer = false
     @state.questionText = text
-    @state.options = null
     return
 
   answer: (text, action, disabled = _.noop) ->
-    @state.answer = false
-    @questionModule.addAnswer
+    answer =
       text: text
       action: =>
         @historyModule.setAnswer(text)
         action.call(@, @state)
-      disabled: _.bind(disabled, @, @state)
+      disabled: => disabled.call(@, @state)
+
+    @state.answer = false
+    @state.answers ?= []
+    @state.answers.push(answer)
+    @questionModule.addAnswer(answer)
     return
 
   option: (list, action = _.noop) ->
     option =
       licenses: (@licenses[license] for license in list)
-      action: _.bind(action, @, @state)
+      action: => action.call(@, @state)
     @state.options ?= []
     @state.options.push(option)
     @questionModule.addOption option
