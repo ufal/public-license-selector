@@ -602,8 +602,12 @@ class History
         index = self.progress.children().index(block.get(0))
         state = self.historyStack[index]
         el.empty()
-        el.append($('<p/>').text(state.questionText))
-        el.append($('<p/>').html("Answered: <strong>#{state.answer}</strong>")) if (state.answer)
+        unless state.finished
+          el.append($('<p/>').text(state.questionText))
+          el.append($('<p/>').html("Answered: <strong>#{state.answer}</strong>")) if (state.answer)
+        else
+          el.append($('<p/>').text("Final Step"))
+          el.append($('<p/>').text("Choose your license below ..."))
         return true
     })
     return block
@@ -1006,6 +1010,7 @@ class LicenseSelector
     delete @state.options
     delete @state.answers
     @state.answer = false
+    @state.finished = false
     @state.questionText = text
     return
 
