@@ -604,7 +604,17 @@ class History
         el.empty()
         unless state.finished
           el.append($('<p/>').text(state.questionText))
-          el.append($('<p/>').html("Answered: <strong>#{state.answer}</strong>")) if (state.answer)
+          if state.options
+            ul = $('<ul />')
+            for option in state.options
+              continue unless option.selected
+              span = $('<span/>')
+              for license in option.licenses
+                span.append($('<span/>').addClass('ls-license-name').text(license.name))
+              ul.append($('<li />').text("[x] ").append(span))
+            el.append(ul)
+          else
+            el.append($('<p/>').html("Answered: <strong>#{state.answer}</strong>")) if (state.answer)
         else
           el.append($('<p/>').text("Final Step"))
           el.append($('<p/>').text("Choose your license below ..."))

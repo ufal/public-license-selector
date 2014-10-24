@@ -29,6 +29,15 @@ html {
 .ls-tooltip p:last-child {
   margin-bottom: 0;
 }
+.ls-tooltip ul {
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+}
+.ls-tooltip li {
+  padding-left: 0;
+  list-style: none;
+}
 .ls-tooltip-wrapper {
   display: inline-block;
   position: absolute;
