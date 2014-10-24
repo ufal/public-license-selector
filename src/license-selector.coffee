@@ -1074,8 +1074,8 @@ $.fn.licenseSelector = (options, args...) ->
       throw new Error("Method #{options} does't exists") unless method?
       return method.apply(ls, args)
 
-    licenses = _.merge(LicenseDefinitions, options.licenses)
-    questions = _.merge(QuestionDefinitions, options.questions)
+    licenses = _.merge(_.cloneDeep(LicenseDefinitions), options.licenses)
+    questions = _.merge(_.cloneDeep(QuestionDefinitions), options.questions)
     delete options.questions
     delete options.licenses
     ls = new LicenseSelector(licenses, questions, options)
