@@ -82,7 +82,7 @@ html {
     position: absolute;
     top: 50px;
     left: 50%;
-    z-index: 20;
+    z-index: @modal-layer+20;
     //margin-left: (@modal-max-width / 2) * -1;
     //width: @modal-max-width;
     width: 100%;
@@ -92,15 +92,14 @@ html {
 
     border-radius: @modal-border-radius;
     background: @modal-inner-background;
-    -webkit-box-shadow: 0 0 30px rgba(0,0,0,0.6);
-            box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    .box-shadow(@modal-shadow-box);
 
     max-width: 100%;
 
-    -webkit-transition: max-width 0.25s linear,
-                        margin-left 0.125s linear;
-            transition: max-width 0.25s linear,
-                        margin-left 0.125s linear;
+    // -webkit-transition: max-width 0.25s linear,
+    //                     margin-left 0.125s linear;
+    //         transition: max-width 0.25s linear,
+    //                     margin-left 0.125s linear;
 
     // // This removes the scrollbar in lt IE9
     // @media \0screen\,screen\9 {
@@ -134,7 +133,7 @@ html {
   // Header
   header {
     border-bottom: 1px solid @modal-border-color;
-    background: #eee;
+    background: @modal-header-background;
     padding: 20px 1.2em 10px 1.2em;
 
     > h2 {
@@ -156,18 +155,9 @@ html {
   .ls-modal-close {
     text-indent: -100px;
 
-    // Background as close
-    &:before {
-    }
-
-    // Actual close button on modal
-    &:after {
-    }
-
     display: block;
     height: 1px; // Prevent close element to appear
     clip: rect(0 0 0 0);
-    margin: -1px;
     overflow: hidden;
 
     &:focus:after {
@@ -179,13 +169,14 @@ html {
     &:before {
       content: '';
       // Background for overlay: Data URI because of IE8 not supporting rgba
-      background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAEUlEQVQoz2NgeEYAjioYSQoAzOTmAXhPhyoAAAAASUVORK5CYII=');
+      //background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAEUlEQVQoz2NgeEYAjioYSQoAzOTmAXhPhyoAAAAASUVORK5CYII=');
+      background: data-uri('../vendor/img/F7F7F7-0.9.png');
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      z-index: 10;
+      z-index: @modal-layer+10;
     }
 
 
@@ -193,7 +184,7 @@ html {
     &:after {
       content: '\00d7';
 
-      background: #eee;
+      background: darken(@modal-header-background, 10%);
       border-radius: @modal-border-radius;
       padding: 2px 8px;
 
@@ -202,9 +193,10 @@ html {
       text-indent: 0;
 
       position: absolute;
-      top: 25px;
+      top: 50px;
       right: 50%;
-      z-index: 20;
+      z-index: @modal-layer+20;
+      cursor: pointer;
       //margin-right: -(@modal-max-width / 2);
     }
   }
@@ -255,7 +247,7 @@ html {
       top: 0;
       left: 0;
       right: 0;
-      z-index: 30;
+      z-index: @modal-layer+30;
     }
 
 
@@ -295,7 +287,7 @@ html {
         top: 5px !important;
         right: 5px;
         left: auto;
-        z-index: 40;
+        z-index: @modal-layer+40;
         margin-left: 0;
       }
     }

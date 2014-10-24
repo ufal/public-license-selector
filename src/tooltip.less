@@ -1,0 +1,76 @@
+.ls-tooltip {
+  font-size: @fontSizeSmall;
+  font-family: @baseFontFamily;
+  margin: 5px;
+  padding: 3px 8px;
+  color: #fff;
+  background: #333;
+  border-radius: 3px;
+  max-width: 350px;
+  p {
+    margin: 0 0 10px
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+.ls-tooltip-wrapper {
+  display: inline-block;
+  position: absolute;
+  z-index: @modal-layer+100;
+}
+.ls-tooltip-wrapper > * {
+  position: relative;
+}
+
+.ls-tooltip-wrapper.ls-tooltip-left > * {
+  right: 0;
+}
+
+.ls-tooltip-wrapper.ls-tooltip-right > * {
+  left: 0;
+}
+
+.ls-tooltip-wrapper.ls-tooltip-top > * {
+  bottom: 0;
+}
+
+.ls-tooltip-wrapper.ls-tooltip-bottom > * {
+  top: 0;
+}
+.ls-tooltip-wrapper:before {
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  content: '';
+  border: 5px solid transparent;
+}
+.ls-tooltip-wrapper.ls-tooltip-left:before {
+  top: 50%;
+  margin-top: -5px;
+  right: 0;
+  border-right-width: 0;
+  border-left-color: #333;
+}
+.ls-tooltip-wrapper.ls-tooltip-right:before {
+  top: 50%;
+  margin-top: -5px;
+  left: 0;
+  border-left-width: 0;
+  border-right-color: #333;
+}
+.ls-tooltip-wrapper.ls-tooltip-top:before {
+  left: 50%;
+  margin-left: -5px;
+  bottom: 0;
+  border-bottom-width: 0;
+  border-top-color: #333;
+}
+.ls-tooltip-wrapper.ls-tooltip-bottom:before {
+  left: 50%;
+  margin-left: -5px;
+  top: 0;
+  border-top-width: 0;
+  border-bottom-color: #333;
+}

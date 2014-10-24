@@ -1,7 +1,7 @@
-.box-shadow (@rest...) {
-  -webkit-box-shadow: @rest;
-  -moz-box-shadow:    @rest;
-  box-shadow:         @rest;
+.box-shadow (...) {
+  -webkit-box-shadow+: @arguments;
+  -moz-box-shadow+:    @arguments;
+  box-shadow+:         @arguments;
 }
 
 .transition (@rest...) {

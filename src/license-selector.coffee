@@ -415,6 +415,99 @@ QuestionDefinitions =
       @include 'weak'
       @license()
 
+# Inspired by devblog.orgsync.com/hangover/
+class Tooltip
+  constructor: (el, anchor, options) ->
+    # defaults
+    @position = 'top' # The position of $el relative to the $anchor.
+    @preserve = false # Preserve $el's listeners and data by using detach instead of remove.
+    @container = false # Append to specified container
+    @beforeShow = false # Before show callback - used often to populate tooltip
+    _.extend(@, options) if options
+    @container = $(@container) if @container && !(@container instanceof $)
+    @hovered = false
+    _.bindAll(@, ['onMouseover', 'onMouseout'])
+    @buildContainer().setElement(el).setAnchor(anchor)
+
+  buildContainer: ->
+    @$wrapper = $('<div/>')
+      .addClass('ls-tooltip-wrapper')
+      .addClass("ls-tooltip-#{@position}")
+    @
+
+  setElement: (el) ->
+    @$wrapper.empty().append(@$el = if el instanceof $ then el else $(el))
+    @
+
+  setAnchor: (anchor) ->
+    @$anchor.css('position', null) if @$anchor
+    @$anchor = if anchor instanceof $ then anchor else $(anchor)
+    @$anchor.on(
+      mouseover: @onMouseover
+      mouseout: @onMouseout
+    ).css('position', 'relative')
+    @
+
+  show: ->
+    if !@beforeShow || @beforeShow(@, @$anchor, @$el)
+      if @container
+        @container.append(@$wrapper)
+      else
+        @$anchor.parent().append(@$wrapper)
+      @move()
+    @
+
+  hide: ->
+    @$wrapper[if @preserve then 'detach' else 'remove' ]()
+    @hovered = false
+    @
+
+  move: ->
+    $wrapper = @$wrapper
+    $anchor = @$anchor
+    wWidth = $wrapper.outerWidth()
+    wHeight = $wrapper.outerHeight()
+    aWidth = $anchor.outerWidth()
+    aHeight = $anchor.outerHeight()
+    aPosition = $anchor.offset()
+    position =
+      left: aPosition.left + parseInt($anchor.css('marginLeft'), 10)
+      top: aPosition.top + parseInt($anchor.css('marginTop'), 10)
+
+    switch @position
+      when 'top'
+        position.left += (aWidth - wWidth) / 2
+        position.top -= wHeight
+      when 'right'
+        position.left += aWidth
+        position.top += (aHeight - wHeight) / 2
+      when 'bottom'
+        position.left += (aWidth - wWidth) / 2
+        position.top += aHeight
+      when 'left'
+        position.left -= wWidth
+        position.top += (aHeight - wHeight) / 2
+    $wrapper.css(position)
+    @move() if ($wrapper.outerWidth() > wWidth || $wrapper.outerHeight() > wHeight)
+    @
+
+  destroy: ->
+    @hide()
+    @$anchor.off
+      mouseover: @onMouseover
+      mouseout: @onMouseout
+    @
+
+  onMouseover: ->
+    return if (@hovered)
+    @hovered = true
+    @show()
+
+  onMouseout: ->
+    return unless (@hovered)
+    @hovered = false
+    @hide()
+
 class History
 
   constructor: (@parent, @licenseSelector) ->
@@ -440,19 +533,18 @@ class History
       .click => @licenseSelector.restart()
 
     @progress = $('<div/>').addClass('ls-history-progress')
-    $('<div/>').addClass('ls-history')
+    history = $('<div/>').addClass('ls-history')
       .append(@restartButton)
       .append(@prevButton)
       .append(@progress)
       .append(@nextButton)
       .appendTo(@parent)
+    @setupTooltips(history)
     @update()
 
   go: (point) ->
     @current = point
     @licenseSelector.setState _.clone @historyStack[@current]
-
-    #console.log @current
     @update()
     return
 
@@ -461,6 +553,22 @@ class History
     @historyStack = []
     @progress.empty()
     @update()
+    return
+
+  setupTooltips: (root) ->
+    self = @
+    $('[title]', root).each ->
+      $el = $(@);
+      title = $el.attr('title')
+      $el.removeAttr('title')
+      new Tooltip($('<div />').addClass('ls-tooltip').text(title), $el, { container: self.licenseSelector.container })
+      return
+    return
+
+  setAnswer: (text) ->
+    return if @current == -1
+    state = @historyStack[@current]
+    state.answer = text
     return
 
   update: ->
@@ -474,6 +582,23 @@ class History
     @nextButton.attr('disabled', @historyStack.length == 0 || @historyStack.length == @current + 1)
     @prevButton.attr('disabled', @current <= 0)
     return
+
+  createProgressBlock: ->
+    self = @
+    block = $('<button/>')
+      .html('&nbsp;')
+      .click -> self.go(self.progress.children().index(@))
+    new Tooltip($('<div/>').addClass('ls-tooltip'), block, {
+      container: self.licenseSelector.container
+      beforeShow: (tooltip, block, el) ->
+        index = self.progress.children().index(block.get(0))
+        state = self.historyStack[index]
+        el.empty()
+        el.append($('<p/>').text(state.questionText))
+        el.append($('<p/>').html("Answered: <strong>#{state.answer}</strong>")) if (state.answer)
+        return true
+    })
+    return block
 
   pushState: (state) ->
     # shallow clone of the state
@@ -493,8 +618,7 @@ class History
       if progressBarBlocks > index
         @progress.children().slice(index).remove()
       else
-        that = @
-        @progress.append($('<button/>').html('&nbsp;').click -> that.go(that.progress.children().index(@)))
+        @progress.append(@createProgressBlock())
     @update()
     return
 
@@ -795,7 +919,8 @@ class LicenseSelector
       license.key = key
 
     @state = {}
-    @modal = new Modal($(@options.appendTo))
+    @container = if @options.appendTo instanceof $ then @options.appendTo else $(@options.appendTo)
+    @modal = new Modal(@container)
     @licensesList = new LicenseList(@modal.content, this)
 
     @historyModule = new History(@modal.header, this)
@@ -832,8 +957,6 @@ class LicenseSelector
         licenses.push license
       @licensesList.update(licenses)
       @state.licenses = licenses
-    # if (@licensesList.availableLicenses.length == 1)
-    #   @licensesList.selectLicense(@licensesList.availableLicenses[0])
     @state.finished = true
     @historyModule.pushState(@state)
     @questionModule.finished()
@@ -859,13 +982,17 @@ class LicenseSelector
   question: (text) ->
     # setting question also resets the whole module
     @questionModule.setQuestion(text)
+    @state.questionText = text
     @state.options = null
     return
 
   answer: (text, action, disabled = _.noop) ->
+    @state.answer = false
     @questionModule.addAnswer
       text: text
-      action: _.bind(action, @, @state)
+      action: =>
+        @historyModule.setAnswer(text)
+        action.call(@, @state)
       disabled: _.bind(disabled, @, @state)
     return
 
