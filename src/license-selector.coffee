@@ -558,7 +558,7 @@ class History
   setupTooltips: (root) ->
     self = @
     $('[title]', root).each ->
-      $el = $(@);
+      $el = $(@)
       title = $el.attr('title')
       $el.removeAttr('title')
       new Tooltip($('<div />').addClass('ls-tooltip').text(title), $el, { container: self.licenseSelector.container })
