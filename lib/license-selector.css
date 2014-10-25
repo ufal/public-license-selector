@@ -23,6 +23,9 @@ html {
   border-radius: 3px;
   max-width: 350px;
 }
+.ls-tooltip .ls-license-name {
+  display: block;
+}
 .ls-tooltip p {
   margin: 0 0 10px;
 }
@@ -30,13 +33,13 @@ html {
   margin-bottom: 0;
 }
 .ls-tooltip ul {
-  padding-left: 0;
-  list-style: none;
+  padding-left: 20px;
+  list-style: square;
   margin: 0;
 }
 .ls-tooltip li {
   padding-left: 0;
-  list-style: none;
+  list-style: square;
 }
 .ls-term-tooltip {
   font-size: 11.9px;
@@ -61,6 +64,9 @@ html {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   max-width: 550px;
 }
+.ls-term-tooltip .ls-license-name {
+  display: block;
+}
 .ls-term-tooltip p {
   margin: 0 0 10px;
 }
@@ -68,13 +74,13 @@ html {
   margin-bottom: 0;
 }
 .ls-term-tooltip ul {
-  padding-left: 0;
-  list-style: none;
+  padding-left: 20px;
+  list-style: square;
   margin: 0;
 }
 .ls-term-tooltip li {
   padding-left: 0;
-  list-style: none;
+  list-style: square;
 }
 .ls-term-tooltip ul {
   margin-bottom: 10px;

@@ -763,7 +763,7 @@ class History
               span = $('<span/>')
               for license in option.licenses
                 span.append($('<span/>').addClass('ls-license-name').text(license.name))
-              ul.append($('<li />').text("[x] ").append(span))
+              ul.append($('<li />').append(span))
             el.append(ul)
           else
             el.append($('<p/>').html("Answered: <strong>#{state.answer}</strong>")) if (state.answer)
