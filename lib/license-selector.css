@@ -38,6 +38,55 @@ html {
   padding-left: 0;
   list-style: none;
 }
+.ls-term-tooltip {
+  font-size: 11.9px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 5px;
+  padding: 3px 8px;
+  color: #fff;
+  background: #333;
+  border-radius: 3px;
+  max-width: 350px;
+  color: #333333;
+  padding: 5px;
+  text-align: left;
+  white-space: normal;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  max-width: 550px;
+}
+.ls-term-tooltip p {
+  margin: 0 0 10px;
+}
+.ls-term-tooltip p:last-child {
+  margin-bottom: 0;
+}
+.ls-term-tooltip ul {
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+}
+.ls-term-tooltip li {
+  padding-left: 0;
+  list-style: none;
+}
+.ls-term-tooltip ul {
+  margin-bottom: 10px;
+  list-style: disc;
+  padding-left: 20px;
+}
+.ls-term-tooltip ul:last-child {
+  margin-bottom: 0;
+}
+.ls-term-tooltip li {
+  list-style: disc;
+}
 .ls-tooltip-wrapper {
   display: inline-block;
   position: absolute;
@@ -86,13 +135,6 @@ html {
   bottom: 0;
   border-bottom-width: 0;
   border-top-color: #333;
-}
-.ls-tooltip-wrapper.ls-tooltip-bottom:before {
-  left: 50%;
-  margin-left: -5px;
-  top: 0;
-  border-top-width: 0;
-  border-bottom-color: #333;
 }
 /* Font icons by http://fontello.com/ */
 @font-face {
@@ -549,6 +591,10 @@ html {
   background: #eee;
   /*margin-bottom: 10px;*/
   border: 1px solid #ccc;
+}
+.license-selector .ls-term {
+  cursor: help;
+  border-bottom: 1px dotted #777;
 }
 .license-selector .ls-question-answers button {
   display: inline-block;

@@ -23,6 +23,35 @@
     list-style: none;
   }
 }
+.ls-term-tooltip {
+  .ls-tooltip();
+  color: @textColor;
+  //font-size: @baseFontSize;
+  padding: 5px;
+  text-align: left;
+  white-space: normal;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+
+  max-width: 550px;
+  ul {
+    margin-bottom: 10px;
+    list-style: disc;
+    padding-left: 20px;
+  }
+  ul:last-child {
+    margin-bottom: 0;
+  }
+  li {
+    list-style: disc;
+  }
+}
 .ls-tooltip-wrapper {
   display: inline-block;
   position: absolute;
@@ -77,9 +106,10 @@
   border-top-color: #333;
 }
 .ls-tooltip-wrapper.ls-tooltip-bottom:before {
-  left: 50%;
-  margin-left: -5px;
-  top: 0;
-  border-top-width: 0;
-  border-bottom-color: #333;
+  // TODO: this is hack for now for terms tooltips
+  // left: 50%;
+  // margin-left: -5px;
+  // top: 0;
+  // border-top-width: 0;
+  // border-bottom-color: #333;
 }
