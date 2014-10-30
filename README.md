@@ -83,13 +83,13 @@ A list of licenses that will get merged to the predefined license. The merge is 
 
 ##### License Attributes
 
-- **`string`** `key` - The hash key (will be automatically added)
-- **`string`** `name` - Full name of the license
-- **`bool`** `available` - Flag whether the license is visible in the license list
-- **`unsigned int`** `priority` - Sort priority (lower means higher in the license list)
-- **`string`** `url` - Url pointing to the license full text
-- **`string`** `description` - A short description of the license
-- **`array[string]`** `categories` - A list of arbitrary category names used for filtering in the questions
+- `string` **key** - The hash key (will be automatically added)
+- `string` **name** - Full name of the license
+- `bool` **available** - Flag whether the license is visible in the license list
+- `unsigned int` **priority** - Sort priority (lower means higher in the license list)
+- `string` **url** - Url pointing to the license full text
+- `string` **description** - A short description of the license
+- `array[string]` **categories** - A list of arbitrary category names used for filtering in the questions
 
 ## Development
 
