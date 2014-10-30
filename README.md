@@ -111,6 +111,11 @@ Node environment is not required but strongly recommended for the development
     
         grunt start
     
+## Authors
+
+- Pawel Kamocki
+- Pavel Straňák <stranak@ufal.mff.cuni.cz>
+- Michal Sedlák <sedlak@ufal.mff.cuni.cz>
 
 ## Attribution
 
