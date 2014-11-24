@@ -1,0 +1,33 @@
+{
+  "name": "lindat-license-selector",
+  "description": "JQuery plugin with UI for picking a license for software or data",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ufal/lindat-license-selector"
+  },
+  "authors": [
+    "Pawel Kamocki",
+    "Pavel Straňák",
+    "Michal Sedlák"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "lodash": "~2.4.1"
+  },
+  "main": "lib/license-selector.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "license",
+    "selector"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
