@@ -12,9 +12,9 @@ JQuery plugin for easy selection of various licenses
 
 <!-- /DESCRIPTION -->
 
-## Demo
+## Give it a Try
 
-[See demo](https://ufal.github.io/lindat-license-selector)
+Use the selector [directly on Github](https://ufal.github.io/lindat-license-selector). You can link this to always use our latest version.
 
 
 ## Install
