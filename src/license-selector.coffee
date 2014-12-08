@@ -974,25 +974,37 @@ class LicenseList
   createElement: (license) ->
     el = $ '<li />'
     select = (e) =>
-      return if e.target && $(e.target).is('button, a')
       @selectLicense(license, el)
       @licenseSelector.selectLicense license
       e.preventDefault()
       e.stopPropagation()
 
-    chooseButton = $('<button/>')
-      .append($('<span/>').addClass('ls-select').text('Select'))
-      .append($('<span/>').addClass('ls-confirm').text('Confirm'))
-      .click(select)
-    el.click(select)
-    h = $('<h4 />').text(license.name)
-    h.append($('<a/>').attr({
-      href: license.url
-      target: '_blank'
-    }).addClass('ls-button').text('See full text')) if license.url
-    h.append(chooseButton)
-    el.append(h)
-    el.append($('<p />').text(license.description)) unless _.isEmpty(license.description)
+    if license.template
+      if _.isFunction(license.template)
+        license.template(el, license, select)
+        return el
+      else if license.template instanceof $
+        el.append(license.template)
+    else
+      chooseButton = $('<button/>')
+        .append($('<span/>').addClass('ls-select').text('Select'))
+        .append($('<span/>').addClass('ls-confirm').text('Confirm'))
+        .click(select)
+
+      h = $('<h4 />').text(license.name)
+      h.append($('<a/>').attr({
+        href: license.url
+        target: '_blank'
+      }).addClass('ls-button').text('See full text')) if license.url
+      h.append(chooseButton)
+      el.append(h)
+      el.append($('<p />').text(license.description)) unless _.isEmpty(license.description)
+      el.addClass(license.cssClass) if license.cssClass
+
+    el.click (e) ->
+      return if e.target && $(e.target).is('button, a')
+      select()
+
     el.data 'license', license
     return el
 
@@ -1090,6 +1102,7 @@ class LicenseList
 class LicenseSelector
   @defaultOptions =
     onLicenseSelected: _.noop
+    licenseItemTemplate: null
     appendTo: 'body'
     start: 'KindOfContent'
 
@@ -1098,6 +1111,8 @@ class LicenseSelector
 
     for key, license of @licenses
       license.key = key
+      if @options.licenseItemTemplate and !license.template
+        license.template = @options.licenseItemTemplate
 
     @state = {}
     @container = if @options.appendTo instanceof $ then @options.appendTo else $(@options.appendTo)

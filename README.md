@@ -39,7 +39,7 @@ The plugin requires [Lo-Dash](http://lodash.com/) or [Underscore](http://undersc
 
 ### Options
 
-#### `onLicenseSelected`
+#### onLicenseSelected
 
 Callback to action that should happen after the license is selected. Receives selected license as a first argument.
 
@@ -50,11 +50,19 @@ onLicenseSelected : function (license) {
 }
 ```
 
-#### `appendTo`
+#### licenseItemTemplate (function|jQuery)
+
+A template function to customize license display in the license list. See the example below. The function takes three arguments:
+
+1. jQuery object of an `<li>` element
+2. `license` object with attributes defined bellow
+3. select function - the function that actually does the license selection. Can be used as `onClick` handler
+
+#### appendTo
 
 JQuery selector specifying a html element where license selector should be attached. Default is `'body'`.
 
-#### `start`
+#### start
 
 Name of the starting question. See to sources for the full list of names. Here are the most useful:
 
@@ -62,7 +70,7 @@ Name of the starting question. See to sources for the full list of names. Here a
 - **'DataCopyrightable'** jumps straight to data licensing. Use this as a `start` if you want to choose only licenses for data.
 - **'YourSoftware'** jumps to software licensing. The same as above but for software.
 
-#### `licenses`
+#### licenses
 
 A list of licenses that will get merged to the predefined license. The merge is done by [`_.merge`](https://lodash.com/docs#merge) so you can use it to add new licenses or to change configuration of the predefined licenses.
 
@@ -75,10 +83,25 @@ A list of licenses that will get merged to the predefined license. The merge is 
         available: true,
         url: 'http://www.example.com/new-license',
         description: 'This is new license inserted as a test',
-        categories: ['data', 'new']
+        categories: ['data', 'new'],
+        template: function($el, license, selectFunction) {
+          var h = $('<h4 />').text(license.name);
+          h.append($('<a/>').attr({
+            href: license.url,
+            target: '_blank'
+          }));
+          $el.append(h);
+          $el.append('<p>Custom template function</p>');
+          $el.append(
+            $('<button/>')
+              .append('<span>Click here to select license</span>')
+              .click(selectFunction)
+          );
+        }
       },
       'cc-by': {
-        description: 'Modified description ...'
+        description: 'Modified description ...',
+        cssClass: 'featured-license'
       },
       'lgpl-3': {
         available: false // hide the LGPL 3 license
@@ -95,6 +118,8 @@ A list of licenses that will get merged to the predefined license. The merge is 
 - `unsigned int` **priority** - Sort priority (lower means higher in the license list)
 - `string` **url** - Url pointing to the license full text
 - `string` **description** - A short description of the license
+- `string` **cssClass** - Custom CSS class set on `<li>` element
+- `function|jQuery` **template** - Template used for custom format
 - `array[string]` **categories** - A list of arbitrary category names used for filtering in the questions
 
 ## Development

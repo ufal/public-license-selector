@@ -18,7 +18,7 @@
             console.log(license)
           }
         }).click();
-        
+
         $('<p><a href="#!">Click to open selector with modified options</a></p>')
           .appendTo('body')
           .licenseSelector({
@@ -29,10 +29,22 @@
                 available: true,
                 url: 'http://www.example.com/abc-license',
                 description: 'This is ABC license inserted as a test',
+                template: function($el, license, selectFunction) {
+                  var h = $('<h4 />').text(license.name);
+                  h.append($('<a/>').attr({
+                    href: license.url,
+                    target: '_blank'
+                  }));
+                  //$el.click(selectFunction);
+                  $el.append(h);
+                  $el.append('<p>Custom template function</p>');
+                  $el.append($('<button/>').append('<span>Click here to select license</span>').click(selectFunction));
+                },
                 categories: ['data', 'abc']
               },
               'cc-by': {
-                description: 'Modified description ...'
+                description: 'Modified description ...',
+                cssClass: 'cc-by'
               }
             },
             start: 'DataCopyrightable',
@@ -59,6 +71,9 @@
         background-color: #f5f5f5;
         border: 1px solid #ccc;
         border-radius: 4px;
+      }
+      .cc-by {
+        border-color: #c80000 !important;
       }
     </style>
   </head>
