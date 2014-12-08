@@ -12,7 +12,7 @@ JQuery plugin for easy selection of various licenses
 
 <!-- /DESCRIPTION -->
 
-## Give it a Try
+## Give It a Try
 
 Use the selector [directly on Github](https://ufal.github.io/lindat-license-selector). You can link to this to always use our latest version.
 
@@ -126,6 +126,10 @@ Node environment is not required but strongly recommended for the development
 ## Attribution
 
 Descriptions for some licenses taken from (or inspired by) descriptions at [tldrLegal](https://tldrlegal.com).
+
+## Warning / Disclaimer
+
+You must not rely on the information from License Selector as an alternative to legal advice from your attorney or other professional legal services provider.   
 
 <!-- LICENSE/ -->
 
