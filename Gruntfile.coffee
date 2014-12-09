@@ -7,13 +7,17 @@ module.exports = (grunt) ->
   grunt.initConfig
     pkg: grunt.file.readJSON('package.json')
 
-    # release:
-    #   options:
-    #     additionalFiles: ['bower.json']
-    #     tagName: 'v<%= version %>'
-    #     npm: false
-    #     commitMessage: 'Release v<%= version %>'
-    #     tagMessage: 'Version v<%= version %>'
+    uglify:
+      dist:
+        options:
+          sourceMap: true
+        files:
+          'dist/license-selector.min.js': ['dist/license-selector.js']
+
+    cssmin:
+      dist:
+        files:
+          'dist/license-selector.min.css': ['dist/license-selector.css']
 
     watch:
       coffee:
@@ -91,4 +95,4 @@ module.exports = (grunt) ->
 
   grunt.registerTask('lint', ['coffeelint'])
   grunt.registerTask('start', ['default', 'open:dev', 'connect:livereload', 'watch'])
-  grunt.registerTask('default', ['coffee', 'less:dev', 'lint'])
+  grunt.registerTask('default', ['coffee', 'less:dev', 'lint', 'uglify:dist', 'cssmin:dist'])
