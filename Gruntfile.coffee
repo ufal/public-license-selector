@@ -7,6 +7,14 @@ module.exports = (grunt) ->
   grunt.initConfig
     pkg: grunt.file.readJSON('package.json')
 
+    # release:
+    #   options:
+    #     additionalFiles: ['bower.json']
+    #     tagName: 'v<%= version %>'
+    #     npm: false
+    #     commitMessage: 'Release v<%= version %>'
+    #     tagMessage: 'Version v<%= version %>'
+
     watch:
       coffee:
         files: ['src/*.coffee', '*.coffee']
@@ -17,7 +25,7 @@ module.exports = (grunt) ->
       livereload:
         options:
           livereload: LIVERELOAD_PORT
-        files: ['*.html', 'lib/*.js', 'lib/*.css']
+        files: ['*.html', 'dist/*.js', 'dist/*.css']
 
     open:
       dev:
@@ -30,7 +38,7 @@ module.exports = (grunt) ->
         options:
           paths: ['src/']
         files:
-          'lib/license-selector.css': 'src/license-selector.less'
+          'dist/license-selector.css': 'src/license-selector.less'
 
     coffee:
       # prototype:
@@ -42,7 +50,7 @@ module.exports = (grunt) ->
         expand: true
         cwd: 'src'
         src: ['*.coffee']
-        dest: 'lib'
+        dest: 'dist'
         ext: '.js'
 
     lesslint:
@@ -79,7 +87,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'clean', ->
     rm = (pathToDelete) ->
       grunt.file.delete(pathToDelete) if grunt.file.exists(pathToDelete)
-    rm('lib')
+    rm('dist')
 
   grunt.registerTask('lint', ['coffeelint'])
   grunt.registerTask('start', ['default', 'open:dev', 'connect:livereload', 'watch'])

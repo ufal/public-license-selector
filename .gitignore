@@ -9,5 +9,7 @@ node_modules
 # No bower components
 bower_components
 
+dist
+
 # Users Environment Variables
 .lock-wscript
