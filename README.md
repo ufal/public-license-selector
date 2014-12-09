@@ -132,13 +132,19 @@ Node environment is not required but strongly recommended for the development
         nvm install stable
         nvm use stable
 
-2. Clone repository
+2. Install Grunt & Bower
+        
+        npm install -g grunt-cli
+        npm install -g bower
+
+3. Clone repository
     
         git clone https://github.com/ufal/lindat-license-selector.git
         cd lindat-license-selector
         npm install
+        bower install
 
-3. Start development server
+4. Start development server
     
         grunt start
     
