@@ -19,11 +19,20 @@ Use the selector [directly on Github](https://ufal.github.io/lindat-license-sele
 
 ## Install
 
+### Using Bower
+
+```
+bower install lindat-license-selector --save
+```
+
+### Manual
+
 Download the latest version of the plugin from the repository
-([Javascript](https://raw.githubusercontent.com/ufal/lindat-license-selector/master/lib/license-selector.js)
-and [CSS](https://raw.githubusercontent.com/ufal/lindat-license-selector/master/lib/license-selector.css))
+([Javascript](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector.js)
+and [CSS](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector.css))
 
 The plugin requires [Lo-Dash](http://lodash.com/) or [Underscore](http://underscorejs.org/) utility library.
+
 
 ## Usage
 ```.html
