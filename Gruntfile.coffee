@@ -43,7 +43,7 @@ module.exports = (grunt) ->
         options:
           branch: 'releases'
           remote: 'git@github.com:ufal/lindat-license-selector.git'
-          tag: pkg.version
+          tag: '<%= pkg.version %>'
 
     copy:
       pages:
