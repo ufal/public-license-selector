@@ -58,6 +58,9 @@ module.exports = (grunt) ->
           {
             src: 'src/fonts/*'
             dest: 'dist/fonts/'
+            filter: 'isFile'
+            expand: true
+            flatten: true
           },
           {
             src: '*.md'
