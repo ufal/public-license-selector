@@ -488,7 +488,7 @@ also regarded as part of the public domain.
 """
   'additional permission': """
 <p>
-In order to be able to deposit your data in our repository, you’ll have to
+In order to be able to deposit your data in our repository, you will have to
 contact the copyright holder (usually the publisher or the author) and ask him
 for a written permission to do so. Our legal help desk will help you draft the
 permission. We will also tell you what to do if you cannot identify the
