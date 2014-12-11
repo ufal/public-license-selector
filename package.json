@@ -1,7 +1,7 @@
 {
   "name": "LicenseSelector",
   "title": "License Selector",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/ufal/lindat-license-selector.git"
