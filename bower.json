@@ -15,7 +15,7 @@
     "jquery": "~2.1.1",
     "lodash": "~2.4.1"
   },
-  "main": "lib/license-selector.js",
+  "main": ["license-selector.js", "license-selector.css"],
   "moduleType": [
     "globals"
   ],

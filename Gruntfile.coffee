@@ -1,6 +1,13 @@
 LIVERELOAD_PORT = 35729
 lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT })
 
+replaceWithMin = (path) ->
+  parts = path.split('/')
+  basename = parts[parts.length - 1]
+  parts = basename.split('.')
+  ext = parts.pop()
+  parts.join('.') + '.min.' + ext
+
 module.exports = (grunt) ->
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks)
 
@@ -18,6 +25,74 @@ module.exports = (grunt) ->
       dist:
         files:
           'dist/license-selector.min.css': ['dist/license-selector.css']
+
+    buildcontrol:
+      options:
+        dir: 'dist'
+        commit: true
+        push: true
+        connectCommits: true
+        message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+
+      pages:
+        options:
+          branch: 'gh-pages'
+
+      release:
+        options:
+          branch: 'releases'
+
+    copy:
+      pages:
+        files: [
+          {
+            src: 'bower_components/jquery/dist/jquery.min.js'
+            dest: 'dist/jquery.min.js'
+          },
+          {
+            src: 'bower_components/lodash/dist/lodash.min.js'
+            dest: 'dist/lodash.min.js'
+          },
+          {
+            src: 'src/fonts/*'
+            dest: 'dist/fonts/'
+          },
+          {
+            src: '*.md'
+            dest: 'dist/'
+          }
+        ]
+
+      release:
+        files: [
+          {
+            src: ['*.md', 'bower.json']
+            dest: 'dist/'
+          }
+        ]
+
+    bump:
+      options:
+        files: ['package.json', 'bower.json']
+        updateConfigs: ['pkg']
+        commit: true
+        commitMessage: 'Release v%VERSION%'
+        commitFiles: ['package.json', 'bower.json']
+        createTag: true
+        tagName: 'v%VERSION%'
+        tagMessage: 'Version %VERSION%'
+        push: true
+
+    dom_munger:
+      release:
+        options:
+          callback: ($) ->
+            $('script[src]').each ->
+              $(@).attr 'src', replaceWithMin($(@).attr('src'))
+            $('link[rel=stylesheet]').each ->
+              $(@).attr 'href', replaceWithMin($(@).attr('href'))
+        src: 'index.html'
+        dest: 'dist/index.html'
 
     watch:
       coffee:
@@ -95,4 +170,26 @@ module.exports = (grunt) ->
 
   grunt.registerTask('lint', ['coffeelint'])
   grunt.registerTask('start', ['default', 'open:dev', 'connect:livereload', 'watch'])
-  grunt.registerTask('default', ['coffee', 'less:dev', 'lint', 'uglify:dist', 'cssmin:dist'])
+  grunt.registerTask('default', [
+    'clean',
+    'coffee',
+    'less:dev',
+    'lint',
+    'uglify',
+    'cssmin'
+  ])
+
+  grunt.registerTask('pages', [
+    'default',
+    'copy:pages',
+    'dom_munger',
+    'buildcontrol:pages'
+  ])
+
+  grunt.registerTask('release', [
+    'bump',
+    'pages',
+    'default',
+    'copy:release'
+    'buildcontrol:release'
+  ])
