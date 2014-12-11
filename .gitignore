@@ -9,7 +9,9 @@ node_modules
 # No bower components
 bower_components
 
+# Ignore build directories
 dist
+pages
 
 # Users Environment Variables
 .lock-wscript

@@ -28,7 +28,6 @@ module.exports = (grunt) ->
 
     buildcontrol:
       options:
-        dir: 'dist'
         commit: true
         push: true
         connectCommits: true
@@ -36,11 +35,13 @@ module.exports = (grunt) ->
 
       pages:
         options:
+          dir: 'pages'
           branch: 'gh-pages'
           remote: 'git@github.com:ufal/lindat-license-selector.git'
 
       release:
         options:
+          dir: 'dist'
           branch: 'releases'
           remote: 'git@github.com:ufal/lindat-license-selector.git'
           tag: '<%= pkg.version %>'
@@ -50,22 +51,29 @@ module.exports = (grunt) ->
         files: [
           {
             src: 'bower_components/jquery/dist/jquery.min.js'
-            dest: 'dist/jquery.min.js'
+            dest: 'pages/jquery.min.js'
           },
           {
             src: 'bower_components/lodash/dist/lodash.min.js'
-            dest: 'dist/lodash.min.js'
+            dest: 'pages/lodash.min.js'
           },
           {
             src: 'src/fonts/*'
-            dest: 'dist/fonts/'
+            dest: 'pages/fonts/'
+            filter: 'isFile'
+            expand: true
+            flatten: true
+          },
+          {
+            src: 'dist/license-selector.*'
+            dest: 'pages/'
             filter: 'isFile'
             expand: true
             flatten: true
           },
           {
             src: '*.md'
-            dest: 'dist/'
+            dest: 'pages/'
           }
         ]
 
@@ -76,6 +84,12 @@ module.exports = (grunt) ->
             dest: 'dist/'
           }
         ]
+
+    clean:
+      dist:
+        src: 'dist/*'
+      pages:
+        src: 'pages/*'
 
     bump:
       options:
@@ -99,7 +113,7 @@ module.exports = (grunt) ->
             $('link[rel=stylesheet]').each ->
               $(@).attr 'href', replaceWithMin($(@).attr('href'))
         src: 'index.html'
-        dest: 'dist/index.html'
+        dest: 'pages/index.html'
 
     watch:
       coffee:
@@ -170,15 +184,10 @@ module.exports = (grunt) ->
             )
             [lrSnippet, connect.static(require('path').resolve(__dirname))]
 
-  grunt.registerTask 'clean', ->
-    rm = (pathToDelete) ->
-      grunt.file.delete(pathToDelete) if grunt.file.exists(pathToDelete)
-    rm('dist')
-
   grunt.registerTask('lint', ['coffeelint'])
   grunt.registerTask('start', ['default', 'open:dev', 'connect:livereload', 'watch'])
   grunt.registerTask('default', [
-    'clean',
+    'clean:dist',
     'coffee',
     'less:dev',
     'lint',
@@ -188,15 +197,14 @@ module.exports = (grunt) ->
 
   grunt.registerTask('pages', [
     'default',
+    'clean:pages',
     'copy:pages',
     'dom_munger',
     'buildcontrol:pages'
   ])
 
   grunt.registerTask('release', [
-    'bump',
     'pages',
-    'default',
     'copy:release'
     'buildcontrol:release'
   ])
