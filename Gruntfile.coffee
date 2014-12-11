@@ -88,6 +88,7 @@ module.exports = (grunt) ->
         tagName: 'v%VERSION%'
         tagMessage: 'Version %VERSION%'
         push: true
+        pushTo: 'origin'
 
     dom_munger:
       release:
