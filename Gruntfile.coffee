@@ -192,7 +192,6 @@ module.exports = (grunt) ->
   ])
 
   grunt.registerTask('release', [
-    'bump',
     'pages',
     'default',
     'copy:release'
