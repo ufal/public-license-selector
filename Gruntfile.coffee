@@ -43,6 +43,7 @@ module.exports = (grunt) ->
         options:
           branch: 'releases'
           remote: 'git@github.com:ufal/lindat-license-selector.git'
+          tag: pkg.version
 
     copy:
       pages:
@@ -83,7 +84,7 @@ module.exports = (grunt) ->
         commit: true
         commitMessage: 'Release v%VERSION%'
         commitFiles: ['package.json', 'bower.json']
-        createTag: true
+        createTag: false
         tagName: 'v%VERSION%'
         tagMessage: 'Version %VERSION%'
         push: true
@@ -192,6 +193,7 @@ module.exports = (grunt) ->
   ])
 
   grunt.registerTask('release', [
+    'bump',
     'pages',
     'default',
     'copy:release'
