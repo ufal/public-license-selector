@@ -456,7 +456,7 @@ YES to this question).
 </ul>
 <p>answer <strong>No</strong> if ...</p>
 <ul>
-  <li>your dataset contains only qualitative data and/or raw facts</li>
+  <li>your dataset contains only quantitative data and/or raw facts</li>
   <li>your dataset is exhaustive and complete (or at least aims to be)</li>
   <li>only if you are sure!</li>
 </ul>
