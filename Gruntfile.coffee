@@ -37,10 +37,12 @@ module.exports = (grunt) ->
       pages:
         options:
           branch: 'gh-pages'
+          remote: 'git@github.com:ufal/lindat-license-selector.git'
 
       release:
         options:
           branch: 'releases'
+          remote: 'git@github.com:ufal/lindat-license-selector.git'
 
     copy:
       pages:
