@@ -146,12 +146,13 @@ module.exports = (grunt) ->
       #     sourceMap: true
       #   files:
       #     'prototype.js': 'prototype.coffee'
-      glob_to_multiple:
-        expand: true
-        cwd: 'src'
-        src: ['*.coffee']
-        dest: 'dist'
-        ext: '.js'
+      compile:
+        options:
+          join: true
+        files: [
+          src: [ 'src/definitions.coffee', 'src/license-selector.coffee' ]
+          dest: 'dist/license-selector.js'
+        ]
 
     lesslint:
       src: ['src/*.less']
