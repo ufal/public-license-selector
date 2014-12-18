@@ -99,7 +99,7 @@ LicenseDefinitions =
     name: 'Artistic License 2.0'
     priority: 8
     available: true
-    url: 'http://dev.perl.org/licenses/artistic.html'
+    url: 'http://opensource.org/licenses/Artistic-2.0'
     description: 'This is a license for software packages with the intent of giving the original copyright holder some measure of control over his software while still remaining open source. It is flexible and allows you to distribute or sell modified versions as long as you fulfill one of various conditions. Look at section 4 in the full text for a better explanation.'
     categories: ['software', 'perl']
 
@@ -219,7 +219,7 @@ LicenseDefinitions =
     name: 'Apache License 2'
     priority: 4
     available: true
-    url: 'http://opensource.org/licenses/Apache-2.0'
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
     description: 'A license that allows you much freedom with the software, including an explicit right to a patent. "State changes" means that you have to include a notice in each file you modified. '
     categories: ['software', 'permissive']
 
