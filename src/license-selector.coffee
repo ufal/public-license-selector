@@ -493,7 +493,7 @@ class Modal
       ).on 'show.lsmodal', scale
     inner = $('<div/>').addClass('ls-modal')
     @header = $('<header/>')
-      .append($('<h2/>').text('Choose a license'))
+      .append($('<h2/>').text('Choose a License'))
       .append($('<p/>').text('Answer the questions or use the search to find the license you want'))
       .appendTo(inner)
 
