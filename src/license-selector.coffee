@@ -557,6 +557,7 @@ class LicenseList
     @update()
 
   createElement: (license) ->
+    customTemplate = false
     el = $ '<li />'
     select = (e) =>
       @selectLicense(license, el)
@@ -567,7 +568,7 @@ class LicenseList
     if license.template
       if _.isFunction(license.template)
         license.template(el, license, select)
-        return el
+        customTemplate = true
       else if license.template instanceof $
         el.append(license.template)
     else
@@ -586,9 +587,10 @@ class LicenseList
       el.append($('<p />').text(license.description)) unless _.isEmpty(license.description)
       el.addClass(license.cssClass) if license.cssClass
 
-    el.click (e) ->
-      return if e.target && $(e.target).is('button, a')
-      select()
+    unless customTemplate
+      el.click (e) ->
+        return if e.target && $(e.target).is('button, a')
+        select()
 
     el.data 'license', license
     return el
@@ -641,7 +643,7 @@ class LicenseList
       el = $(el)
       license = el.data 'license'
       if licenses[license.key]? and @matchFilter(licenses[license.key])
-        elements[licenses.key] = el
+        elements[license.key] = el
       else
         el.remove()
 
