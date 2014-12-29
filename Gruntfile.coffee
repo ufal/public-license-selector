@@ -20,6 +20,7 @@ module.exports = (grunt) ->
           sourceMap: true
         files:
           'dist/license-selector.min.js': ['dist/license-selector.js']
+          'dist/license-selector-clarin.min.js': ['dist/license-selector-clarin.js']
 
     cssmin:
       dist:
@@ -65,7 +66,7 @@ module.exports = (grunt) ->
             flatten: true
           },
           {
-            src: 'dist/license-selector.*'
+            src: 'dist/license-selector*'
             dest: 'pages/'
             filter: 'isFile'
             expand: true
@@ -141,17 +142,18 @@ module.exports = (grunt) ->
           'dist/license-selector.css': 'src/license-selector.less'
 
     coffee:
-      # prototype:
-      #   options:
-      #     sourceMap: true
-      #   files:
-      #     'prototype.js': 'prototype.coffee'
       compile:
         options:
           join: true
         files: [
-          src: [ 'src/definitions.coffee', 'src/license-selector.coffee' ]
-          dest: 'dist/license-selector.js'
+          {
+            src: [ 'src/definitions.coffee', 'src/license-selector.coffee' ]
+            dest: 'dist/license-selector.js'
+          },
+          {
+            src: [ 'src/clarin-extension.coffee' ]
+            dest: 'dist/license-selector-clarin.js'
+          }
         ]
 
     lesslint:

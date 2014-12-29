@@ -5,7 +5,7 @@ LicenseDefinitions =
     available: true
     url: 'http://creativecommons.org/publicdomain/mark/1.0/'
     description: "The work identified as being free of known restrictions under copyright law, including all related and neighboring rights."
-    categories: ['data', 'software', 'public-domain']
+    categories: ['public', 'data', 'software', 'public-domain']
 
   'cc-zero':
     name: 'Public Domain Dedication (CC Zero)'
@@ -13,7 +13,7 @@ LicenseDefinitions =
     available: true
     url: 'http://creativecommons.org/publicdomain/zero/1.0/'
     description: 'CC Zero enables scientists, educators, artists and other creators and owners of copyright- or database-protected content to waive those interests in their works and thereby place them as completely as possible in the public domain, so that others may freely build upon, enhance and reuse the works for any purposes without restriction under copyright or database law.'
-    categories: ['data', 'public-domain']
+    categories: ['public', 'data', 'public-domain']
 
   'pddl':
     name: 'Open Data Commons Public Domain Dedication and License (PDDL)'
@@ -21,7 +21,7 @@ LicenseDefinitions =
     available: false
     url: 'http://opendatacommons.org/licenses/pddl/summary/'
     description: 'This license is meant to be an international, database-specific equivalent of the public domain. You cannot relicense or sublicense any database under this license because, like the public domain, after dedication you no longer own any rights to the database.'
-    categories: ['data', 'public-domain']
+    categories: ['public', 'data', 'public-domain']
 
   'cc-by':
     name: 'Creative Commons Attribution (CC-BY)'
@@ -29,7 +29,7 @@ LicenseDefinitions =
     available: true
     url: 'http://creativecommons.org/licenses/by/4.0/'
     description: 'This is the standard creative commons license that gives others maximum freedom to do what they want with your work.'
-    categories: ['data', 'by']
+    categories: ['public', 'data', 'by']
 
   'odc-by':
     name: 'Open Data Commons Attribution License (ODC-By)'
@@ -37,7 +37,7 @@ LicenseDefinitions =
     available: false
     url: 'http://opendatacommons.org/licenses/by/summary/'
     description: ''
-    categories: ['data', 'by']
+    categories: ['public', 'data', 'by']
 
   'cc-by-sa':
     name: 'Creative Commons Attribution-ShareAlike (CC-BY-SA)'
@@ -45,7 +45,7 @@ LicenseDefinitions =
     available: true
     url: 'http://creativecommons.org/licenses/by-sa/4.0/'
     description: 'This creative commons license is very similar to the regular Attribution license, but requires you to release all derivative works under this same license.'
-    categories: ['data', 'by', 'sa']
+    categories: ['public', 'data', 'by', 'sa']
 
   'odbl':
     name: 'Open Data Commons Open Database License (ODbL)'
@@ -53,7 +53,7 @@ LicenseDefinitions =
     available: false
     url: 'http://opendatacommons.org/licenses/odbl/summary/'
     description: 'A copyleft license used by OpenStreetMap and others with very specific terms designed for databases.'
-    categories: ['data', 'by', 'sa']
+    categories: ['public', 'data', 'by', 'sa']
 
   'cc-by-nd':
     name: 'Creative Commons Attribution-NoDerivs (CC-BY-ND)'
@@ -61,7 +61,7 @@ LicenseDefinitions =
     available: true
     url: 'http://creativecommons.org/licenses/by-nd/4.0/'
     description: 'The no derivatives creative commons license is straightforward; you can take a work released under this license and re-distribute it but you cannot change it.'
-    categories: ['data', 'by', 'nd']
+    categories: ['public', 'data', 'by', 'nd']
 
   'cc-by-nc':
     name: 'Creative Commons Attribution-NonCommercial (CC-BY-NC)'
@@ -69,7 +69,7 @@ LicenseDefinitions =
     available: true
     url: 'http://creativecommons.org/licenses/by-nc/4.0/'
     description: 'A creative commons license that bans commercial use.'
-    categories: ['data', 'by', 'nc']
+    categories: ['public', 'data', 'by', 'nc']
 
   'cc-by-nc-sa':
     name: 'Creative Commons Attribution-NonCommercial-ShareAlike (CC-BY-NC-SA)'
@@ -77,7 +77,7 @@ LicenseDefinitions =
     available: true
     url: 'http://creativecommons.org/licenses/by-nc-sa/4.0/'
     description: 'A creative commons license that bans commercial use and requires you to release any modified works under this license.'
-    categories: ['data', 'by', 'nc', 'sa']
+    categories: ['public', 'data', 'by', 'nc', 'sa']
 
   'cc-by-nc-nd':
     name: 'Creative Commons Attribution-NonCommercial-NoDerivs (CC-BY-NC-ND)'
@@ -85,7 +85,7 @@ LicenseDefinitions =
     available: true
     url: 'http://creativecommons.org/licenses/by-nc-nd/4.0/'
     description: 'The most restrictive creative commons license. This only allows people to download and share your work for no commercial gain and for no other purposes.'
-    categories: ['data', 'by', 'nc', 'nd']
+    categories: ['public', 'data', 'by', 'nc', 'nd']
 
   'perl-artistic-1':
     name: 'Artistic License 1.0'
@@ -93,7 +93,7 @@ LicenseDefinitions =
     available: true
     url: 'http://opensource.org/licenses/Artistic-Perl-1.0'
     description: 'NOTE: This license has been superseded by the Artistic License, Version 2.0. This is a license for software packages with the intent of giving the original copyright holder some measure of control over his software while still remaining open source. It is flexible and allows you to distribute or sell modified versions as long as you fulfill one of various conditions. Look at section 4 in the full text for a better explanation.'
-    categories: ['software', 'perl']
+    categories: ['public', 'software', 'perl']
 
   'perl-artistic-2':
     name: 'Artistic License 2.0'
@@ -101,7 +101,7 @@ LicenseDefinitions =
     available: true
     url: 'http://opensource.org/licenses/Artistic-2.0'
     description: 'This is a license for software packages with the intent of giving the original copyright holder some measure of control over his software while still remaining open source. It is flexible and allows you to distribute or sell modified versions as long as you fulfill one of various conditions. Look at section 4 in the full text for a better explanation.'
-    categories: ['software', 'perl']
+    categories: ['public', 'software', 'perl']
 
   'gpl-2+':
     name: 'GNU General Public License 2 or later (GPL-2.0)'
@@ -109,7 +109,7 @@ LicenseDefinitions =
     available: true
     url: 'http://opensource.org/licenses/GPL-2.0'
     description: 'You may copy, distribute and modify the software as long as you track changes/dates of in source files and keep all modifications under GPL. You can distribute your application using a GPL library commercially, but you must also disclose the source code.'
-    categories: ['software', 'gpl', 'copyleft', 'strong']
+    categories: ['public', 'software', 'gpl', 'copyleft', 'strong']
 
   'gpl-2':
     name: 'GNU General Public License 2 (GPL-2.0)'
@@ -117,7 +117,7 @@ LicenseDefinitions =
     available: false
     url: 'http://www.gnu.org/licenses/gpl-2.0.html'
     description: 'Standard GNU GPL version 2 but without support for later versions i.e. you cannot relicense under GPL 3.'
-    categories: ['software', 'gpl', 'copyleft', 'strong']
+    categories: ['public', 'software', 'gpl', 'copyleft', 'strong']
 
   'gpl-3':
     name: 'GNU General Public License 3 (GPL-3.0)'
@@ -125,7 +125,7 @@ LicenseDefinitions =
     available: true
     url: 'http://opensource.org/licenses/GPL-3.0'
     description: 'You may copy, distribute and modify the software as long as you track changes/dates of in source files and keep modifications under GPL. You can distribute your application using a GPL library commercially, but you must also provide the source code. GPL 3 tries to close some loopholes in GPL 2.'
-    categories: ['software', 'gpl', 'copyleft', 'strong']
+    categories: ['public', 'software', 'gpl', 'copyleft', 'strong']
 
   'agpl-1':
     name: 'Affero General Public License 1 (AGPL-1.0)'
@@ -133,7 +133,7 @@ LicenseDefinitions =
     available: false
     url: 'http://www.affero.org/oagpl.html'
     description: ''
-    categories: ['software', 'agpl', 'copyleft', 'strong']
+    categories: ['public', 'software', 'agpl', 'copyleft', 'strong']
 
   'agpl-3':
     name: 'Affero General Public License 3 (AGPL-3.0)'
@@ -141,7 +141,7 @@ LicenseDefinitions =
     available: true
     url: 'http://opensource.org/licenses/AGPL-3.0'
     description: 'The AGPL license differs from the other GNU licenses in that it was built for network software. You can distribute modified versions if you keep track of the changes and the date you made them. As per usual with GNU licenses, you must license derivatives under AGPL. It provides the same restrictions and freedoms as the GPLv3 but with an additional clause which makes it so that source code must be distributed along with web publication. Since web sites and services are never distributed in the traditional sense, the AGPL is the GPL of the web.'
-    categories: ['software', 'agpl', 'copyleft', 'strong']
+    categories: ['public', 'software', 'agpl', 'copyleft', 'strong']
 
   'mpl-2':
     name: 'Mozilla Public License 2.0'
@@ -149,7 +149,7 @@ LicenseDefinitions =
     available: true
     url: 'http://opensource.org/licenses/MPL-2.0'
     description: 'This is a lenient license used by the Mozilla Corporation that allows you a variety of explicit freedoms with the software so long as you keep modifications under this license and distribute the original source code alongside executables. It is a good midway license; it isn’t very strict and has only straightforward requirements.'
-    categories: ['software', 'copyleft', 'weak']
+    categories: ['public', 'software', 'copyleft', 'weak']
 
   'lgpl-2.1+':
     name: 'GNU Library or "Lesser" General Public License 2.1 or later (LGPL-2.1)'
@@ -157,7 +157,7 @@ LicenseDefinitions =
     available: true
     url: 'http://opensource.org/licenses/LGPL-2.1'
     description: 'You may copy, distribute and modify the software provided that modifications are described inside the modified files and licensed for free under LGPL-2.1. Derivatives or non-separate (statically-linked) works of the software must be licensed under LGPL, but separate, parent projects don\'t have to be.'
-    categories: ['software', 'copyleft', 'weak']
+    categories: ['public', 'software', 'copyleft', 'weak']
 
   'lgpl-2.1':
     name: 'GNU Library or "Lesser" General Public License 2.1 (LGPL-2.1)'
@@ -165,7 +165,7 @@ LicenseDefinitions =
     available: false
     url: 'http://opensource.org/licenses/LGPL-2.1'
     description: 'Standard GNU LGPL version 2.1 but without support for later versions i.e. you cannot relicense under LGPL 3.'
-    categories: ['software', 'copyleft', 'weak']
+    categories: ['public', 'software', 'copyleft', 'weak']
 
   'lgpl-3':
     name: 'GNU Library or "Lesser" General Public License 3.0 (LGPL-3.0)'
@@ -173,7 +173,7 @@ LicenseDefinitions =
     available: true
     url: 'http://opensource.org/licenses/LGPL-3.0'
     description: 'You may copy, distribute and modify the software provided that modifications are described inside the modified files and licensed for free under LGPL-2.1.  Derivatives or non-separate (statically-linked) works of the software must be licensed under LGPL, but separate, parent projects don\'t have to be. LGPL 3 tries to close some loopholes in LGPL 2.1.'
-    categories: ['software', 'copyleft', 'weak']
+    categories: ['public', 'software', 'copyleft', 'weak']
 
   'epl-1':
     name: 'Eclipse Public License 1.0 (EPL-1.0)'
@@ -181,7 +181,7 @@ LicenseDefinitions =
     available: true
     url: 'http://opensource.org/licenses/EPL-1.0'
     description: 'This license, made and used by the Eclipse Foundation, isn’t all too stringent and gives both copyright and explicit patent rights. Check the full text of the license to see how liability is accorded.'
-    categories: ['software', 'copyleft', 'weak']
+    categories: ['public', 'software', 'copyleft', 'weak']
 
   'cddl-1':
     name: 'Common Development and Distribution License (CDDL-1.0)'
@@ -189,7 +189,7 @@ LicenseDefinitions =
     available: true
     url: 'http://opensource.org/licenses/CDDL-1.0'
     description: 'This is a very permissive and popular license made by Sun Microsystems that also includes explicit patent grants. It is relatively simplistic in its conditions, requiring only a small amount of documentation for redistribution (applying to source as well as modified code).'
-    categories: ['software', 'copyleft', 'weak']
+    categories: ['public', 'software', 'copyleft', 'weak']
 
   'mit':
     name: 'The MIT License (MIT)'
@@ -197,7 +197,7 @@ LicenseDefinitions =
     available: true
     url: 'http://opensource.org/licenses/mit-license.php'
     description: 'A short, permissive software license. Basically, you can do whatever you want as long as you include the original copyright and license.'
-    categories: ['software', 'permissive']
+    categories: ['public', 'software', 'permissive']
 
   'bsd-3c':
     name: 'The BSD 3-Clause "New" or "Revised" License (BSD)'
@@ -205,7 +205,7 @@ LicenseDefinitions =
     available: true
     url: 'http://opensource.org/licenses/BSD-3-Clause'
     description: 'The BSD 3-clause license allows you almost unlimited freedom with the software so long as you include the BSD copyright notice in it. "Use trademark" in this case means you cannot use the names of the original company or its members to endorse derived products.'
-    categories: ['software', 'permissive']
+    categories: ['public', 'software', 'permissive']
 
   'bsd-2c':
     name: 'The BSD 2-Clause "Simplified" or "FreeBSD" License'
@@ -213,7 +213,7 @@ LicenseDefinitions =
     available: true
     url: 'http://opensource.org/licenses/BSD-2-Clause'
     description: 'The BSD 2-clause license allows you almost unlimited freedom with the software so long as you include the BSD copyright notice in it.'
-    categories: ['software', 'permissive']
+    categories: ['public', 'software', 'permissive']
 
   'apache-2':
     name: 'Apache License 2'
@@ -221,7 +221,7 @@ LicenseDefinitions =
     available: true
     url: 'http://www.apache.org/licenses/LICENSE-2.0'
     description: 'A license that allows you much freedom with the software, including an explicit right to a patent. "State changes" means that you have to include a notice in each file you modified. '
-    categories: ['software', 'permissive']
+    categories: ['public', 'software', 'permissive']
 
 Y = true
 N = false

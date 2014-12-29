@@ -29,15 +29,26 @@
 
     <!-- implementation -->
     <script type="text/javascript" src="dist/license-selector.js"></script>
+    <script type="text/javascript" src="dist/license-selector-clarin.js"></script>
     <script type="text/javascript">
       $(function() {
         $('<p><a href="#!">Click to open selector</a></p>')
           .appendTo('body')
-          .licenseSelector({onLicenseSelected : function (license) {
-            $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
-            console.log(license)
-          }
-        }).click();
+          .licenseSelector({
+            onLicenseSelected : function (license) {
+              $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
+              console.log(license)
+            }
+          }).click();
+
+        $('<p><a href="#!">Click to open selector for CLARIN</a></p>')
+          .appendTo('body')
+          .clarinLicenseSelector({
+            onLicenseSelected : function (license) {
+              $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
+              console.log(license)
+            }
+          });
 
         $('<p><a href="#!">Click to open selector with modified options</a></p>')
           .appendTo('body')

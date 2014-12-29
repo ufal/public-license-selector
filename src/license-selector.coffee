@@ -585,6 +585,7 @@ class LicenseList
       h.append(chooseButton)
       el.append(h)
       el.append($('<p />').text(license.description)) unless _.isEmpty(license.description)
+      el.addClass(_.map(license.categories, (cat) -> 'ls-category-' + cat).join(' ')) if license.categories
       el.addClass(license.cssClass) if license.cssClass
 
     unless customTemplate
@@ -692,6 +693,7 @@ class LicenseSelector
     licenseItemTemplate: null
     appendTo: 'body'
     start: 'KindOfContent'
+
 
   constructor: (@licenses, @questions, @options = {}) ->
     _.defaults(@options, LicenseSelector.defaultOptions)
