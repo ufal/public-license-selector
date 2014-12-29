@@ -262,18 +262,19 @@
     }
   }
 
-  .ls-license-list ul {
+  .ls-license-list > ul {
     list-style: none;
     padding: 0;
     margin: 0;
   }
 
-  .ls-license-list li {
+  .ls-license-list > ul > li {
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 5px 10px;
     margin: 5px 0;
     cursor: pointer;
+    position: relative;
   }
 
   .ls-license-list h4 {
@@ -316,4 +317,68 @@
   .ls-license-list li.ls-active .ls-confirm, .ls-license-list li .ls-select {
     display: inline-block;
   }
+
+  .ls-labels:after {
+    content:"";
+    display:table;
+    clear:both;
+  }
+
+  .ls-label {
+    padding: 2px 3px;
+    margin: 0 4px 0 0;
+    font-weight: 500;
+    float: left;
+  }
+
+  .ls-label-public {
+    color: #5cb811;
+    border-radius: 4px;
+    border: 1px solid #5cb811;
+    background-color: #dff0d8;
+  }
+
+  .ls-label-aca {
+    color: #ffab23;
+    border-radius: 4px;
+    border: 1px solid #ffab23;
+    background-color: #fcf8e3;
+  }
+
+  .ls-label-res {
+    color: #c62d1f;
+    border-radius: 4px;
+    border: 1px solid #c62d1f;
+    background-color: #f2dede;
+  }
+
+  .label-icon(@icon; @width : 22px) {
+    background-image: data-uri("img/licenses/@{icon}.png");
+    width: @width - 6;
+    height: 18px;
+    background-position: center;
+    background-size: @width 22px;
+    background-repeat: no-repeat;
+  }
+
+  .ls-icon-pd   { .label-icon('pd'); }
+  .ls-icon-cc   { .label-icon('cc'); }
+  .ls-icon-zero { .label-icon('zero'); }
+  .ls-icon-by   { .label-icon('by'); }
+  .ls-icon-sa   { .label-icon('sa'); }
+  .ls-icon-nd   { .label-icon('nd'); }
+  .ls-icon-nc   { .label-icon('nc'); }
+  .ls-icon-perl   { .label-icon('perl'); }
+  .ls-icon-osi   { .label-icon('osi', 25px); }
+  .ls-icon-gpl   { .label-icon('gpl'); }
+  .ls-icon-gpl3   { .label-icon('gpl3', 82px); }
+  .ls-icon-agpl3   { .label-icon('agpl3', 82px); }
+  .ls-icon-lgpl   { .label-icon('lgpl'); }
+  .ls-icon-lgpl3   { .label-icon('lgpl3', 82px); }
+  .ls-icon-copyleft   { .label-icon('copyleft'); }
+  .ls-icon-mozilla   { .label-icon('mozilla', 31px); }
+  .ls-icon-mit   { .label-icon('mit'); }
+  .ls-icon-bsd   { .label-icon('bsd'); }
+  .ls-icon-apache   { .label-icon('apache', 86px); }
+  .ls-icon-eclipse   { .label-icon('eclipse', 102px); }
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 13.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 14948)  --><svg enable-background="new 11 -7 64 64" height="64px" id="Layer_1" inkscape:output_extension="org.inkscape.output.svg.inkscape" inkscape:version="0.46" sodipodi:docname="no_derivatives.svg" sodipodi:version="0.32" space="preserve" version="1.0" viewBox="11 -7 64 64" width="64px" x="0px" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" y="0px">
+  <metadata>
+    <rdf:RDF xmlns:cc="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <cc:Work rdf:about="">
+        <dc:title></dc:title>
+        <dc:description></dc:description>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li></rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://creativecommons.org/about/downloads">
+            <dc:title>Source: Creative Commons, Source: Creative Commons, Source: Creative Commons</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title></dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title></dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date></dc:date>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/by/3.0/"/>
+        <dc:language>en</dc:language>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs id="defs14">
+    <inkscape:perspective id="perspective16" inkscape:persp3d-origin="32 : 21.333333 : 1" inkscape:vp_x="0 : 32 : 1" inkscape:vp_y="0 : 1000 : 0" inkscape:vp_z="64 : 32 : 1" sodipodi:type="inkscape:persp3d"/>
+  </defs>
+  <sodipodi:namedview bordercolor="#666666" borderopacity="1.0" gridtolerance="10.0" guidetolerance="10.0" id="base" inkscape:current-layer="Layer_1" inkscape:cx="6.7684953" inkscape:cy="37.517241" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:snap-global="false" inkscape:window-height="674" inkscape:window-width="640" inkscape:window-x="46" inkscape:window-y="15" inkscape:zoom="14.5" objecttolerance="10.0" pagecolor="#ffffff" showgrid="false" showguides="false"/>
+  <g id="g5" transform="translate(5.4482759,-3.5172414)">
+    <circle cx="37.563999" cy="28.288" id="circle7" r="29.013" sodipodi:cx="37.563999" sodipodi:cy="28.288" sodipodi:rx="29.013" sodipodi:ry="29.013" style="fill:#ffffff"/>
+    <g id="g9">
+      <path d="M 37.443,-3.5 C 46.394,-3.5 53.974,-0.395 60.185,5.815 C 66.393,11.987 69.5,19.548 69.5,28.5 C 69.5,37.454 66.451,44.957 60.355,51.014 C 53.918,57.338 46.279,60.5 37.443,60.5 C 28.794,60.5 21.29,57.357 14.929,51.07 C 8.644,44.786 5.5,37.264 5.5,28.501 C 5.5,19.778 8.644,12.216 14.929,5.816 C 21.138,-0.395 28.643,-3.5 37.443,-3.5 z M 37.557,2.272 C 30.281,2.272 24.129,4.844 19.1,9.987 C 13.88,15.283 11.271,21.454 11.271,28.5 C 11.271,35.625 13.861,41.757 19.041,46.9 C 24.222,52.082 30.393,54.671 37.555,54.671 C 44.678,54.671 50.889,52.063 56.184,46.843 C 61.213,41.967 63.727,35.854 63.727,28.5 C 63.727,21.187 61.174,15.015 56.071,9.987 C 51.004,4.842 44.832,2.272 37.557,2.272 z M 49.615,20.956 L 49.615,26.442 L 26.358,26.442 L 26.358,20.956 L 49.615,20.956 z M 49.615,31.243 L 49.615,36.726 L 26.358,36.726 L 26.358,31.243 L 49.615,31.243 z" id="path11"/>
+    </g>
+  </g>
+</svg>

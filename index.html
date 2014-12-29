@@ -28,20 +28,19 @@
     <script type="text/javascript" src="bower_components/lodash/dist/lodash.js"></script>
 
     <!-- implementation -->
-    <script type="text/javascript" src="dist/license-selector.js"></script>
     <script type="text/javascript" src="dist/license-selector-clarin.js"></script>
     <script type="text/javascript">
       $(function() {
-        $('<p><a href="#!">Click to open selector</a></p>')
+        var ls = $('<p><a href="#!">Click to open selector</a></p>')
           .appendTo('body')
           .licenseSelector({
             onLicenseSelected : function (license) {
               $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
               console.log(license)
             }
-          }).click();
+          });
 
-        $('<p><a href="#!">Click to open selector for CLARIN</a></p>')
+        var clarinLs = $('<p><a href="#!">Click to open selector for CLARIN</a></p>')
           .appendTo('body')
           .clarinLicenseSelector({
             onLicenseSelected : function (license) {
@@ -49,6 +48,12 @@
               console.log(license)
             }
           });
+
+        if (window.location.hash == '#clarin') {
+          clarinLs.click();
+        } else {
+          ls.click();
+        }
 
         $('<p><a href="#!">Click to open selector with modified options</a></p>')
           .appendTo('body')

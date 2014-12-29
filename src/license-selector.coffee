@@ -572,20 +572,30 @@ class LicenseList
       else if license.template instanceof $
         el.append(license.template)
     else
-      chooseButton = $('<button/>')
-        .append($('<span/>').addClass('ls-select').text('Select'))
-        .append($('<span/>').addClass('ls-confirm').text('Confirm'))
-        .click(select)
-
+      el.attr('title', 'Click to select the license')
       h = $('<h4 />').text(license.name)
       h.append($('<a/>').attr({
         href: license.url
         target: '_blank'
       }).addClass('ls-button').text('See full text')) if license.url
-      h.append(chooseButton)
       el.append(h)
       el.append($('<p />').text(license.description)) unless _.isEmpty(license.description)
-      el.addClass(_.map(license.categories, (cat) -> 'ls-category-' + cat).join(' ')) if license.categories
+      el.addClass(license.cssClass) if license.cssClass
+      license.labels ||= []
+
+      l = $('<div/>').addClass('ls-labels')
+      for label in license.labels
+        continue unless LabelsDefinitions[label]
+
+        d = LabelsDefinitions[label]
+        l.addClass(d.parentClass) if d.parentClass
+        item = $('<span/>').addClass('ls-label')
+        item.addClass(d.itemClass) if d.itemClass
+        item.text(d.text) if d.text
+        item.attr('title', d.title) if d.title
+        l.append(item)
+
+      el.append(l)
       el.addClass(license.cssClass) if license.cssClass
 
     unless customTemplate

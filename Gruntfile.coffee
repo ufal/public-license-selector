@@ -32,7 +32,7 @@ module.exports = (grunt) ->
         commit: true
         push: true
         connectCommits: true
-        message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+        message: 'Built %sourceName% from %sourceCommit% on %sourceBranch%'
 
       pages:
         options:
@@ -66,7 +66,7 @@ module.exports = (grunt) ->
             flatten: true
           },
           {
-            src: 'dist/license-selector*'
+            src: 'dist/*.{js,css,map}'
             dest: 'pages/'
             filter: 'isFile'
             expand: true
@@ -151,7 +151,7 @@ module.exports = (grunt) ->
             dest: 'dist/license-selector.js'
           },
           {
-            src: [ 'src/clarin-extension.coffee' ]
+            src: [ 'src/definitions.coffee', 'src/license-selector.coffee', 'src/clarin-extension.coffee' ]
             dest: 'dist/license-selector-clarin.js'
           }
         ]
