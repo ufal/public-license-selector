@@ -562,8 +562,9 @@ class LicenseList
     select = (e) =>
       @selectLicense(license, el)
       @licenseSelector.selectLicense license
-      e.preventDefault()
-      e.stopPropagation()
+      if e?
+        e.preventDefault()
+        e.stopPropagation()
 
     if license.template
       if _.isFunction(license.template)
@@ -602,7 +603,7 @@ class LicenseList
     unless customTemplate
       el.click (e) ->
         return if e.target && $(e.target).is('button, a')
-        select()
+        select(e)
 
     el.data 'license', license
     return el
