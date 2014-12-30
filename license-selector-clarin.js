@@ -1,5 +1,5 @@
 (function() {
-  var EVENT_NS, Explanations, ExplanationsTerms, History, LabelsDefinitions, LicenseCompatibility, LicenseDefinitions, LicenseList, LicenseSelector, Modal, N, Question, QuestionDefinitions, Search, Tooltip, Y, addExplanations, explanationTooltips,
+  var ClarinLicenseDefinitions, ClarinQuestionDefinitions, EVENT_NS, Explanations, ExplanationsTerms, History, LabelsDefinitions, LicenseCompatibility, LicenseDefinitions, LicenseList, LicenseSelector, Modal, N, Question, QuestionDefinitions, Search, Tooltip, Y, addExplanations, explanationTooltips,
     __slice = [].slice;
 
   LicenseDefinitions = {
@@ -1624,6 +1624,69 @@
         return e.preventDefault();
       });
     });
+  };
+
+  ClarinLicenseDefinitions = {
+    'clarin-aca': {
+      name: 'CLARIN Academic End-User License (ACA)',
+      priority: 10,
+      available: true,
+      url: 'https://kitwiki.csc.fi/twiki/pub/FinCLARIN/ClarinEULA/CLARIN-EULA-ACA-2014-10.rtf',
+      description: 'CLARIN Academic End-User License grants you right to use and/or make copies of the data for educational,‭ ‬teaching or research purposes.',
+      categories: ['aca', 'data'],
+      labels: ['aca', 'by', 'nc']
+    },
+    'clarin-res': {
+      name: 'CLARIN Restricted End-User License (ACA)',
+      priority: 10,
+      available: true,
+      url: 'https://kitwiki.csc.fi/twiki/pub/FinCLARIN/ClarinEULA/CLARIN-EULA-RES-2014-10.rtf',
+      description: 'CLARIN Academic End-User License grants you right to use and/or make copies of the data only for personal purposes.',
+      categories: ['res', 'data'],
+      labels: ['res', 'nc', 'nd']
+    }
+  };
+
+  ClarinQuestionDefinitions = {
+    LimitAccess: function() {
+      this.question('How do you want to limit access to your data?');
+      this.answer('Publicly available', function() {
+        this.include('public');
+        return this.goto('AllowDerivativeWorks');
+      });
+      this.answer('Only academic', function() {
+        this.include('aca');
+        return this.license();
+      });
+      return this.answer('Further restricted', function() {
+        this.include('res');
+        return this.license();
+      });
+    },
+    OwnIPR: function() {
+      this.question('Do you own copyright and similar rights in your dataset and all its constitutive parts?');
+      this.yes(function() {
+        return this.goto('LimitAccess');
+      });
+      return this.no(function() {
+        return this.goto('EnsureLicensing');
+      });
+    }
+  };
+
+  $.fn.clarinLicenseSelector = function() {
+    var args, options;
+    options = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+    if (!options || _.isObject(options)) {
+      options.showLabels = true;
+      options.licenses = _.merge(_.cloneDeep(ClarinLicenseDefinitions), options.licenses);
+      options.questions = _.merge(_.cloneDeep(ClarinQuestionDefinitions), options.questions);
+    }
+    if (!_.isArray(args)) {
+      args = [];
+    }
+    args.unshift(options);
+    return $.fn.licenseSelector.apply(this, args);
   };
 
 }).call(this);
