@@ -31,25 +31,29 @@
     <script type="text/javascript" src="dist/license-selector-clarin.js"></script>
     <script type="text/javascript">
       $(function() {
-        var ls = $('<p><a href="#!">Click to open selector</a></p>')
+        var clarinLs, ls = $('<p><a href="#!">Click to open selector</a></p>')
           .appendTo('body')
           .licenseSelector({
+            showLabels : false,
             onLicenseSelected : function (license) {
               $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
               console.log(license)
             }
           });
 
-        var clarinLs = $('<p><a href="#!">Click to open selector for CLARIN</a></p>')
-          .appendTo('body')
-          .clarinLicenseSelector({
-            onLicenseSelected : function (license) {
-              $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
-              console.log(license)
-            }
-          });
+        // Add selector for CLARIN only if it exists
+        if ($.fn.clarinLicenseSelector) {
+          clarinLs = $('<p><a href="#!">Click to open selector for CLARIN</a></p>')
+            .appendTo('body')
+            .clarinLicenseSelector({
+              onLicenseSelected : function (license) {
+                $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
+                console.log(license)
+              }
+            });
+        }
 
-        if (window.location.hash == '#clarin') {
+        if (clarinLs && window.location.hash == '#clarin') {
           clarinLs.click();
         } else {
           ls.click();

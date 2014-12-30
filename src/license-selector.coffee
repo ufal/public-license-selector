@@ -583,19 +583,20 @@ class LicenseList
       el.addClass(license.cssClass) if license.cssClass
       license.labels ||= []
 
-      l = $('<div/>').addClass('ls-labels')
-      for label in license.labels
-        continue unless LabelsDefinitions[label]
+      if @licenseSelector.options.showLabels
+        l = $('<div/>').addClass('ls-labels')
+        for label in license.labels
+          continue unless LabelsDefinitions[label]
 
-        d = LabelsDefinitions[label]
-        l.addClass(d.parentClass) if d.parentClass
-        item = $('<span/>').addClass('ls-label')
-        item.addClass(d.itemClass) if d.itemClass
-        item.text(d.text) if d.text
-        item.attr('title', d.title) if d.title
-        l.append(item)
+          d = LabelsDefinitions[label]
+          l.addClass(d.parentClass) if d.parentClass
+          item = $('<span/>').addClass('ls-label')
+          item.addClass(d.itemClass) if d.itemClass
+          item.text(d.text) if d.text
+          item.attr('title', d.title) if d.title
+          l.append(item)
 
-      el.append(l)
+        el.append(l)
       el.addClass(license.cssClass) if license.cssClass
 
     unless customTemplate
@@ -699,6 +700,7 @@ class LicenseList
 
 class LicenseSelector
   @defaultOptions =
+    showLabels: true
     onLicenseSelected: _.noop
     licenseItemTemplate: null
     appendTo: 'body'
