@@ -34,7 +34,7 @@
         var clarinLs, ls = $('<p><a href="#!">Click to open selector</a></p>')
           .appendTo('body')
           .licenseSelector({
-            showLabels : false,
+            showLabels : true,
             onLicenseSelected : function (license) {
               $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
               console.log(license)
