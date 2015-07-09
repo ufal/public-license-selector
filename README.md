@@ -17,7 +17,15 @@ JQuery plugin for easy selection of various licenses
 Use the selector [directly on Github](https://ufal.github.io/lindat-license-selector). You can link to this to always use our latest version.
 
 
+## CLARIN Compatible
+
+The selector can now be used for CLARIN repositories. See the CLARIN compatible version [here on GitHub](https://ufal.github.io/lindat-license-selector#clarin).
+
 ## Install
+
+The plugin is distributed in two versions - standard and Clarin. Standard version contains common set of licenses and focuses only on so called public licenses which will make your work publicly available.
+
+Clarin version contains licenses that somehow limit access to your work. For now you can find there CLARIN Academic End-User License and CLARIN Restricted End-User License.  
 
 ### Using Bower
 
@@ -27,9 +35,15 @@ bower install lindat-license-selector --save
 
 ### Manual
 
-Download the latest version of the plugin from the repository
-([Javascript](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector.js)
-and [CSS](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector.css))
+The latest version is in the [releases branch](https://github.com/ufal/lindat-license-selector/tree/releases).
+
+Standard version:
+- [Javascript](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector.js)
+- [CSS](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector.css)
+
+CLARIN version:
+- [Javascript](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector-clarin.js)
+- [CSS](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector.css)
 
 The plugin requires [Lo-Dash](http://lodash.com/) or [Underscore](http://underscorejs.org/) utility library.
 
@@ -45,6 +59,19 @@ The plugin requires [Lo-Dash](http://lodash.com/) or [Underscore](http://undersc
   });
 </script>
 ```
+or for CLARIN:
+
+```.html
+<link rel="stylesheet" href="license-selector.css">
+<script type="text/javascript" src="license-selector.js"></script>
+<script type="text/javascript">
+  $(function() {
+    'use strict';
+    $('selector').clarinLicenseSelector({ ...options... });
+  });
+</script>
+```
+Additional licenses and some default options will be injected in CLARIN version.
 
 ### Options
 
@@ -78,6 +105,10 @@ Name of the starting question. See to sources for the full list of names. Here a
 - **'KindOfContent'** (default) is asking about the kind of content (Software or Data)
 - **'DataCopyrightable'** jumps straight to data licensing. Use this as a `start` if you want to choose only licenses for data.
 - **'YourSoftware'** jumps to software licensing. The same as above but for software.
+
+#### showLabels (bool)
+
+Whether or not to show labels for each license.
 
 #### licenses
 
@@ -130,6 +161,7 @@ A list of licenses that will get merged to the predefined license. The merge is 
 - `string` **cssClass** - Custom CSS class set on `<li>` element
 - `function|jQuery` **template** - Template used for custom format
 - `array[string]` **categories** - A list of arbitrary category names used for filtering in the questions
+- `array[string]` **labels** - A list of labels that will be shown for the license. Each labels has a picture or special css style connected so this is not completely arbitrary.
 
 ## Development
 

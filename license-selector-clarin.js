@@ -19,7 +19,7 @@
       url: 'http://creativecommons.org/publicdomain/zero/1.0/',
       description: 'CC Zero enables scientists, educators, artists and other creators and owners of copyright- or database-protected content to waive those interests in their works and thereby place them as completely as possible in the public domain, so that others may freely build upon, enhance and reuse the works for any purposes without restriction under copyright or database law.',
       categories: ['public', 'data', 'public-domain'],
-      labels: ['public', 'cc', 'zero']
+      labels: ['public', 'cc', 'zero', 'opendata']
     },
     'pddl': {
       name: 'Open Data Commons Public Domain Dedication and License (PDDL)',
@@ -37,7 +37,7 @@
       url: 'http://creativecommons.org/licenses/by/4.0/',
       description: 'This is the standard creative commons license that gives others maximum freedom to do what they want with your work.',
       categories: ['public', 'data', 'by'],
-      labels: ['public', 'cc', 'by']
+      labels: ['public', 'cc', 'by', 'opendata']
     },
     'odc-by': {
       name: 'Open Data Commons Attribution License (ODC-By)',
@@ -55,7 +55,7 @@
       url: 'http://creativecommons.org/licenses/by-sa/4.0/',
       description: 'This creative commons license is very similar to the regular Attribution license, but requires you to release all derivative works under this same license.',
       categories: ['public', 'data', 'by', 'sa'],
-      labels: ['public', 'cc', 'by', 'sa']
+      labels: ['public', 'cc', 'by', 'sa', 'opendata']
     },
     'odbl': {
       name: 'Open Data Commons Open Database License (ODbL)',
@@ -621,6 +621,10 @@
     eclipse: {
       title: 'License endorsed by Eclipse Foundation',
       itemClass: 'ls-icon-eclipse'
+    },
+    opendata: {
+      title: 'Open Data',
+      itemClass: 'ls-icon-opendata'
     }
   };
 
