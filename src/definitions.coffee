@@ -129,7 +129,7 @@ LicenseDefinitions =
     name: 'GNU General Public License 2 (GPL-2.0)'
     priority: 10
     available: false
-    url: 'http://www.gnu.org/licenses/gpl-2.0.html'
+    url: 'http://opensource.org/licenses/GPL-2.0'
     description: 'Standard GNU GPL version 2 but without support for later versions i.e. you cannot relicense under GPL 3.'
     categories: ['public', 'software', 'gpl', 'copyleft', 'strong']
     labels: ['public', 'gpl', 'copyleft']
