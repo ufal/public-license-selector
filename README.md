@@ -17,10 +17,6 @@ JQuery plugin for easy selection of various licenses
 Use the selector [directly on Github](https://ufal.github.io/lindat-license-selector). You can link to this to always use our latest version.
 
 
-## CLARIN Compatible
-
-The selector can now be used for CLARIN repositories. See the CLARIN compatible version [here on GitHub](https://ufal.github.io/lindat-license-selector#clarin).
-
 ## Install
 
 The plugin is distributed in two versions - standard and Clarin. Standard version contains common set of licenses and focuses only on so called public licenses which will make your work publicly available.
