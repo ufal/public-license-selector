@@ -1,14 +1,14 @@
 
 <!-- TITLE/ -->
 
-# License Selector
+# Public License Selector
 
 <!-- /TITLE -->
 
 
 <!-- DESCRIPTION/ -->
 
-JQuery plugin for easy selection of various licenses
+JQuery plugin for easy selection of public licenses. Also, it is publicly licensed and available itself.
 
 <!-- /DESCRIPTION -->
 
@@ -19,9 +19,8 @@ Use the selector [directly on Github](https://ufal.github.io/lindat-license-sele
 
 ## Install
 
-The plugin is distributed in two versions - standard and Clarin. Standard version contains common set of licenses and focuses only on so called public licenses which will make your work publicly available.
+The plugin contains common set of so called public licenses which will make your work publicly available.
 
-Clarin version contains licenses that somehow limit access to your work. For now you can find there CLARIN Academic End-User License and CLARIN Restricted End-User License.  
 
 ### Using Bower
 
@@ -32,13 +31,7 @@ bower install lindat-license-selector --save
 ### Manual
 
 The latest version is in the [releases branch](https://github.com/ufal/lindat-license-selector/tree/releases).
-
-Standard version:
 - [Javascript](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector.js)
-- [CSS](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector.css)
-
-CLARIN version:
-- [Javascript](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector-clarin.js)
 - [CSS](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector.css)
 
 The plugin requires [Lo-Dash](http://lodash.com/) or [Underscore](http://underscorejs.org/) utility library.
@@ -55,19 +48,7 @@ The plugin requires [Lo-Dash](http://lodash.com/) or [Underscore](http://undersc
   });
 </script>
 ```
-or for CLARIN:
 
-```.html
-<link rel="stylesheet" href="license-selector.css">
-<script type="text/javascript" src="license-selector.js"></script>
-<script type="text/javascript">
-  $(function() {
-    'use strict';
-    $('selector').clarinLicenseSelector({ ...options... });
-  });
-</script>
-```
-Additional licenses and some default options will be injected in CLARIN version.
 
 ### Options
 
@@ -216,7 +197,7 @@ Node environment is not required but strongly recommended for the development
     
 ## Authors
 
-- Pawel Kamocki
+- Pawel Kamocki <kamocki@ids-mannheim.de>
 - Pavel Straňák <stranak@ufal.mff.cuni.cz>
 - Michal Sedlák <sedlak@ufal.mff.cuni.cz>
 
