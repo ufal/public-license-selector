@@ -14,7 +14,7 @@ JQuery plugin for easy selection of public licenses. Also, it is publicly licens
 
 ## Give It a Try
 
-Use the selector [directly on Github](https://ufal.github.io/lindat-license-selector). You can link to this to always use our latest version.
+Use the selector [directly on Github](https://ufal.github.io/public-license-selector). You can link to this to always use our latest version.
 
 
 ## Install
