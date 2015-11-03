@@ -9,7 +9,7 @@ before_deploy: bash ./ci/build_release.sh
 deploy:
 - provider: releases
   api_key:
-    secure: I3E0Gj7DkMrw8dwq/nUej4LxE7q/u27Vcy+GUM2tyaL6/3OgzWF0WOOxu7O7IzMVg0+Mp2bNP4GDxUGxs5n34wTQBHgWAnZ3eUoINPQuWLGLrSHRuNMhGYYi5GsMbFle+dAvMD8B8E6+o+zRW3NLj3BxU35LedYMdy93QDhWv8yshyGCYyTWbzni/5RZ/2m1UBoD5+bgbkMX2KCcq2F/WgsbcIezIIpmmhR/PpZvk8hInsLngZpv4A/Yjm634XtbBdrxHoTrDG7+W5VV3KRd+vADLPoj6xmL+6IjCj8w0C9nD6fpeA2m29UzkWyjVHmvESLNOZFPW3z269/GgjJuLrlxvNJcAwlf7cb+LfTfr/XNfwwhkU98CJ36HlODHSlsTVkp185sCFdOueWrmAtxyiR/l/4HycO5CFVMlHeTwsvOeUT53Qm5k0hsxMPTry6NfA6mjhmg+19CZ1ebC9/GrqjKItujt/RdBIKOj/3kHUSgnpCK2X/l/xEDiyZsh5uDuQd9msP6QH9DtSaUYTOnKrXQ0IqdQ5rV1k3PlAkjtxeTOz2AREjJ5H6LuHmH5uMlcyLtuDomUswL9J2rnD/nb8TUp0kSaUsArM47rd1lYjfRlYAvnLhTAQXGl713zt6X9veh1OLn6DZubgwO/7yJ//GsPSwcjzttbO0JlheUZ5k=
+    secure: cDVJluCReiLGADQ4MwLMzKTM5vtioImeKlJx9P42clu4hjKR89zylNQyUQwTtao0h64zX+QfpKUhwTIhNHz58oDVqk6r6g2omy9+mtEHHVfHXdnYqQI0b9lU4Yllcc51sa8CpYH5CYImFdxwpduOkK7M7M/1ozwJitVHIlqUW0Y=
   file:
   - dist.tar.gz
   - dist.zip
