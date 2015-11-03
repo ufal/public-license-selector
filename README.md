@@ -3,6 +3,8 @@
 
 # Public License Selector
 
+[![Build Status](https://travis-ci.org/ufal/public-license-selector.svg)](https://travis-ci.org/ufal/public-license-selector)
+
 <!-- /TITLE -->
 
 
@@ -25,14 +27,14 @@ The plugin contains common set of so called public licenses which will make your
 ### Using Bower
 
 ```
-bower install lindat-license-selector --save
+bower install public-license-selector --save
 ```
 
 ### Manual
 
-The latest version is in the [releases branch](https://github.com/ufal/lindat-license-selector/tree/releases).
-- [Javascript](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector.js)
-- [CSS](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector.css)
+The latest version is in the [releases branch](https://github.com/ufal/public-license-selector/tree/releases).
+- [Javascript](https://raw.githubusercontent.com/ufal/public-license-selector/releases/license-selector.js)
+- [CSS](https://raw.githubusercontent.com/ufal/public-license-selector/releases/license-selector.css)
 
 The plugin requires [Lo-Dash](http://lodash.com/) or [Underscore](http://underscorejs.org/) utility library.
 
@@ -175,25 +177,19 @@ Node environment is not required but strongly recommended for the development
 
 1. Install Node
     
-        curl https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash
+        curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
         nvm install stable
         nvm use stable
 
-2. Install Grunt & Bower
-        
-        npm install -g grunt-cli
-        npm install -g bower
-
-3. Clone repository
+2. Clone repository
     
-        git clone https://github.com/ufal/lindat-license-selector.git
-        cd lindat-license-selector
-        npm install
-        bower install
+        git clone https://github.com/ufal/public-license-selector.git
+        cd public-license-selector
+        make install
 
 4. Start development server
     
-        grunt start
+        make run
     
 ## Authors
 
@@ -215,6 +211,6 @@ You must not rely on the information from License Selector as an alternative to 
 
 Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT license](http://creativecommons.org/licenses/MIT/)
 
-Copyright &copy; 2014 Institute of Formal and Applied Linguistics (http://ufal.mff.cuni.cz)
+Copyright &copy; 2015 Institute of Formal and Applied Linguistics (http://ufal.mff.cuni.cz)
 
 <!-- /LICENSE -->
