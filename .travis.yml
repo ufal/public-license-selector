@@ -3,11 +3,8 @@ sudo: false
 node_js: '0.11'
 branches:
   except:
-    - edge
     - releases
     - gh-pages
-addons:
-  sauce_connect: true
 before_deploy: bash ./ci/build_release.sh
 deploy:
 - provider: releases

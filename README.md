@@ -190,6 +190,14 @@ Node environment is not required but strongly recommended for the development
 4. Start development server
     
         make run
+        
+## Making new release
+
+| Task                 | Version                                |
+|----------------------|----------------------------------------|
+| make release         | v0.0.1 -> v0.0.2 + commit + tag + push |
+| make release-minor   | v0.0.1 -> v0.1.0 + commit + tag + push |
+| make release-major   | v0.0.1 -> v1.0.1 + commit + tag + push |
     
 ## Authors
 
