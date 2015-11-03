@@ -1,49 +1,40 @@
 
 <!-- TITLE/ -->
 
-# License Selector
+# Public License Selector
+
+[![Build Status](https://travis-ci.org/ufal/public-license-selector.svg)](https://travis-ci.org/ufal/public-license-selector)
 
 <!-- /TITLE -->
 
 
 <!-- DESCRIPTION/ -->
 
-JQuery plugin for easy selection of various licenses
+JQuery plugin for easy selection of public licenses. Also, it is publicly licensed and available itself.
 
 <!-- /DESCRIPTION -->
 
 ## Give It a Try
 
-Use the selector [directly on Github](https://ufal.github.io/lindat-license-selector). You can link to this to always use our latest version.
+Use the selector [directly on Github](https://ufal.github.io/public-license-selector). You can link to this to always use our latest version.
 
-
-## CLARIN Compatible
-
-The selector can now be used for CLARIN repositories. See the CLARIN compatible version [here on GitHub](https://ufal.github.io/lindat-license-selector#clarin).
 
 ## Install
 
-The plugin is distributed in two versions - standard and Clarin. Standard version contains common set of licenses and focuses only on so called public licenses which will make your work publicly available.
+The plugin contains common set of so called public licenses which will make your work publicly available.
 
-Clarin version contains licenses that somehow limit access to your work. For now you can find there CLARIN Academic End-User License and CLARIN Restricted End-User License.  
 
 ### Using Bower
 
 ```
-bower install lindat-license-selector --save
+bower install public-license-selector --save
 ```
 
 ### Manual
 
-The latest version is in the [releases branch](https://github.com/ufal/lindat-license-selector/tree/releases).
-
-Standard version:
-- [Javascript](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector.js)
-- [CSS](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector.css)
-
-CLARIN version:
-- [Javascript](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector-clarin.js)
-- [CSS](https://raw.githubusercontent.com/ufal/lindat-license-selector/releases/license-selector.css)
+The latest version is in the [releases branch](https://github.com/ufal/public-license-selector/tree/releases).
+- [Javascript](https://raw.githubusercontent.com/ufal/public-license-selector/releases/license-selector.js)
+- [CSS](https://raw.githubusercontent.com/ufal/public-license-selector/releases/license-selector.css)
 
 The plugin requires [Lo-Dash](http://lodash.com/) or [Underscore](http://underscorejs.org/) utility library.
 
@@ -59,19 +50,7 @@ The plugin requires [Lo-Dash](http://lodash.com/) or [Underscore](http://undersc
   });
 </script>
 ```
-or for CLARIN:
 
-```.html
-<link rel="stylesheet" href="license-selector.css">
-<script type="text/javascript" src="license-selector.js"></script>
-<script type="text/javascript">
-  $(function() {
-    'use strict';
-    $('selector').clarinLicenseSelector({ ...options... });
-  });
-</script>
-```
-Additional licenses and some default options will be injected in CLARIN version.
 
 ### Options
 
@@ -163,35 +142,66 @@ A list of licenses that will get merged to the predefined license. The merge is 
 - `array[string]` **categories** - A list of arbitrary category names used for filtering in the questions
 - `array[string]` **labels** - A list of labels that will be shown for the license. Each labels has a picture or special css style connected so this is not completely arbitrary.
 
+## Available Licenses
+
+List of licenses that can be chosen in with default settings.
+
+|License name | URL |
+|-------------|-----|
+| Affero General Public License 3 (AGPL-3.0) | http://opensource.org/licenses/AGPL-3.0 |
+| Apache License 2 | http://www.apache.org/licenses/LICENSE-2.0 |
+| Artistic License 1.0 | http://opensource.org/licenses/Artistic-Perl-1.0 |
+| Artistic License 2.0 | http://opensource.org/licenses/Artistic-2.0 |
+| Common Development and Distribution License (CDDL-1.0) | http://opensource.org/licenses/CDDL-1.0 |
+| Creative Commons Attribution (CC-BY) | http://creativecommons.org/licenses/by/4.0/ |
+| Creative Commons Attribution-NoDerivs (CC-BY-ND) | http://creativecommons.org/licenses/by-nd/4.0/ |
+| Creative Commons Attribution-NonCommercial (CC-BY-NC) | http://creativecommons.org/licenses/by-nc/4.0/ |
+| Creative Commons Attribution-NonCommercial-NoDerivs (CC-BY-NC-ND) | http://creativecommons.org/licenses/by-nc-nd/4.0/ |
+| Creative Commons Attribution-NonCommercial-ShareAlike (CC-BY-NC-SA) | http://creativecommons.org/licenses/by-nc-sa/4.0/ |
+| Creative Commons Attribution-ShareAlike (CC-BY-SA) | http://creativecommons.org/licenses/by-sa/4.0/ |
+| Eclipse Public License 1.0 (EPL-1.0) | http://opensource.org/licenses/EPL-1.0 |
+| GNU General Public License 2 or later (GPL-2.0) | http://opensource.org/licenses/GPL-2.0 |
+| GNU General Public License 3 (GPL-3.0) | http://opensource.org/licenses/GPL-3.0 |
+| GNU Library or "Lesser" General Public License 2.1 or later (LGPL-2.1) | http://opensource.org/licenses/LGPL-2.1 |
+| GNU Library or "Lesser" General Public License 3.0 (LGPL-3.0) | http://opensource.org/licenses/LGPL-3.0 |
+| Mozilla Public License 2.0 | http://opensource.org/licenses/MPL-2.0 |
+| Public Domain Dedication (CC Zero) | http://creativecommons.org/publicdomain/zero/1.0/ |
+| Public Domain Mark (PD) | http://creativecommons.org/publicdomain/mark/1.0/ |
+| The BSD 2-Clause "Simplified" or "FreeBSD" License | http://opensource.org/licenses/BSD-2-Clause |
+| The BSD 3-Clause "New" or "Revised" License (BSD) | http://opensource.org/licenses/BSD-3-Clause |
+| The MIT License (MIT) | http://opensource.org/licenses/mit-license.php |
+
 ## Development
 
 Node environment is not required but strongly recommended for the development
 
 1. Install Node
     
-        curl https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash
+        curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
         nvm install stable
         nvm use stable
 
-2. Install Grunt & Bower
-        
-        npm install -g grunt-cli
-        npm install -g bower
-
-3. Clone repository
+2. Clone repository
     
-        git clone https://github.com/ufal/lindat-license-selector.git
-        cd lindat-license-selector
-        npm install
-        bower install
+        git clone https://github.com/ufal/public-license-selector.git
+        cd public-license-selector
+        make install
 
 4. Start development server
     
-        grunt start
+        make run
+        
+## Making new release
+
+| Task                 | Version                                |
+|----------------------|----------------------------------------|
+| make release         | v0.0.1 -> v0.0.2 + commit + tag + push |
+| make release-minor   | v0.0.1 -> v0.1.0 + commit + tag + push |
+| make release-major   | v0.0.1 -> v1.0.1 + commit + tag + push |
     
 ## Authors
 
-- Pawel Kamocki
+- Pawel Kamocki <kamocki@ids-mannheim.de>
 - Pavel Straňák <stranak@ufal.mff.cuni.cz>
 - Michal Sedlák <sedlak@ufal.mff.cuni.cz>
 
@@ -209,6 +219,6 @@ You must not rely on the information from License Selector as an alternative to 
 
 Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT license](http://creativecommons.org/licenses/MIT/)
 
-Copyright &copy; 2014 Institute of Formal and Applied Linguistics (http://ufal.mff.cuni.cz)
+Copyright &copy; 2015 Institute of Formal and Applied Linguistics (http://ufal.mff.cuni.cz)
 
 <!-- /LICENSE -->
