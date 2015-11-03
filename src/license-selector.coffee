@@ -1,5 +1,9 @@
 EVENT_NS = 'license-selector'
 
+$ = require 'jquery';
+_ = require 'lodash';
+{LicenseDefinitions, LicenseCompatibility, QuestionDefinitions, LabelsDefinitions} = require './definitions.coffee'
+
 # keyword : text
 Explanations =
   'the scope of copyright and related rights': """

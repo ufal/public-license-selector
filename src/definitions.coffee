@@ -1,3 +1,6 @@
+Y = true
+N = false
+
 LicenseDefinitions =
   'cc-public-domain':
     name: 'Public Domain Mark (PD)'
@@ -250,9 +253,6 @@ LicenseDefinitions =
     description: 'A license that allows you much freedom with the software, including an explicit right to a patent. "State changes" means that you have to include a notice in each file you modified. '
     categories: ['public', 'software', 'permissive']
     labels: ['public', 'apache', 'osi']
-
-Y = true
-N = false
 
 LicenseCompatibility =
   columns:              ['cc-public-domain', 'mit', 'bsd-2c', 'bsd-3c', 'apache-2', 'lgpl-2.1', 'lgpl-2.1+', 'lgpl-3', 'mpl-2', 'epl-1', 'cddl-1', 'gpl-2', 'gpl-2+', 'gpl-3', 'agpl-1', 'agpl-3']
@@ -517,3 +517,9 @@ LabelsDefinitions =
   opendata:
     title: 'Open Data'
     itemClass: 'ls-icon-opendata'
+
+module.exports =
+  LicenseDefinitions: LicenseDefinitions,
+  LicenseCompatibility: LicenseCompatibility,
+  QuestionDefinitions: QuestionDefinitions,
+  LabelsDefinitions: LabelsDefinitions

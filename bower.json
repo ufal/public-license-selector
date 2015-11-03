@@ -1,10 +1,10 @@
 {
-  "name": "lindat-license-selector",
+  "name": "public-license-selector",
   "description": "JQuery plugin with UI for picking a license for software or data",
   "version": "0.0.5",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ufal/lindat-license-selector"
+    "url": "https://github.com/ufal/public-license-selector"
   },
   "authors": [
     "Pawel Kamocki",

@@ -1,0 +1,38 @@
+language: node_js
+sudo: false
+node_js: '0.11'
+branches:
+  except:
+    - edge
+    - releases
+    - gh-pages
+addons:
+  sauce_connect: true
+before_deploy: bash ./ci/build_release.sh
+deploy:
+- provider: releases
+  api_key:
+    secure: I3E0Gj7DkMrw8dwq/nUej4LxE7q/u27Vcy+GUM2tyaL6/3OgzWF0WOOxu7O7IzMVg0+Mp2bNP4GDxUGxs5n34wTQBHgWAnZ3eUoINPQuWLGLrSHRuNMhGYYi5GsMbFle+dAvMD8B8E6+o+zRW3NLj3BxU35LedYMdy93QDhWv8yshyGCYyTWbzni/5RZ/2m1UBoD5+bgbkMX2KCcq2F/WgsbcIezIIpmmhR/PpZvk8hInsLngZpv4A/Yjm634XtbBdrxHoTrDG7+W5VV3KRd+vADLPoj6xmL+6IjCj8w0C9nD6fpeA2m29UzkWyjVHmvESLNOZFPW3z269/GgjJuLrlxvNJcAwlf7cb+LfTfr/XNfwwhkU98CJ36HlODHSlsTVkp185sCFdOueWrmAtxyiR/l/4HycO5CFVMlHeTwsvOeUT53Qm5k0hsxMPTry6NfA6mjhmg+19CZ1ebC9/GrqjKItujt/RdBIKOj/3kHUSgnpCK2X/l/xEDiyZsh5uDuQd9msP6QH9DtSaUYTOnKrXQ0IqdQ5rV1k3PlAkjtxeTOz2AREjJ5H6LuHmH5uMlcyLtuDomUswL9J2rnD/nb8TUp0kSaUsArM47rd1lYjfRlYAvnLhTAQXGl713zt6X9veh1OLn6DZubgwO/7yJ//GsPSwcjzttbO0JlheUZ5k=
+  file:
+  - dist.tar.gz
+  - dist.zip
+  skip_cleanup: true
+  on:
+    repo: ufal/public-license-selector
+    all_branches: true
+    condition: '-n "$TRAVIS_TAG"'
+- provider: script
+  script: bash ./ci/push_build.sh
+  skip_cleanup: true
+  on:
+    repo: ufal/public-license-selector
+    all_branches: true
+    condition: '-n "$TRAVIS_TAG" || "$TRAVIS_BRANCH" = "master"'
+cache:
+  directories:
+  - node_modules
+env:
+  global:
+  - NODE_ENV=travis
+  - secure: moEL3e1aAuPDSMKQBqbZNAp1OFUsu6C+njbIVJyBaYCuwWgAq8l/oDtU1gKGYP7RoNd9+WRHf4RUC/qZVhfrekSeypSW03CdzFsEu5BvlDgNOyVEqL1xck3a7f9QJPOuTibxS9xC1zVzlTtKsOtP3lbwxW/IX5D7PQtxjgvRAqA=
+

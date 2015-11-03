@@ -1,0 +1,9 @@
+{
+  "commitMessage": "Releasing %s",
+  "tagName": "v%s",
+  "scripts": {
+    "preupdate": "echo 'Releasing new version...'",
+    "postcommit": "git push origin master --follow-tags",
+    "postupdate": "echo 'Updated to version %s'"
+  }
+}
