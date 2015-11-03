@@ -3,7 +3,7 @@
 
 # Public License Selector
 
-[![Build Status](https://travis-ci.org/ufal/public-license-selector.svg)](https://travis-ci.org/ufal/public-license-selector)
+[![Build Status](https://travis-ci.org/ufal/public-license-selector.svg?branch=master)](https://travis-ci.org/ufal/public-license-selector)
 
 <!-- /TITLE -->
 
