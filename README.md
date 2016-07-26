@@ -10,7 +10,9 @@
 
 <!-- DESCRIPTION/ -->
 
-JQuery plugin for easy selection of public licenses. Also, it is publicly licensed and available itself.
+JQuery plugin for easy selection of public licenses. 
+
+[Read our paper](http://www.lrec-conf.org/proceedings/lrec2016/summaries/880.html) for more details.
 
 <!-- /DESCRIPTION -->
 
