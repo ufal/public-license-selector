@@ -25,7 +25,7 @@ Use the selector [directly on Github](https://ufal.github.io/public-license-sele
 - [CLARIN DSpace Repositories][dspace]: deployments in [Czechia][cz], Italy, Lithuania, Norway, Poland, Slovenia, Spain, Sweden, Brazil. 
 - EUDAT [B2SHARE Repository][b2share]
 
-In case you use Public License Selector, please let us know. 
+*In case you use Public License Selector, please let us know. We would love to add your site to this list.* 
 
 [b2share]:https://b2share.eudat.eu
 [dspace]:https://github.com/ufal/clarin-dspace
