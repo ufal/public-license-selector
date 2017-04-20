@@ -20,6 +20,16 @@ JQuery plugin for easy selection of public licenses.
 
 Use the selector [directly on Github](https://ufal.github.io/public-license-selector). You can link to this to always use our latest version.
 
+## Used by
+
+- [CLARIN DSpace Repositories][dspace]: deployments in [Czechia][cz], Italy, Lithuania, Norway, Poland, Slovenia, Spain, Sweden, Brazil. 
+- EUDAT [B2SHARE Repository][b2share]
+
+In case you use Public License Selector, please let us know. 
+
+[b2share]:https://b2share.eudat.eu
+[dspace]:https://github.com/ufal/clarin-dspace
+[cz]:https://lindat.mff.cuni.cz/repository/xmlui/
 
 ## Install
 
