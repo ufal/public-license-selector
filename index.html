@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>License Selector</title>
+    <style>
+      pre {
+        display: block;
+        padding: 9px;
+        margin: 0 0 10px;
+        font-size: 13px;
+        line-height: 1.42857143;
+        color: #333;
+        word-break: break-all;
+        word-wrap: break-word;
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .cc-by {
+        border-color: #c80000 !important;
+      }
+    </style>
+  <link href="license-selector.css" rel="stylesheet"></head>
+  <body>
+  <h1>License Selector</h1>
+  <p>If you see this without closing the License Selector please reload the page.</p>
+
+  <!-- dependencies -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+
+  <!-- implementation -->
+  <script type="text/javascript">
+    $(function() {
+      var clarinLs, ls = $('<p><a href="#!">Click to open selector</a></p>')
+        .appendTo('body')
+        .licenseSelector({
+          showLabels : true,
+          onLicenseSelected : function (license) {
+            $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
+            console.log(license)
+          }
+        });
+
+      // Add selector for CLARIN only if it exists
+      if ($.fn.clarinLicenseSelector) {
+        clarinLs = $('<p><a href="#!">Click to open selector for CLARIN</a></p>')
+          .appendTo('body')
+          .clarinLicenseSelector({
+            onLicenseSelected : function (license) {
+              $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
+              console.log(license)
+            }
+          });
+      }
+
+      if (clarinLs && window.location.hash == '#clarin') {
+        clarinLs.click();
+      } else {
+        ls.click();
+      }
+
+      $('<p><a href="#!">Click to open selector with modified options</a></p>')
+        .appendTo('body')
+        .licenseSelector({
+          licenses: {
+            'abc-license': {
+              name: 'ABC license',
+              priority: 1,
+              available: true,
+              url: 'http://www.example.com/abc-license',
+              description: 'This is ABC license inserted as a test',
+              template: function($el, license, selectFunction) {
+                var h = $('<h4 />').text(license.name);
+                h.append($('<a/>').attr({
+                  href: license.url,
+                  target: '_blank'
+                }));
+                //$el.click(selectFunction);
+                $el.append(h);
+                $el.append('<p>Custom template function</p>');
+                $el.append($('<button/>').append('<span>Click here to select license</span>').click(selectFunction));
+              },
+              categories: ['data', 'abc']
+            },
+            'cc-by': {
+              description: 'Modified description ...',
+              cssClass: 'cc-by'
+            }
+          },
+          start: 'DataCopyrightable',
+          onLicenseSelected : function (license) {
+            $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
+            console.log(license)
+          }
+        });
+    });
+  </script>
+  <script type="text/javascript" src="license-selector.js"></script></body>
+</html>

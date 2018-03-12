@@ -1,0 +1,37 @@
+{
+  "name": "public-license-selector",
+  "description": "JQuery plugin with UI for picking a license for software or data",
+  "version": "0.0.6",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ufal/public-license-selector"
+  },
+  "authors": [
+    "Pawel Kamocki",
+    "Pavel Straňák",
+    "Michal Sedlák"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "lodash": "~2.4.1"
+  },
+  "main": [
+    "license-selector.js",
+    "license-selector.css"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "license",
+    "selector"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
