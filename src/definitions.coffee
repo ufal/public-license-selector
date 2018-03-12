@@ -420,7 +420,7 @@ QuestionDefinitions =
     @answer 'Next', nextAction, (state) -> !_.any state.options, (option) -> option.selected
 
   Copyleft: ->
-    @question 'Do you want others who modify your code to be forced to also release it under an open source license?'
+    @question 'Do you require others who modify your code to release it under a compatible licence?'
     @yes ->
       @include 'copyleft'
       if @has('weak') and @has('strong')
