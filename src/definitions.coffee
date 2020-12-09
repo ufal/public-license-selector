@@ -393,7 +393,7 @@ QuestionDefinitions =
         for license2 in licenses
           index2 = _.indexOf(LicenseCompatibility.columns, license2.key)
           unless LicenseCompatibility.table[license2.key][index1] or LicenseCompatibility.table[license1.key][index2]
-            @cantlicense "The licenses <strong>#{license1.name}</strong> and <strong>#{license2.name}</strong> in your software are incompatible. Contact the copyright owner and try to talk him into re-licensing."
+            @cantlicense "The licenses <strong>#{license1.name}</strong> and <strong>#{license2.name}</strong> in your software are incompatible. Contact the copyright owner and try to talk them into re-licensing."
             return
       list = null
       for license in licenses
