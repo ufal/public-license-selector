@@ -9,7 +9,7 @@ const baseConfig = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   devtool: 'source-map',
   entry: {
-    'license-selector': ['./src/license-selector.coffee', './src/license-selector.less']
+    'license-selector': ['./src/index.coffee', './src/license-selector.less']
   },
   externals: {
     lodash: '_',
