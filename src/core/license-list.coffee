@@ -4,7 +4,7 @@ LabelsDefinitions = require '../data/labels'
 
 ###
 # Class: LicenseList
-# Summary: Renders available licenses, applies filters, and reports selections back to the selctor.
+# Summary: Renders available licenses, applies filters, and reports selections back to the selector.
 # Responsibilities:
 # - Generates default list items, including labels pulled from `data/labels`.
 # - Keeps `@availableLicenses` in sync with include/exclude helpers and search terms.
@@ -51,7 +51,6 @@ class LicenseList
       }).addClass('ls-button').text('See full text')) if license.url
       el.append(h)
       el.append($('<p />').text(license.description)) unless _.isEmpty(license.description)
-      el.addClass(license.cssClass) if license.cssClass
       license.labels ||= []
 
       if @licenseSelector.options.showLabels
@@ -68,7 +67,8 @@ class LicenseList
           l.append(item)
 
         el.append(l)
-      el.addClass(license.cssClass) if license.cssClass
+
+    el.addClass(license.cssClass) if license.cssClass
 
     unless customTemplate
       el.click (e) ->

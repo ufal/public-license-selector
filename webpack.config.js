@@ -104,6 +104,8 @@ const esmConfig = {
     filename: '[name].esm.js',
     module: true
   },
+  // ESM bundles target module consumers, so they expect package import names
+  // rather than the global identifiers used by the UMD build.
   externals: {
     lodash: 'lodash',
     jquery: 'jquery'
@@ -111,4 +113,17 @@ const esmConfig = {
   plugins: baseConfig.plugins.filter((plugin) => !(plugin instanceof HtmlWebpackPlugin))
 };
 
-module.exports = [umdConfig, esmConfig];
+const configurations = {
+  umd: umdConfig,
+  esm: esmConfig
+};
+
+module.exports = (env = {}) => {
+  const targets = env.bundle ? [env.bundle] : Object.keys(configurations);
+  return targets.map((target) => {
+    if (!configurations[target]) {
+      throw new Error(`Unknown bundle: ${target}`);
+    }
+    return configurations[target];
+  });
+};

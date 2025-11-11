@@ -5,7 +5,7 @@ $ = require 'jquery'
 # Summary: Provides the header search input and forwards queries to `LicenseList.filter`.
 # Responsibilities:
 # - Owns a text box bound to `input` events and forwards values to the list.
-# - Toggles visbility alongside the license list as questions demand.
+# - Toggles visibility alongside the license list as questions demand.
 ###
 class Search
   constructor: (@parent, @licenseList) ->

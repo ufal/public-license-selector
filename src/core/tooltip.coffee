@@ -5,7 +5,7 @@ _ = require 'lodash'
 # Class: Tooltip
 # Summary: Lightweight tooltip engine shared by history and progress buttons and explanation terms.
 # Responsibilities:
-# - Accepts an achor and optinal container, positioning wrapper relative to the anchor.
+# - Accepts an achor and optional container, positioning wrapper relative to the anchor.
 # - Supports `beforeShow` callbacks for lazy content population and optional preservation via `detach`.
 # - Handles focus/hover lifecycle across mouse and keyboard events.
 ###
