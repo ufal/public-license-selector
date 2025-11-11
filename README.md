@@ -33,6 +33,15 @@ Use the selector [directly on Github](https://ufal.github.io/public-license-sele
 [dspace]:https://github.com/ufal/clarin-dspace
 [cz]:https://lindat.mff.cuni.cz/repository/xmlui/
 
+## Contributing
+
+We welcome pull requests and issue reports. To get started:
+- Review the workflow in [`docs/extending.md`](docs/extending.md) for details on editing data files, updating the wizard, and running local builds/tests.
+- Open an issue or discussion before large changes so we can align on scope and direction.
+- Run `npm run build` and `npm start` to verify changes locally before submitting a PR.
+
+If you have questions, feel free to open a GitHub discussion or issue and we’ll help you find the right approach.
+
 ## Install
 
 The plugin contains common set of so called public licenses which will make your work publicly available.
