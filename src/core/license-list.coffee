@@ -2,6 +2,14 @@ $ = require 'jquery'
 _ = require 'lodash'
 LabelsDefinitions = require '../data/labels'
 
+###
+# Class: LicenseList
+# Summary: Renders available licenses, applies filters, and reports selections back to the selctor.
+# Responsibilities:
+# - Generates default list items, including labels pulled from `data/labels`.
+# - Keeps `@availableLicenses` in sync with include/exclude helpers and search terms.
+# - Toggles the error banner when no licenses match and coordinates with the search header.
+###
 class LicenseList
   comperator = (obj, text) ->
     text = (''+text).toLowerCase()

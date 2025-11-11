@@ -1,5 +1,12 @@
 $ = require 'jquery'
 
+###
+# Class: Modal
+# Summary: Builds and manages the overlay container for the selector.
+# Responsibilities:
+# - Creates structural DOM (header, content area, close button) and attaches to the append target.
+# - Handles responsive scaling by updating injected `<style>` rules on window resize or show.
+###
 class Modal
   # based on css-modal https://github.com/drublic/css-modal
 

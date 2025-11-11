@@ -1,6 +1,14 @@
 $ = require 'jquery'
 _ = require 'lodash'
 
+###
+# Class: Tooltip
+# Summary: Lightweight tooltip engine shared by history and progress buttons and explanation terms.
+# Responsibilities:
+# - Accepts an achor and optinal container, positioning wrapper relative to the anchor.
+# - Supports `beforeShow` callbacks for lazy content population and optional preservation via `detach`.
+# - Handles focus/hover lifecycle across mouse and keyboard events.
+###
 # Inspired by devblog.orgsync.com/hangover/
 class Tooltip
   constructor: (el, anchor, options) ->

@@ -1,6 +1,10 @@
 Y = true
 N = false
 
+###
+# Module: data/compatibility.coffee
+# Summary: Compatibility matrix used during the software flow to detect incompatible license mixes.
+###
 LicenseCompatibility =
   columns:              ['cc-public-domain', 'mit', 'bsd-2c', 'bsd-3c', 'apache-2', 'lgpl-2.1', 'lgpl-2.1+', 'lgpl-3', 'mpl-2', 'epl-1', 'cddl-1', 'gpl-2', 'gpl-2+', 'gpl-3', 'agpl-1', 'agpl-3']
   table:

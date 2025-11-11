@@ -1,6 +1,10 @@
 _ = require 'lodash'
 LicenseCompatibility = require './compatibility'
 
+###
+# Module: data/questions.coffee
+# Summary: Decision tree functions invoked by `LicenseSelector.goto`.
+###
 QuestionDefinitions =
   KindOfContent: ->
     @question 'What do you want to deposit?'

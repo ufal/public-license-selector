@@ -2,6 +2,14 @@ $ = require 'jquery'
 _ = require 'lodash'
 {addExplanations, explanationTooltips} = require '../helpers/explanations.coffee'
 
+###
+# Class: Question
+# Summary: Controls the prompt, answer buttons, checkbox options, and error display in the modal header.
+# Responsibilities:
+# - Resets content on new questions and injects explanation tooltips for marked terms.
+# - Wires checkbox options to update both selector state and history snapshots.
+# - Hides or show the license list depending on whether options are active.
+###
 class Question
 
   constructor: (@parent, @licenseSelector) ->

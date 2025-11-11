@@ -4,6 +4,10 @@ Tooltip = require '../core/tooltip'
 
 EVENT_NS = 'license-selector'
 
+###
+# Module: helpers/explanations.coffee
+# Summary: Glossary support that wraps trigger terms and attaches tooltips with rich HTML.
+###
 Explanations =
   'the scope of copyright and related rights': """
 <p>

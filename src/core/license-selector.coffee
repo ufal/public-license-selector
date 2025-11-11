@@ -7,6 +7,14 @@ Question = require './question'
 Search = require './search'
 LicenseList = require './license-list'
 
+###
+# Class: LicenseSelector
+# Summary: Coordinates the modal UI, question flow, search, and license list state.
+# Responsibilities:
+# - Normalises license definitions and bootstraps submodules (modal, history, question, search, list).
+# - Provides DSL helpers (`@question`, `@answer`, `@include`, etc.) consumed by question definitions.
+# - Tracks selection state, triggers callbacks, and pushes snapshots into the history stack.
+###
 class LicenseSelector
   @defaultOptions =
     showLabels: true

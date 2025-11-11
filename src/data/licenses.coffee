@@ -1,3 +1,7 @@
+###
+# Module: data/licenses.coffee
+# Summary: Master list of license definitions consumed by the selector and compatibility logic.
+###
 LicenseDefinitions =
   'cc-public-domain':
     name: 'Public Domain Mark (PD)'

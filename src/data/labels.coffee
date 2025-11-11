@@ -1,3 +1,7 @@
+###
+# Module: data/labels.coffee
+# Summary: Label metadata powering badge styling in the license list.
+###
 LabelsDefinitions =
   public:
     text: 'Publicly Available'

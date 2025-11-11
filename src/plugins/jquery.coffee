@@ -4,6 +4,10 @@ LicenseSelector = require '../core/license-selector'
 LicenseDefinitions = require '../data/licenses'
 QuestionDefinitions = require '../data/questions'
 
+###
+# Module: plugins/jquery.coffee
+# Summary: jQuery integration that initiates or dispatches methods on `LicenseSelector` instances.
+###
 $.fn.licenseSelector = (options, args...) ->
   return @each ->
     if args.length > 0

@@ -2,6 +2,14 @@ $ = require 'jquery'
 _ = require 'lodash'
 Tooltip = require './tooltip'
 
+###
+# Class: History
+# Summary: Maintains a stack of answered states and powers back/forward navigation.
+# Responsibilities:
+# - Deep-clones selector state in `pushState` and trims future history when rewinding.
+# - Renders progress buttons with tooltips summarising past asnwers/options.
+# - Exposes `setAnswer` and `setOptionSelected` so the Question module updates snapshots after input.
+###
 class History
 
   constructor: (@parent, @licenseSelector) ->
