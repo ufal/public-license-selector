@@ -14,6 +14,8 @@ JQuery plugin for easy selection of public licenses.
 
 [Read our paper](http://www.lrec-conf.org/proceedings/lrec2016/summaries/880.html) for more details.
 
+> Need to customise licenses or the decision tree? See [`docs/extending.md`](docs/extending.md).
+
 <!-- /DESCRIPTION -->
 
 ## Give It a Try
@@ -183,9 +185,53 @@ List of licenses that can be chosen in with default settings.
 | The BSD 3-Clause "New" or "Revised" License (BSD) | http://opensource.org/licenses/BSD-3-Clause |
 | The MIT License (MIT) | http://opensource.org/licenses/mit-license.php |
 
+## Modern Build & Usage
+
+The current source is organised under `src/` with modular CoffeeScript files (helpers, core components, data, plugins). To work with the modern webpack 5 build:
+
+1. Install dependencies once:
+   ```bash
+   npm install
+   ```
+2. Build the distributable bundles:
+   ```bash
+   npm run build
+   ```
+   This produces `dist/license-selector.umd.js`, `dist/license-selector.esm.js`, and `dist/license-selector.css`.
+3. Run the demo locally:
+   ```bash
+   npm start
+   ```
+   Webpack dev server opens `ci/index.html`, letting you exercise the selector in the browser.
+
+### Consuming the bundles
+- **UMD** (`dist/license-selector.umd.js`): load via `<script>` and use the `$(...).licenseSelector(...)` jQuery plugin as shown below.
+- **ESM** (`dist/license-selector.esm.js`): import into modern bundlers and wire it into your app code.
+- Include `dist/license-selector.css` (and bundled fonts) so the modal renders correctly.
+
+When integrating into another application, make sure jQuery and Lodash are available (the bundles treat them as externals) and initialise the plugin from your own bootstrap code.
+
+> Need deeper customisation (add licenses, adjust the wizard)? See [`docs/extending.md`](docs/extending.md).
+
 ## Development
 
-Node environment is not required but strongly recommended for the development
+### Modern workflow
+1. Install dependencies (once):
+   ```bash
+   npm install
+   ```
+2. Start the dev server:
+   ```bash
+   npm start
+   ```
+   This rebuilds on change and serves the demo page.
+3. Produce release bundles:
+   ```bash
+   npm run build
+   ```
+
+### Legacy make targets
+The original Makefile-based flow is still available if you rely on it:
 
 1. Install Node
     
@@ -199,10 +245,10 @@ Node environment is not required but strongly recommended for the development
         cd public-license-selector
         make install
 
-4. Start development server
+3. Start development server
     
         make run
-        
+
 ## Making new release
 
 | Task                 | Version                                |
