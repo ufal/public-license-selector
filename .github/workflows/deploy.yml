@@ -2,8 +2,6 @@ name: Build and Deploy
 
 on:
   push:
-    branches:
-      - '**'  # Build all branches like Travis did
     branches-ignore:
       - releases
       - gh-pages
