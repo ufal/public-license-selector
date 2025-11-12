@@ -1,291 +1,170 @@
-
-<!-- TITLE/ -->
-
 # Public License Selector
 
-[![Build Status](https://travis-ci.org/ufal/public-license-selector.svg?branch=master)](https://travis-ci.org/ufal/public-license-selector)
+JQuery-powered wizard for choosing data and software licenses. Ships as modular CoffeeScript source with webpack builds for both browser globals (UMD) and modern bundlers (ESM).
 
-<!-- /TITLE -->
+## Live Demo
 
+Use the selector at [https://ufal.github.io/public-license-selector](https://ufal.github.io/public-license-selector) for the most recent build.
 
-<!-- DESCRIPTION/ -->
+## Features
 
-JQuery plugin for easy selection of public licenses. 
+- Guided questionnaire covering data and software licensing paths, with inline explanations and tooltips.
+- Searchable license catalogue with badges sourced from `src/data/labels.coffee`.
+- History navigation that lets users review and replay previous answers.
+- Bundled CSS, icon font, and LESS sources to theme the modal.
 
-[Read our paper](http://www.lrec-conf.org/proceedings/lrec2016/summaries/880.html) for more details.
+## Installation
 
-> Need to customise licenses or the decision tree? See [`docs/extending.md`](docs/extending.md).
+Clone the repo and install dependencies once:
 
-<!-- /DESCRIPTION -->
-
-## Give It a Try
-
-Use the selector [directly on Github](https://ufal.github.io/public-license-selector). You can link to this to always use our latest version.
-
-## Used by
-
-- [CLARIN DSpace Repositories][dspace]: deployments in [Czechia][cz], Italy, Lithuania, Norway, Poland, Slovenia, Spain, Sweden, Brazil. 
-- EUDAT [B2SHARE Repository][b2share]
-
-*In case you use Public License Selector, please let us know. We would love to add your site to this list.* 
-
-[b2share]:https://b2share.eudat.eu
-[dspace]:https://github.com/ufal/clarin-dspace
-[cz]:https://lindat.mff.cuni.cz/repository/xmlui/
-
-## Contributing
-
-We welcome pull requests and issue reports. To get started:
-- Review the workflow in [`docs/extending.md`](docs/extending.md) for details on editing data files, updating the wizard, and running local builds/tests.
-- Open an issue or discussion before large changes so we can align on scope and direction.
-- Run `npm run build` and `npm start` to verify changes locally before submitting a PR.
-
-If you have questions, feel free to open a GitHub discussion or issue and we’ll help you find the right approach.
-
-## Install
-
-The plugin contains common set of so called public licenses which will make your work publicly available.
-
-
-### Using Bower
-
-```
-bower install public-license-selector --save
+```bash
+npm install
 ```
 
-### Manual
+Build the distributable bundles:
 
-The latest version is in the [releases branch](https://github.com/ufal/public-license-selector/tree/releases).
-- [Javascript](https://raw.githubusercontent.com/ufal/public-license-selector/releases/license-selector.js)
-- [CSS](https://raw.githubusercontent.com/ufal/public-license-selector/releases/license-selector.css)
+```bash
+npm run build     # runs clean + build:umd + build:esm
+# or individually
+npm run build:umd
+npm run build:esm
+```
 
-The plugin requires [Lo-Dash](http://lodash.com/) or [Underscore](http://underscorejs.org/) utility library.
+During development, launch the demo with live rebuilds:
 
+```bash
+npm start
+```
 
-## Usage
-```.html
-<link rel="stylesheet" href="license-selector.css">
-<script type="text/javascript" src="license-selector.js"></script>
-<script type="text/javascript">
-  $(function() {
-    'use strict';
-    $('selector').licenseSelector({ ...options... });
+Webpack serves `index.html` and watches the CoffeeScript/LESS sources.
+
+## Consuming the Bundles
+
+`dist/` contains everything you need:
+
+| File | Description |
+| --- | --- |
+| `license-selector.umd.js` | Browser-friendly UMD bundle exposing `LicenseSelector`. Expects global `jQuery` and `_` (lodash). |
+| `license-selector.esm.js` | Tree-shakeable ESM bundle for modern build pipelines. Expects `jquery` and `lodash` via imports. |
+| `license-selector.css` | Stylesheet + icon font references for the modal UI. |
+
+### UMD Example
+
+```html
+<link rel="stylesheet" href="dist/license-selector.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+<script src="dist/license-selector.umd.js"></script>
+<script>
+  $(function () {
+    $('button#pick-license').licenseSelector({
+      showLabels: true,
+      onLicenseSelected: function (license) {
+        console.log('Selected license:' license);
+      }
+    });
   });
 </script>
 ```
 
+### ESM Example
 
-### Options
+```js
+import $ from 'jquery';
+import _ from 'lodash';
+import 'dist/license-selector.css';
+import 'dist/license-selector.esm.js';
 
-#### onLicenseSelected
-
-Callback to action that should happen after the license is selected. Receives selected license as a first argument.
-
-```.javascript
-onLicenseSelected : function (license) {
-    $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
-    console.log(license)
-}
+$('#pick-license').licenseSelector({
+  start: 'YourSoftware',
+  onLicenseSelected(license) {
+    console.log(license);
+  }
+});
 ```
 
-#### licenseItemTemplate (function|jQuery)
+## jQuery Plugin Options
 
-A template function to customize license display in the license list. See the example below. The function takes three arguments:
+| Option | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `appendTo` | `string \| HTMLElement \| JQuery` | `'body'` | Parent element for the modal root. |
+| `start` | `string` | `'KindOfContent'` | Initial question; see `src/data/questions.coffee`. |
+| `showLabels` | `boolean` | `true` | Toggle license badge rendering. |
+| `licenseItemTemplate` | `function \| JQuery` | `null` | Custom renderer for `<li>` entries. |
+| `licenses` | `Record<string, Partial<LicenseDefinition>>` | `{}` | Deep-merged with `src/data/licenses.coffee`. |
+| `questions` | `Record<string, Function>` | `{}` | Deep-merged with `src/data/questions.coffee`. |
+| `onLicenseSelected` | `function` | `_.noop` | Fires when the user confirms a license. |
 
-1. jQuery object of an `<li>` element
-2. `license` object with attributes defined bellow
-3. select function - the function that actually does the license selection. Can be used as `onClick` handler
+The TypeScript interface definitions live in `index.d.ts` and mirror the table above.
 
-#### appendTo
+## Customizing Licenses & Decision Flow
 
-JQuery selector specifying a html element where license selector should be attached. Default is `'body'`.
+- License metadata: `src/data/licenses.coffee`
+- Compatibility matrix: `src/data/compatibility.coffee`
+- Questionnaire states: `src/data/questions.coffee`
+- Tooltip text: `src/helpers/explanations.coffee`
 
-#### start
+See `docs/extending.md` for step-by-step guidance on adding licenses, extending labels, or branching the wizard logic.
 
-Name of the starting question. See to sources for the full list of names. Here are the most useful:
+## Architecture Overview
 
-- **'KindOfContent'** (default) is asking about the kind of content (Software or Data)
-- **'DataCopyrightable'** jumps straight to data licensing. Use this as a `start` if you want to choose only licenses for data.
-- **'YourSoftware'** jumps to software licensing. The same as above but for software.
+| Module | Responsibility |
+| --- | --- |
+| `src/index.coffee` | Entry point exporting the selector plus bundled data helpers. |
+| `src/core/license-selector.coffee` | Orchestrates modal lifecycle, questions, history, and list state. |
+| `src/core/history.coffee` | Manages the navigation stack and tooltips for previous answers. |
+| `src/core/question.coffee` | Renders prompts, answers, checkbox options, and validation errors. |
+| `src/core/license-list.coffee` | Displays filterable licenses and handles selection state. |
+| `src/core/search.coffee` | Header search input wired to the license list filter. |
+| `src/core/modal.coffee` | Builds the modal shell and handles responsive sizing. |
+| `src/core/tooltip.coffee` | Shared tooltip widget used across the UI. |
+| `src/plugins/jquery.coffee` | Registers the `$.fn.licenseSelector` plugin and merges overrides. |
+| `src/license-selector.less` & friends | Styles for modal layout, typography, and iconography. |
 
-#### showLabels (bool)
 
-Whether or not to show labels for each license.
+## Development Workflow
 
-#### licenses
+1. Work inside the CoffeeScript/LESS sources under `src/`.
+2. Run `npm start` for hot rebuilds and manual testing against `index.html`.
+3. Execute `npm run build` before publishing to refresh the assets in `dist/`.
+4. Linting is handled via webpack loaders; ensure the dev server logs stay clean.
 
-A list of licenses that will get merged to the predefined license. The merge is done by [`_.merge`](https://lodash.com/docs#merge) so you can use it to add new licenses or to change configuration of the predefined licenses.
+### Legacy Makefile Commands
 
-```.javascript
-.licenseSelector({
-    licenses: {
-      'abc-license': {
-        name: 'NEW license',
-        priority: 1,
-        available: true,
-        url: 'http://www.example.com/new-license',
-        description: 'This is new license inserted as a test',
-        categories: ['data', 'new'],
-        template: function($el, license, selectFunction) {
-          var h = $('<h4 />').text(license.name);
-          h.append($('<a/>').attr({
-            href: license.url,
-            target: '_blank'
-          }));
-          $el.append(h);
-          $el.append('<p>Custom template function</p>');
-          $el.append(
-            $('<button/>')
-              .append('<span>Click here to select license</span>')
-              .click(selectFunction)
-          );
-        }
-      },
-      'cc-by': {
-        description: 'Modified description ...',
-        cssClass: 'featured-license'
-      },
-      'lgpl-3': {
-        available: false // hide the LGPL 3 license
-      }
-    }
-);
+The orginal Makefile remains functional if you prefer that workflow:
+
+```bash
+make install # installs dependencies via npm
+make run     # starts the demo server
+make build   # rebuilds distributable assets
 ```
 
-##### License Attributes
+The release helpers (`make release`, `make release-minor`, `make release-major`) are still available for version tagging automation.
 
-- `string` **key** - The hash key (will be automatically added)
-- `string` **name** - Full name of the license
-- `bool` **available** - Flag whether the license is visible in the license list
-- `unsigned int` **priority** - Sort priority (lower means higher in the license list)
-- `string` **url** - Url pointing to the license full text
-- `string` **description** - A short description of the license
-- `string` **cssClass** - Custom CSS class set on `<li>` element
-- `function|jQuery` **template** - Template used for custom format
-- `array[string]` **categories** - A list of arbitrary category names used for filtering in the questions
-- `array[string]` **labels** - A list of labels that will be shown for the license. Each labels has a picture or special css style connected so this is not completely arbitrary.
+## Used By
 
-## Available Licenses
+- [CLARIN DSpace Repositories](https://github.com/ufal/clarin-dspace) - deployments across Czechia, Italy, Lithuania, Norway, Poland, Slovenia, Spain, Sweden, Brazil.
+- [EUDAT B2SHARE](https://b2share.eudat.eu).
 
-List of licenses that can be chosen in with default settings.
+Using the selector elsewhere? Open an issue or discussion so we can add your deployment.
 
-|License name | URL |
-|-------------|-----|
-| Affero General Public License 3 (AGPL-3.0) | http://opensource.org/licenses/AGPL-3.0 |
-| Apache License 2 | http://www.apache.org/licenses/LICENSE-2.0 |
-| Artistic License 1.0 | http://opensource.org/licenses/Artistic-Perl-1.0 |
-| Artistic License 2.0 | http://opensource.org/licenses/Artistic-2.0 |
-| Common Development and Distribution License (CDDL-1.0) | http://opensource.org/licenses/CDDL-1.0 |
-| Creative Commons Attribution (CC-BY) | http://creativecommons.org/licenses/by/4.0/ |
-| Creative Commons Attribution-NoDerivs (CC-BY-ND) | http://creativecommons.org/licenses/by-nd/4.0/ |
-| Creative Commons Attribution-NonCommercial (CC-BY-NC) | http://creativecommons.org/licenses/by-nc/4.0/ |
-| Creative Commons Attribution-NonCommercial-NoDerivs (CC-BY-NC-ND) | http://creativecommons.org/licenses/by-nc-nd/4.0/ |
-| Creative Commons Attribution-NonCommercial-ShareAlike (CC-BY-NC-SA) | http://creativecommons.org/licenses/by-nc-sa/4.0/ |
-| Creative Commons Attribution-ShareAlike (CC-BY-SA) | http://creativecommons.org/licenses/by-sa/4.0/ |
-| Eclipse Public License 1.0 (EPL-1.0) | http://opensource.org/licenses/EPL-1.0 |
-| GNU General Public License 2 or later (GPL-2.0) | http://opensource.org/licenses/GPL-2.0 |
-| GNU General Public License 3 (GPL-3.0) | http://opensource.org/licenses/GPL-3.0 |
-| GNU Library or "Lesser" General Public License 2.1 or later (LGPL-2.1) | http://opensource.org/licenses/LGPL-2.1 |
-| GNU Library or "Lesser" General Public License 3.0 (LGPL-3.0) | http://opensource.org/licenses/LGPL-3.0 |
-| Mozilla Public License 2.0 | http://opensource.org/licenses/MPL-2.0 |
-| Public Domain Dedication (CC Zero) | http://creativecommons.org/publicdomain/zero/1.0/ |
-| Public Domain Mark (PD) | http://creativecommons.org/publicdomain/mark/1.0/ |
-| The BSD 2-Clause "Simplified" or "FreeBSD" License | http://opensource.org/licenses/BSD-2-Clause |
-| The BSD 3-Clause "New" or "Revised" License (BSD) | http://opensource.org/licenses/BSD-3-Clause |
-| The MIT License (MIT) | http://opensource.org/licenses/mit-license.php |
+## Contributing
 
-## Modern Build & Usage
+- Review `docs/extending.md` before large changes.
+- Discuss new features via Github issues/discussions to align on scope.
+- Run `npm run build` (and optionally `npm start`) to verify changes locally.
+- Submit pull request with clear descriptions of the behaviour affected.
 
-The current source is organised under `src/` with modular CoffeeScript files (helpers, core components, data, plugins). To work with the modern webpack 5 build:
-
-1. Install dependencies once:
-   ```bash
-   npm install
-   ```
-2. Build the distributable bundles:
-   ```bash
-   npm run build
-   ```
-   This produces `dist/license-selector.umd.js`, `dist/license-selector.esm.js`, and `dist/license-selector.css`.
-3. Run the demo locally:
-   ```bash
-   npm start
-   ```
-   Webpack dev server opens `ci/index.html`, letting you exercise the selector in the browser.
-
-### Consuming the bundles
-- **UMD** (`dist/license-selector.umd.js`): load via `<script>` and use the `$(...).licenseSelector(...)` jQuery plugin as shown below.
-- **ESM** (`dist/license-selector.esm.js`): import into modern bundlers and wire it into your app code.
-- Include `dist/license-selector.css` (and bundled fonts) so the modal renders correctly.
-
-When integrating into another application, make sure jQuery and Lodash are available (the bundles treat them as externals) and initialise the plugin from your own bootstrap code.
-
-> Need deeper customisation (add licenses, adjust the wizard)? See [`docs/extending.md`](docs/extending.md).
-
-## Development
-
-### Modern workflow
-1. Install dependencies (once):
-   ```bash
-   npm install
-   ```
-2. Start the dev server:
-   ```bash
-   npm start
-   ```
-   This rebuilds on change and serves the demo page.
-3. Produce release bundles:
-   ```bash
-   npm run build
-   ```
-
-### Legacy make targets
-The original Makefile-based flow is still available if you rely on it:
-
-1. Install Node
-    
-        curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
-        nvm install stable
-        nvm use stable
-
-2. Clone repository
-    
-        git clone https://github.com/ufal/public-license-selector.git
-        cd public-license-selector
-        make install
-
-3. Start development server
-    
-        make run
-
-## Making new release
-
-| Task                 | Version                                |
-|----------------------|----------------------------------------|
-| make release         | v0.0.1 -> v0.0.2 + commit + tag + push |
-| make release-minor   | v0.0.1 -> v0.1.0 + commit + tag + push |
-| make release-major   | v0.0.1 -> v1.0.1 + commit + tag + push |
-    
 ## Authors
 
-- Pawel Kamocki <kamocki@ids-mannheim.de>
-- Pavel Straňák <stranak@ufal.mff.cuni.cz>
-- Michal Sedlák <sedlak@ufal.mff.cuni.cz>
+- Pawel Kamocki
+- Pavel Straňák
+- Michal Sedlák
 
-## Attribution
+## Disclaimer
 
-Descriptions for some licenses taken from (or inspired by) descriptions at [tldrLegal](https://tldrlegal.com).
-
-## Warning / Disclaimer
-
-You must not rely on the information from License Selector as an alternative to legal advice from your attorney or other professional legal services provider.   
-
-<!-- LICENSE/ -->
+This tool does not replace professional legal advice. Consult your legal counsel for authoritative guidance.
 
 ## License
 
-Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT license](http://creativecommons.org/licenses/MIT/)
-
-Copyright &copy; 2015 Institute of Formal and Applied Linguistics (http://ufal.mff.cuni.cz)
-
-<!-- /LICENSE -->
+[MIT](LICENSE.md) © Institute of Formal and Applied Linguistics, Charles University.
