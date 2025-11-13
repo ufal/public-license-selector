@@ -26,6 +26,11 @@ npm install @ufal/license-selector
 npm install jquery lodash
 ```
 
+**Tested command**
+```bash
+npm install @ufal/license-selector jquery@2.2.4 lodash@3.10.1 --save
+```
+
 Continue reading for **development setup**, or skip to [Consuming the Bundles](#consuming-the-bundles) to use the published package.
 
 
