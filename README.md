@@ -13,6 +13,22 @@ Use the selector at [https://ufal.github.io/public-license-selector](https://ufa
 - History navigation that lets users review and replay previous answers.
 - Bundled CSS, icon font, and LESS sources to theme the modal.
 
+## Using as NPM Package
+
+The selector is published to npm as `@ufal/license-selector` and can be installed in your project:
+
+```bash
+npm install @ufal/license-selector
+```
+
+**Peer dependencies:**
+```bash
+npm install jquery lodash
+```
+
+Continue reading for **development setup**, or skip to [Consuming the Bundles](#consuming-the-bundles) to use the published package.
+
+
 ## Installation
 
 Clone the repo and install dependencies once:
@@ -39,6 +55,73 @@ npm start
 Webpack serves `index.html` and watches the CoffeeScript/LESS sources.
 
 ## Consuming the Bundles
+
+### From NPM Package
+
+After installing via `npm install @ufal/license-selector`, the bundles are available in `node_modules/@ufal/license-selector/dist/`:
+
+| File | Description |
+| --- | --- |
+| `license-selector.umd.js` | Browser-friendly UMD bundle exposing `LicenseSelector`. Expects global `jQuery` and `_` (lodash). |
+| `license-selector.esm.js` | Tree-shakeable ESM bundle for modern build pipelines. Expects `jquery` and `lodash` via imports. |
+| `license-selector.css` | Stylesheet + icon font references for the modal UI. |
+
+### From Local Build
+
+If you cloned the repo and ran `npm run build`, the same files are in `dist/`.
+
+### UMD Example (Browser)
+
+```html
+<link rel="stylesheet" href="node_modules/@ufal/license-selector/dist/license-selector.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+<script src="node_modules/@ufal/license-selector/dist/license-selector.umd.js"></script>
+<script>
+  $(function () {
+    $('button#pick-license').licenseSelector({
+      showLabels: true,
+      onLicenseSelected: function (license) {
+        console.log('Selected license:', license);
+      }
+    });
+  });
+</script>
+```
+
+### ESM Example (Webpack/Vite)
+
+```js
+import $ from 'jquery';
+import _ from 'lodash';
+import '@ufal/license-selector/dist/license-selector.css';
+import '@ufal/license-selector/dist/license-selector.esm.js';
+
+$('#pick-license').licenseSelector({
+  start: 'YourSoftware',
+  onLicenseSelected(license) {
+    console.log(license);
+  }
+});
+```
+
+### TypeScript Example
+
+```typescript
+import type { LicenseDefinition, LicenseSelectorOptions } from '@ufal/license-selector';
+
+const options: LicenseSelectorOptions = {
+  showLabels: true,
+  onLicenseSelected: (license: LicenseDefinition) => {
+    console.log(license.name, license.url);
+  }
+};
+
+// jQuery plugin available globally (if loaded via UMD)
+const $ = (window as any).jQuery;
+$('#pick-license').licenseSelector(options);
+```
+## From Local Build
 
 `dist/` contains everything you need:
 
