@@ -1,5 +1,5 @@
 {
-  "name": "LicenseSelector",
+  "name": "@ufal/license-selector",
   "title": "License Selector",
   "version": "0.0.6",
   "repository": {
@@ -7,9 +7,25 @@
     "url": "https://github.com/ufal/public-license-selector.git"
   },
   "description": "JQuery plugin with UI for picking a license for software or data",
-  "homepage": "http://ufal.github.io/lindat-license-selector",
-  "package": false,
-  "bower": true,
+  "main": "dist/license-selector.umd.js",
+  "module": "dist/license-selector.esm.js",
+  "types": "index.d.ts",
+  "files": [
+    "dist/",
+    "index.d.ts",
+    "LICENSE.md",
+    "README.md"
+  ],
+  "homepage": "http://ufal.github.io/public-license-selector",
+  "keywords": [
+    "license",
+    "selector",
+    "license selector",
+    "public license",
+    "software license",
+    "data license",
+    "jquery plugin"
+  ],
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.23.0",
@@ -30,11 +46,16 @@
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   },
+  "peerDependencies": {
+    "jquery": ">=2.1.1",
+    "lodash": ">=2.4.1"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "build:umd": "cross-env NODE_ENV=production webpack --config webpack.config.js --env bundle=umd",
     "build:esm": "cross-env NODE_ENV=production webpack --config webpack.config.js --env bundle=esm",
     "build": "npm-run-all clean build:umd build:esm",
+    "prepublishOnly": "npm run build",
     "start": "cross-env NODE_ENV=development webpack serve --config webpack.config.js --env bundle=umd --open",
     "test": "npm run build"
   },

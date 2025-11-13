@@ -1,0 +1,29 @@
+# Development files
+src/
+ci/
+docs/
+.github/
+node_modules/
+
+# Build configs
+webpack.config.js
+webpack.config-old.js
+babel.config.json
+.mversionrc
+.editorconfig
+Makefile
+
+# CI/CD
+.travis.yml
+
+# Documentation (already in README)
+testing-plan.md
+
+# Demo files
+index.html
+
+# Obsolete
+bower.json
+
+# Source maps (optional - remove if you want to include them)
+*.map
