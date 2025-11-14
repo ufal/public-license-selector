@@ -1,5 +1,7 @@
 # Public License Selector
 
+[Read our paper](http://www.lrec-conf.org/proceedings/lrec2016/summaries/880.html) for more details.
+
 JQuery-powered wizard for choosing data and software licenses. Ships as modular CoffeeScript source with webpack builds for both browser globals (UMD) and modern bundlers (ESM).
 
 ## Live Demo
@@ -184,6 +186,75 @@ $('#pick-license').licenseSelector({
 | `onLicenseSelected` | `function` | `_.noop` | Fires when the user confirms a license. |
 
 The TypeScript interface definitions live in `index.d.ts` and mirror the table above.
+
+## Example: Customizing Licenses with `licenses` Option
+
+A list of licenses that will get merged to the predefined licenses. The merge is done by [`_.merge`](https://lodash.com/docs#merge) so you can use it to add new licenses or to change configuration of the predefined licenses.
+
+```js
+$('.selector').licenseSelector({
+  licenses: {
+    'abc-license': {
+      name: 'NEW license',
+      priority: 1,
+      available: true,
+      url: 'http://www.example.com/new-license',
+      description: 'This is new license inserted as a test',
+      categories: ['data', 'new'],
+      template: function($el, license, selectFunction) {
+        var h = $('<h4 />').text(license.name);
+        h.append($('<a/>').attr({
+          href: license.url,
+          target: '_blank'
+        }));
+        $el.append(h);
+        $el.append('<p>Custom template function</p>');
+        $el.append(
+          $('<button/>')
+            .append('<span>Click here to select license</span>')
+            .click(selectFunction)
+        );
+      }
+    },
+    'cc-by': {
+      description: 'Modified description ...',
+      cssClass: 'featured-license'
+    },
+    'lgpl-3': {
+      available: false // hide the LGPL 3 license
+    }
+  }
+});
+```
+
+## Available Licenses
+
+List of licenses that can be chosen with default settings.
+
+| License name | URL |
+| --- | --- |
+| Affero General Public License 3 (AGPL-3.0) | http://opensource.org/licenses/AGPL-3.0 |
+| Apache License 2 | http://www.apache.org/licenses/LICENSE-2.0 |
+| Artistic License 1.0 | http://opensource.org/licenses/Artistic-Perl-1.0 |
+| Artistic License 2.0 | http://opensource.org/licenses/Artistic-2.0 |
+| Common Development and Distribution License (CDDL-1.0) | http://opensource.org/licenses/CDDL-1.0 |
+| Creative Commons Attribution (CC-BY) | http://creativecommons.org/licenses/by/4.0/ |
+| Creative Commons Attribution-NoDerivs (CC-BY-ND) | http://creativecommons.org/licenses/by-nd/4.0/ |
+| Creative Commons Attribution-NonCommercial (CC-BY-NC) | http://creativecommons.org/licenses/by-nc/4.0/ |
+| Creative Commons Attribution-NonCommercial-NoDerivs (CC-BY-NC-ND) | http://creativecommons.org/licenses/by-nc-nd/4.0/ |
+| Creative Commons Attribution-NonCommercial-ShareAlike (CC-BY-NC-SA) | http://creativecommons.org/licenses/by-nc-sa/4.0/ |
+| Creative Commons Attribution-ShareAlike (CC-BY-SA) | http://creativecommons.org/licenses/by-sa/4.0/ |
+| Eclipse Public License 1.0 (EPL-1.0) | http://opensource.org/licenses/EPL-1.0 |
+| GNU General Public License 2 or later (GPL-2.0) | http://opensource.org/licenses/GPL-2.0 |
+| GNU General Public License 3 (GPL-3.0) | http://opensource.org/licenses/GPL-3.0 |
+| GNU Library or "Lesser" General Public License 2.1 or later (LGPL-2.1) | http://opensource.org/licenses/LGPL-2.1 |
+| GNU Library or "Lesser" General Public License 3.0 (LGPL-3.0) | http://opensource.org/licenses/LGPL-3.0 |
+| Mozilla Public License 2.0 | http://opensource.org/licenses/MPL-2.0 |
+| Public Domain Dedication (CC Zero) | http://creativecommons.org/publicdomain/zero/1.0/ |
+| Public Domain Mark (PD) | http://creativecommons.org/publicdomain/mark/1.0/ |
+| The BSD 2-Clause "Simplified" or "FreeBSD" License | http://opensource.org/licenses/BSD-2-Clause |
+| The BSD 3-Clause "New" or "Revised" License (BSD) | http://opensource.org/licenses/BSD-3-Clause |
+| The MIT License (MIT) | http://opensource.org/licenses/mit-license.php |
 
 ## Customizing Licenses & Decision Flow
 
