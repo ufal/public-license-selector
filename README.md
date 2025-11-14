@@ -15,9 +15,11 @@ Use the selector at [https://ufal.github.io/public-license-selector](https://ufa
 - History navigation that lets users review and replay previous answers.
 - Bundled CSS, icon font, and LESS sources to theme the modal.
 
-## Using as NPM Package
+## Install
 
-The selector is published to npm as `@ufal/license-selector` and can be installed in your project:
+The plugin contains a common set of so-called public licenses which will make your work publicly available.
+
+### Using npm
 
 ```bash
 npm install @ufal/license-selector
@@ -28,10 +30,18 @@ npm install @ufal/license-selector
 npm install jquery lodash
 ```
 
-**Tested command**
+**Tested command:**
 ```bash
 npm install @ufal/license-selector jquery@2.2.4 lodash@3.10.1 --save
 ```
+
+### Manual
+
+The latest version is in the [releases branch](https://github.com/ufal/public-license-selector/tree/releases).
+- [Javascript](https://raw.githubusercontent.com/ufal/public-license-selector/releases/license-selector.js)
+- [CSS](https://raw.githubusercontent.com/ufal/public-license-selector/releases/license-selector.css)
+
+The plugin requires [Lo-Dash](http://lodash.com/) or [Underscore](http://underscorejs.org/) utility library.
 
 Continue reading for **development setup**, or skip to [Consuming the Bundles](#consuming-the-bundles) to use the published package.
 
@@ -227,6 +237,21 @@ $('.selector').licenseSelector({
 });
 ```
 
+### License Attributes
+
+When customizing licenses via the `licenses` option, each license object can have the following attributes:
+
+- `string` **key** - The hash key (will be automatically added)
+- `string` **name** - Full name of the license
+- `bool` **available** - Flag whether the license is visible in the license list
+- `unsigned int` **priority** - Sort priority (lower means higher in the license list)
+- `string` **url** - Url pointing to the license full text
+- `string` **description** - A short description of the license
+- `string` **cssClass** - Custom CSS class set on `<li>` element
+- `function|jQuery` **template** - Template used for custom format
+- `array[string]` **categories** - A list of arbitrary category names used for filtering in the questions
+- `array[string]` **labels** - A list of labels that will be shown for the license. Each label has a picture or special css style connected.
+
 ## Available Licenses
 
 List of licenses that can be chosen with default settings.
@@ -319,6 +344,10 @@ Using the selector elsewhere? Open an issue or discussion so we can add your dep
 - Pawel Kamocki
 - Pavel Straňák
 - Michal Sedlák
+
+## Attribution
+
+Descriptions for some licenses taken from (or inspired by) descriptions at [tldrLegal](https://tldrlegal.com).
 
 ## Disclaimer
 
