@@ -57,7 +57,8 @@
     "build": "npm-run-all clean build:umd build:esm",
     "prepublishOnly": "npm run build",
     "start": "cross-env NODE_ENV=development webpack serve --config webpack.config.js --env bundle=umd --open",
-    "test": "npm run build"
+    "test": "npm run build",
+    "generate-graph": "node scripts/generate-state-graph.js"
   },
   "engines": {
     "node": ">=0.8.0"

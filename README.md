@@ -15,6 +15,18 @@ Use the selector at [https://ufal.github.io/public-license-selector](https://ufa
 - History navigation that lets users review and replay previous answers.
 - Bundled CSS, icon font, and LESS sources to theme the modal.
 
+## Decision Flow Visualization
+
+View the auto-generated state graph of the questionnaire:
+
+- Full diagram: `docs/state-graph.md` (renders on GitHub with Mermaid code blocks)
+
+To regenerate after editing `src/data/questions.coffee`:
+
+```bash
+npm run generate-graph
+```
+
 ## Install
 
 The plugin contains a common set of so-called public licenses which will make your work publicly available.
