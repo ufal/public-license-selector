@@ -1,46 +1,129 @@
-/* jshint node:true */
+/* eslint-env node */
+const path = require('path');
+const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const pkg = require('./package.json');
 
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-
-var pgk = require('./package.json');
-
-var defines = new webpack.DefinePlugin({
-  VERSION: JSON.stringify(pgk.version)
-});
-
-module.exports = {
+const baseConfig = {
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   devtool: 'source-map',
-  entry: ['./src/license-selector.coffee', './src/license-selector.less'],
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'license-selector.js'
+  entry: {
+    'license-selector': ['./src/index.coffee', './src/license-selector.less']
   },
   externals: {
     lodash: '_',
     jquery: 'jQuery'
   },
   module: {
-    loaders: [
-      {test: /\.less$/, loader: ExtractTextPlugin.extract('css!autoprefixer!less')},
-      {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}, // inline base64 URLs for <=8k images, direct URLs for the rest
-      {test: /\.coffee$/, loader: 'coffee'},
-      {test: /\.(woff|woff2)$/, loader: 'url?limit=10000&mimetype=application/font-woff&prefix=fonts'},
-      {test: /\.ttf$/, loader: 'url?limit=10000&mimetype=application/octet-stream&prefix=fonts'},
-      {test: /\.eot$/, loader: 'url?limit=10000&mimetype=application/vnd.ms-fontobject&prefix=fonts'},
-      {test: /\.svg$/, loader: 'url?limit=10000&mimetype=image/svg+xml&prefix=fonts'}
+    rules: [
+      {
+        test: /\.coffee$/,
+        use: [
+          {
+            loader: 'babel-loader'
+          },
+          {
+            loader: 'coffee-loader'
+          }
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                javascriptEnabled: true,
+                math: 'always'
+              }
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8 * 1024
+          }
+        }
+      },
+      {
+        test: /\.(woff2?|ttf|eot)$/,
+        type: 'asset/resource'
+      }
     ]
   },
+  resolve: {
+    extensions: ['.coffee', '.js']
+  },
   plugins: [
-    new webpack.optimize.DedupePlugin(),
+    new webpack.DefinePlugin({
+      VERSION: JSON.stringify(pkg.version)
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css'
+    }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'index.html')
-    }),
-    new ExtractTextPlugin('license-selector.css', {
-      allChunks: true
-    }),
-    defines
-  ]
+      template: path.join(__dirname, 'index.html'),
+      inject: 'body',
+      scriptLoading: 'blocking'
+    })
+  ],
+  optimization: {
+    minimize: process.env.NODE_ENV === 'production'
+  }
+};
+
+const umdConfig = {
+  ...baseConfig,
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].umd.js',
+    library: {
+      name: 'LicenseSelector',
+      type: 'umd'
+    },
+    globalObject: 'this'
+  }
+};
+
+const esmConfig = {
+  ...baseConfig,
+  target: 'es2020',
+  experiments: {
+    outputModule: true
+  },
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].esm.js',
+    module: true
+  },
+  // ESM bundles target module consumers, so they expect package import names
+  // rather than the global identifiers used by the UMD build.
+  externals: {
+    lodash: 'lodash',
+    jquery: 'jquery'
+  },
+  plugins: baseConfig.plugins.filter((plugin) => !(plugin instanceof HtmlWebpackPlugin))
+};
+
+const configurations = {
+  umd: umdConfig,
+  esm: esmConfig
+};
+
+module.exports = (env = {}) => {
+  const targets = env.bundle ? [env.bundle] : Object.keys(configurations);
+  return targets.map((target) => {
+    if (!configurations[target]) {
+      throw new Error(`Unknown bundle: ${target}`);
+    }
+    return configurations[target];
+  });
 };
