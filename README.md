@@ -19,7 +19,7 @@ Use the selector at [https://ufal.github.io/public-license-selector](https://ufa
 
 View the auto-generated state graph of the questionnaire:
 
-- Full diagram: `docs/state-graph.md` (renders on GitHub with Mermaid code blocks)
+- Full diagram: [docs/state-graph.md](docs/state-graph.md) (renders on GitHub with Mermaid code blocks)
 
 To regenerate after editing `src/data/questions.coffee`:
 
@@ -346,7 +346,7 @@ Using the selector elsewhere? Open an issue or discussion so we can add your dep
 
 ## Contributing
 
-- Review `docs/extending.md` before large changes.
+- Review [docs/extending.md](docs/extending.md) before large changes.
 - Discuss new features via Github issues/discussions to align on scope.
 - Run `npm run build` (and optionally `npm start`) to verify changes locally.
 - Submit pull request with clear descriptions of the behaviour affected.
