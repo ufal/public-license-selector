@@ -1,9 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <title>License Selector</title>
-    <style>
-      pre {
+<!doctype html><html><head><title>License Selector</title><style>pre {
         display: block;
         padding: 9px;
         margin: 0 0 10px;
@@ -18,20 +13,7 @@
       }
       .cc-by {
         border-color: #c80000 !important;
-      }
-    </style>
-  <link href="license-selector.css" rel="stylesheet"></head>
-  <body>
-  <h1>License Selector</h1>
-  <p>If you see this without closing the License Selector please reload the page.</p>
-
-  <!-- dependencies -->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
-
-  <!-- implementation -->
-  <script type="text/javascript">
-    $(function() {
+      }</style><link href="license-selector.css" rel="stylesheet"></head><body><h1>License Selector</h1><p>If you see this without closing the License Selector please reload the page.</p><script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script><script>$(function() {
       var clarinLs, ls = $('<p><a href="#!">Click to open selector</a></p>')
         .appendTo('body')
         .licenseSelector({
@@ -94,7 +76,4 @@
             console.log(license)
           }
         });
-    });
-  </script>
-  <script type="text/javascript" src="license-selector.js"></script></body>
-</html>
+    });</script><script src="license-selector.umd.js"></script></body></html>
