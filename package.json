@@ -1,7 +1,7 @@
 {
   "name": "@ufal/license-selector",
   "title": "License Selector",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/ufal/public-license-selector.git"
