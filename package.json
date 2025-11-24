@@ -26,7 +26,6 @@
     "data license",
     "jquery plugin"
   ],
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.23.0",
     "@babel/preset-env": "^7.23.0",
@@ -35,6 +34,7 @@
     "coffee-script": "^1.12.7",
     "cross-env": "^7.0.3",
     "css-loader": "^6.8.1",
+    "cypress": "^13.6.0",
     "html-webpack-plugin": "^5.5.3",
     "less": "^4.2.0",
     "less-loader": "^11.1.3",
@@ -57,7 +57,10 @@
     "build": "npm-run-all clean build:umd build:esm",
     "prepublishOnly": "npm run build",
     "start": "cross-env NODE_ENV=development webpack serve --config webpack.config.js --env bundle=umd --open",
-    "test": "npm run build",
+    "test": "cypress run",
+    "test:open": "cypress open",
+    "test:headed": "cypress run --headed --browser chrome",
+    "test:ci": "cypress run --browser chrome",
     "generate-graph": "node scripts/generate-state-graph.js"
   },
   "engines": {

@@ -67,6 +67,37 @@ jobs:
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: 'Deploy from ${{ github.sha }}'
 
+  # Test deployment to Github with Cypress
+  test-deployment:
+    needs: deploy-pages
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Wait for deployment to propagate
+        run: sleep 30
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          headed: false
+          spec: cypress/e2e/license-selector.cy.js
+        env:
+          CYPRESS_BASE_URL: https://ufal.github.io/public-license-selector
+
   # Create GitHub Release on tags
   release:
     needs: build
