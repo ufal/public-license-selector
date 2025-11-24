@@ -1,7 +1,6 @@
 describe('License Selector E2E Tests', () => {
 
   beforeEach(() => {
-    // Visit the GitHub Pages URL before each test
     cy.visit('/')
   })
 
@@ -25,7 +24,6 @@ describe('License Selector E2E Tests', () => {
     })
 
     it('should load without critical console errors', () => {
-      // Modal auto-opens, so just verify no major errors
       cy.window().its('console').should('exist')
     })
   })
@@ -48,7 +46,6 @@ describe('License Selector E2E Tests', () => {
     })
 
     it('should have CSS loaded correctly', () => {
-      // Verify modal has proper styling
       cy.get('.license-selector').should('have.css', 'position')
     })
   })
@@ -56,7 +53,6 @@ describe('License Selector E2E Tests', () => {
   describe('License Selector Modal - Auto-Open Behavior', () => {
 
     it('should automatically open the modal on page load', () => {
-      // The index.html calls ls.click() on ready, so modal opens automatically
       cy.modalShouldBeVisible()
     })
 
@@ -83,9 +79,7 @@ describe('License Selector E2E Tests', () => {
     })
 
     it('should reopen modal when clicking the selector link', () => {
-      // First close it
       cy.closeModal()
-      // Then reopen
       cy.reopenLicenseSelector()
       cy.modalShouldBeVisible()
     })
@@ -108,13 +102,11 @@ describe('License Selector E2E Tests', () => {
 
     it('should allow clicking Software button', () => {
       cy.clickAnswer('Software')
-      // Should navigate to next question
       cy.get('.ls-question-text').should('be.visible')
     })
 
     it('should allow clicking Data button', () => {
       cy.clickAnswer('Data')
-      // Should navigate to next question
       cy.get('.ls-question-text').should('be.visible')
     })
   })
@@ -122,7 +114,6 @@ describe('License Selector E2E Tests', () => {
   describe('Questionnaire Flow - Data Path', () => {
 
     beforeEach(() => {
-      // Start the data path
       cy.clickAnswer('Data')
     })
 
@@ -136,20 +127,16 @@ describe('License Selector E2E Tests', () => {
     })
 
     it('should navigate through the questionnaire', () => {
-      // Click Yes to copyright question
       cy.get('.ls-question-answers button').contains('Yes').click()
       cy.wait(300)
 
-      // Should show next question
       cy.get('.ls-question').should('be.visible')
     })
 
     it('should eventually show licenses', () => {
-      // Navigate through a complete path
       cy.get('.ls-question-answers button').contains('No').click()
       cy.wait(500)
 
-      // Should show license results
       cy.get('.ls-license-list').should('be.visible')
     })
   })
@@ -157,7 +144,6 @@ describe('License Selector E2E Tests', () => {
   describe('License List Display', () => {
 
     it('should display licenses after completing questionnaire', () => {
-      // Quick path to licenses: Data -> No
       cy.clickAnswer('Data')
       cy.get('.ls-question-answers button').contains('No').click()
       cy.wait(500)
@@ -196,13 +182,10 @@ describe('License Selector E2E Tests', () => {
       cy.viewport(1920, 1080)
       cy.visit('/')
 
-      // Modal should auto-open
       cy.modalShouldBeVisible()
 
-      // Question should be visible
       cy.get('.ls-question').should('be.visible')
 
-      // Buttons should be clickable
       cy.get('.ls-question-answers button').should('be.visible')
     })
   })
@@ -213,14 +196,13 @@ describe('License Selector E2E Tests', () => {
       const start = Date.now()
       cy.visit('/').then(() => {
         const loadTime = Date.now() - start
-        expect(loadTime).to.be.lessThan(5000) // 5 seconds
+        expect(loadTime).to.be.lessThan(5000)
       })
     })
 
     it('should open modal quickly (auto-opens)', () => {
       cy.visit('/')
       cy.modalShouldBeVisible()
-      // If we get here within default timeout, it's fast enough
     })
 
     it('should respond to clicks quickly', () => {
@@ -236,12 +218,10 @@ describe('License Selector E2E Tests', () => {
   describe('Integration with Page', () => {
 
     it('should handle multiple selector instances', () => {
-      // The page has multiple selectors
       cy.get('p a').filter(':contains("Click to open selector")').should('have.length.gte', 1)
     })
 
     it('should support modified options selector', () => {
-      // Third selector with custom options
       cy.contains('Click to open selector with modified options').should('exist')
     })
   })
