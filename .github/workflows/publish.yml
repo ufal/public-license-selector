@@ -4,8 +4,8 @@ on:
     types: [published]
 
 permissions:
-	contents: read
-	id-token: write
+   contents: read
+   id-token: write
 
 jobs:
   publish:
