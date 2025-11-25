@@ -67,7 +67,7 @@ jobs:
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: 'Deploy from ${{ github.sha }}'
 
-  # Test deployment to Github with Cypress
+  # Test deployment to GitHub with Cypress
   test-deployment:
     needs: deploy-pages
     runs-on: ubuntu-latest
@@ -87,7 +87,20 @@ jobs:
         run: npm ci
 
       - name: Wait for deployment to propagate
-        run: sleep 30
+        run: |
+          URL="https://ufal.github.io/public-license-selector"
+          ATTEMPTS=20
+          SLEEP=5
+          for i in $(seq 1 $ATTEMPTS); do
+            echo "Checking deployment ($i/$ATTEMPTS): $URL"
+            if curl -sSf --max-time 5 "$URL" > /dev/null; then
+              echo "Deployment is live!"
+              exit 0
+            fi
+            sleep $SLEEP
+          done
+          echo "Deployment did not propagate after $((ATTEMPTS * SLEEP)) seconds."
+          exit 1
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6

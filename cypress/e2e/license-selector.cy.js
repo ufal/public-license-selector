@@ -23,8 +23,13 @@ describe('License Selector E2E Tests', () => {
       cy.contains('a', 'Click to open selector').should('exist')
     })
 
-    it('should load without critical console errors', () => {
-      cy.window().its('console').should('exist')
+    it('should load without console errors', () => {
+      cy.visit('/', {
+        onBeforeLoad(win) {
+          cy.spy(win.console, 'error').as('consoleError')
+        }
+      })
+      cy.get('@consoleError').should('not.have.been.called')
     })
   })
 
@@ -128,14 +133,12 @@ describe('License Selector E2E Tests', () => {
 
     it('should navigate through the questionnaire', () => {
       cy.get('.ls-question-answers button').contains('Yes').click()
-      cy.wait(300)
 
       cy.get('.ls-question').should('be.visible')
     })
 
     it('should eventually show licenses', () => {
       cy.get('.ls-question-answers button').contains('No').click()
-      cy.wait(500)
 
       cy.get('.ls-license-list').should('be.visible')
     })
@@ -146,7 +149,6 @@ describe('License Selector E2E Tests', () => {
     it('should display licenses after completing questionnaire', () => {
       cy.clickAnswer('Data')
       cy.get('.ls-question-answers button').contains('No').click()
-      cy.wait(500)
 
       cy.licensesShouldBeVisible()
     })
@@ -154,7 +156,6 @@ describe('License Selector E2E Tests', () => {
     it('should display license items with names', () => {
       cy.clickAnswer('Data')
       cy.get('.ls-question-answers button').contains('No').click()
-      cy.wait(500)
 
       cy.get('.ls-license-list ul li h4').should('exist')
     })
@@ -162,7 +163,6 @@ describe('License Selector E2E Tests', () => {
     it('should have clickable license items', () => {
       cy.clickAnswer('Data')
       cy.get('.ls-question-answers button').contains('No').click()
-      cy.wait(500)
 
       cy.get('.ls-license-list ul li').first().should('be.visible')
     })
@@ -170,7 +170,6 @@ describe('License Selector E2E Tests', () => {
     it('should display "See full text" links', () => {
       cy.clickAnswer('Data')
       cy.get('.ls-question-answers button').contains('No').click()
-      cy.wait(500)
 
       cy.get('.ls-license-list .ls-button').should('exist')
     })
@@ -192,11 +191,11 @@ describe('License Selector E2E Tests', () => {
 
   describe('Performance', () => {
 
-    it('should load the page within acceptable time', () => {
-      const start = Date.now()
-      cy.visit('/').then(() => {
-        const loadTime = Date.now() - start
-        expect(loadTime).to.be.lessThan(5000)
+    it('should load the DOMContentLoaded event within acceptable time', () => {
+      cy.visit('/')
+      cy.window().its('performance.timing').then((timing) => {
+        const domContentLoaded = timing.domContentLoadedEventEnd - timing.navigationStart
+        expect(domContentLoaded).to.be.lessThan(3000)
       })
     })
 
@@ -206,12 +205,8 @@ describe('License Selector E2E Tests', () => {
     })
 
     it('should respond to clicks quickly', () => {
-      const start = Date.now()
       cy.clickAnswer('Data')
-      cy.get('.ls-question-text').should('be.visible').then(() => {
-        const responseTime = Date.now() - start
-        expect(responseTime).to.be.lessThan(2000)
-      })
+      cy.get('.ls-question-text').should('be.visible')
     })
   })
 

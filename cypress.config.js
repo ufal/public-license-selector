@@ -2,12 +2,13 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: "https://ufal.github.io/public-license-selector/",
+    baseUrl: process.env.CYPRESS_BASE_URL || "https://ufal.github.io/public-license-selector",
     viewportWidth: 1280,
     viewportHeight: 720,
 
-    video: false,
-    screenshotOnRunFailure: false,
+    // Enable video and screenshots in CI for debugging; disable locally to save resources
+    video: !!process.env.CI,
+    screenshotOnRunFailure: !!process.env.CI,
 
     defaultCommandTimeout: 10000,
     pageLoadTimeout: 30000,

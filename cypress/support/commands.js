@@ -33,7 +33,6 @@ Cypress.Commands.add('reopenLicenseSelector', () => {
  */
 Cypress.Commands.add('clickAnswer', (answerText) => {
   cy.get('.ls-question-answers button').contains(answerText).click()
-  cy.wait(300) // Brief wait for UI update
 })
 
 /**
