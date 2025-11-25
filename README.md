@@ -83,6 +83,24 @@ npm start
 
 Webpack serves `index.html` and watches the CoffeeScript/LESS sources.
 
+## Testing
+
+Automated end-to-end tests verify the GitHub Pages deployment after each release:
+
+```bash
+npm test              # Run tests in headless mode
+npm run test:open     # Open Cypress interactive test runner
+npm run test:headed   # Run tests with visible browser
+```
+
+Tests cover:
+- Page load and asset loading (jQuery, lodash, CSS)
+- Modal auto-open behavior
+- Questionnaire navigation (Data/Software paths)
+- License selection and display
+- Responsive design and accessibility
+- Performance benchmarks
+
 ## Consuming the Bundles
 
 ### From NPM Package
