@@ -1,7 +1,7 @@
 {
   "name": "@ufal/license-selector",
   "title": "License Selector",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/ufal/public-license-selector.git"
@@ -63,16 +63,56 @@
   "engines": {
     "node": ">=0.8.0"
   },
+  "author": {
+    "name": "ÚFAL",
+    "email": "ufal@ufal.mff.cuni.cz",
+    "url": "https://ufal.mff.cuni.cz/"
+  },
   "authors": [
     "Pawel Kamocki",
     "Pavel Straňák",
     "Michal Sedlák"
   ],
   "maintainers": [
-    "Michal Sedlák <sedlak@ufal.mff.cuni.cz>"
+    "Ondřej Košarko <kosarko@ufal.mff.cuni.cz>"
   ],
   "contributors": [
-    "m1ch4ls (https://github.com/m1ch4ls)"
+    {
+      "name": "m1ch4ls",
+      "url": "https://github.com/m1ch4ls"
+    },
+    {
+      "name": "stranak",
+      "url": "https://github.com/stranak"
+    },
+    {
+      "name": "kosarko",
+      "url": "https://github.com/kosarko"
+    },
+    {
+      "name": "vidiecan",
+      "url": "https://github.com/vidiecan"
+    },
+    {
+      "name": "Aldarone",
+      "url": "https://github.com/Aldarone"
+    },
+    {
+      "name": "amadulhaxxani",
+      "url": "https://github.com/amadulhaxxani"
+    },
+    {
+      "name": "bvreede",
+      "url": "https://github.com/bvreede"
+    },
+    {
+      "name": "emanueldima",
+      "url": "https://github.com/emanueldima"
+    },
+    {
+      "name": "katrinleinweber",
+      "url": "https://github.com/katrinleinweber"
+    }
   ],
   "license": "MIT",
   "bugs": {
