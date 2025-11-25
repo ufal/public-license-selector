@@ -1,7 +1,7 @@
 {
   "name": "public-license-selector",
   "description": "JQuery plugin with UI for picking a license for software or data",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/ufal/public-license-selector"
