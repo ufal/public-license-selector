@@ -12,3 +12,6 @@ dist
 # Users Environment Variables
 .lock-wscript
 .idea
+
+# Claude
+.claude/
