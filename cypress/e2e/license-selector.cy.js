@@ -7,7 +7,7 @@ describe('License Selector E2E Tests', () => {
   describe('Page Load and Basic Structure', () => {
 
     it('should load the page successfully', () => {
-      cy.url().should('include', 'ufal.github.io/public-license-selector')
+      cy.url().should('include', Cypress.config('baseUrl'))
       cy.get('body').should('be.visible')
     })
 
