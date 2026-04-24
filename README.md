@@ -29,12 +29,12 @@ npm run generate-graph
 
 ## Requirements
 
-**⚠️ BREAKING CHANGE (v0.1.4+):** This version requires **Node.js 18.20.0 or higher**.
+**⚠️ BREAKING CHANGE (v0.1.4+):** This version requires **Node.js 20.10.0 or higher**.
 
-- **Node.js:** >= 18.20.0 (LTS recommended)
+- **Node.js:** >= 20.10.0 (LTS recommended)
 - **Peer Dependencies:** jQuery >= 2.1.1, lodash >= 2.4.1
 
-**Why Node 18+?** This update modernizes the build toolchain (Webpack 5, Babel 7.28, Cypress 13) and replaces deprecated packages (coffee-script → coffeescript). The package is optimized for compatibility with modern projects like dspace-angular v7.6.1.
+**Why Node 20+?** This update modernizes the build toolchain (Webpack 5, Babel 7.28, Cypress 13) and replaces deprecated packages (coffee-script → coffeescript). The package is optimized for compatibility with modern projects like dspace-angular v7.6.1.
 
 ## Install
 
