@@ -13,13 +13,13 @@
       }
       .cc-by {
         border-color: #c80000 !important;
-      }</style><link href="license-selector.css" rel="stylesheet"></head><body><h1>License Selector</h1><p>If you see this without closing the License Selector please reload the page.</p><script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script><script>$(function() {
+      }</style><link href="license-selector.css" rel="stylesheet"></head><body><h1>License Selector</h1><p>If you see this without closing the License Selector please reload the page.</p><div id="demo"></div><script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script><script>$(function() {
       var clarinLs, ls = $('<p><a href="#!">Click to open selector</a></p>')
-        .appendTo('body')
+        .appendTo('#demo')
         .licenseSelector({
           showLabels : true,
           onLicenseSelected : function (license) {
-            $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
+            $('#demo').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
             console.log(license)
           }
         });
@@ -27,10 +27,10 @@
       // Add selector for CLARIN only if it exists
       if ($.fn.clarinLicenseSelector) {
         clarinLs = $('<p><a href="#!">Click to open selector for CLARIN</a></p>')
-          .appendTo('body')
+          .appendTo('#demo')
           .clarinLicenseSelector({
             onLicenseSelected : function (license) {
-              $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
+              $('#demo').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
               console.log(license)
             }
           });
@@ -43,7 +43,7 @@
       }
 
       $('<p><a href="#!">Click to open selector with modified options</a></p>')
-        .appendTo('body')
+        .appendTo('#demo')
         .licenseSelector({
           licenses: {
             'abc-license': {
@@ -72,8 +72,8 @@
           },
           start: 'DataCopyrightable',
           onLicenseSelected : function (license) {
-            $('body').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
+            $('#demo').append($('<pre></pre>').text(JSON.stringify(license, null, 4)))
             console.log(license)
           }
         });
-    });</script><script src="license-selector.umd.js"></script></body></html>
+    });</script><footer style="margin-top: 2em; border-top: 1px solid #ccc; padding-top: 1em;"><h2>Acknowledgment</h2><p align="left"><img src="https://webcentrum.muni.cz/media/3831863/seda_eosc.png" alt="EOSC CZ Logo" height="90"></p><hr/><p>This project output was developed with financial contributions from the <a href="https://www.eosc.cz/projekty/narodni-podpora-pro-eosc">EOSC CZ</a> initiative through the project <strong>National Repository Platform for Research Data</strong> (CZ.02.01.01/00/23_014/0008787), funded by the Programme Johannes Amos Comenius (P JAC) of the Ministry of Education, Youth and Sports of the Czech Republic (MEYS).</p><hr/><p align="left"><img src="https://webcentrum.muni.cz/media/3832168/seda_eu-msmt_eng.png" alt="EU and MŠMT Logos" height="90"></p></footer><script src="license-selector.umd.js"></script></body></html>
