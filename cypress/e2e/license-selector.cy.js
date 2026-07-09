@@ -240,4 +240,83 @@ describe('License Selector E2E Tests', () => {
         .and('not.be.disabled')
     })
   })
+
+  describe('Regression Coverage - GPL Version Handling', () => {
+    const primarySelector = '.license-selector.is-active'
+
+    const goToSoftwareLicenseSelection = () => {
+      cy.get(primarySelector).first().within(() => {
+        cy.contains('.ls-question-answers button', 'Software').click()
+        cy.contains('.ls-question-answers button', 'Based on existing software').click()
+        cy.contains('.ls-question-answers button', 'Modifying the existing software').click()
+        cy.get('.ls-question-text').should('contain', 'Select licenses in your code')
+        cy.get('.ls-question-options').should('be.visible')
+      })
+    }
+
+    const selectInteropLicense = (licenseKeyText) => {
+      cy.get(primarySelector).first().within(() => {
+        cy.contains('.ls-question-options li', licenseKeyText)
+          .find('input[type="checkbox"]')
+          .click({ force: true })
+          .should('be.checked')
+        cy.contains('.ls-question-answers button', 'Next')
+          .should('not.be.disabled')
+          .click({ force: true })
+      })
+    }
+
+    const getRecommendationText = () => {
+      cy.get('body').should(($body) => {
+        const hasVisibleList = $body.find('.license-selector.is-active .ls-license-list:visible').length > 0
+        const hasSelectionOutput = $body.find('pre').length > 0
+        expect(hasVisibleList || hasSelectionOutput).to.equal(true)
+      })
+
+      return cy.get('body').then(($body) => {
+        const visibleList = $body.find('.license-selector.is-active .ls-license-list:visible').first()
+        if (visibleList.length > 0) {
+          return Cypress.$(visibleList).text()
+        }
+        const latestSelection = $body.find('pre').last()
+        return latestSelection.length > 0 ? latestSelection.text() : ''
+      })
+    }
+
+    it('issue #26: GPL-2.0-only selection should return results and no cant-license error', () => {
+      goToSoftwareLicenseSelection()
+      selectInteropLicense('GPL-2.0-only')
+
+      getRecommendationText().then((text) => {
+        expect(text).to.contain('GPL-2.0-only')
+        expect(text).to.not.contain("Can't choose a license")
+      })
+
+      cy.get('body').within(() => {
+        cy.get('.ls-question-error:visible').should('have.length', 0)
+        cy.get('.ls-not-found:visible').should('have.length', 0)
+      })
+    })
+
+    it('issue #27: GPL-3.0-only selection should not offer GPL-2.0-or-later', () => {
+      goToSoftwareLicenseSelection()
+      selectInteropLicense('GPL-3.0-only')
+
+      getRecommendationText().then((text) => {
+        expect(text).to.contain('GPL-3.0-only')
+        expect(text).to.not.contain('GPL-2.0-or-later')
+      })
+    })
+
+    it('issue #19: GPL-2.0-only and GPL-2.0-or-later should be distinct entries', () => {
+      goToSoftwareLicenseSelection()
+
+      cy.get(primarySelector).first().within(() => {
+        cy.contains('.ls-question-options li', 'GPL-2.0-only').should('be.visible')
+        cy.contains('.ls-question-options li', 'GPL-2.0-or-later').should('be.visible')
+        cy.get('.ls-question-options li').filter(':contains("GPL-2.0-only")').its('length').should('be.gte', 1)
+        cy.get('.ls-question-options li').filter(':contains("GPL-2.0-or-later")').its('length').should('be.gte', 1)
+      })
+    })
+  })
 })

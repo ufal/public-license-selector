@@ -28,7 +28,8 @@ class LicenseSelector
     _.defaults(@options, LicenseSelector.defaultOptions)
 
     for key, license of @licenses
-      license.key = key
+      # Keep the first (canonical) key when alias entries reference the same object.
+      license.key ?= key
       if @options.licenseItemTemplate and !license.template
         license.template = @options.licenseItemTemplate
 

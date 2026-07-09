@@ -233,13 +233,14 @@ class StateGraphGenerator {
    */
   getNodeClass(stateName) {
     const dataStates = [
-      'DataCopyrightable', 'OwnIPR', 'AllowDerivativeWorks',
-      'ShareAlike', 'CommercialUse', 'DecideAttribute',
-      'EnsureLicensing', 'LicenseInteropData'
+      'DataCopyrightable', 'AllOriginalWork', 'AllowDerivativeWorks',
+      'ShareAlike', 'CommercialUse', 'ThirdPartyPublic',
+      'MadeChanges', 'ThirdPartyLicense', 'ThirdPartyNCDerivatives',
+      'ThirdPartyNCShareAlike'
     ];
 
     const softwareStates = [
-      'YourSoftware', 'LicenseInteropSoftware',
+      'YourSoftware', 'ModifyingExisting', 'LicenseInteropSoftware',
       'Copyleft', 'StrongCopyleft'
     ];
 
@@ -264,13 +265,13 @@ class StateGraphGenerator {
    */
   isInPath(stateName, pathType) {
     const dataStates = [
-      'KindOfContent', 'DataCopyrightable', 'OwnIPR', 'AllowDerivativeWorks',
-      'ShareAlike', 'CommercialUse', 'DecideAttribute',
-      'EnsureLicensing', 'LicenseInteropData'
+      'KindOfContent', 'DataCopyrightable', 'AllOriginalWork', 'AllowDerivativeWorks',
+      'ShareAlike', 'CommercialUse', 'ThirdPartyPublic', 'MadeChanges',
+      'ThirdPartyLicense', 'ThirdPartyNCDerivatives', 'ThirdPartyNCShareAlike'
     ];
 
     const softwareStates = [
-      'KindOfContent', 'YourSoftware', 'LicenseInteropSoftware',
+      'KindOfContent', 'YourSoftware', 'ModifyingExisting', 'LicenseInteropSoftware',
       'Copyleft', 'StrongCopyleft'
     ];
 
@@ -397,6 +398,7 @@ class StateGraphGenerator {
     doc += '- **License Data**: `src/data/licenses.coffee`\n';
     doc += '- **Compatibility Matrix**: `src/data/compatibility.coffee`\n';
     doc += '- **Generator Script**: `scripts/generate-state-graph.js`\n';
+    doc += '- **Source Flowcharts**: `docs/license-selector-tree/LS_Flowchart_navrh_software_ENG.1 (1).pdf`, `LS_Flowchart_navrh_Data_ENG (4).pdf`\n';
 
     return doc;
   }

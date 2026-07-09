@@ -119,7 +119,7 @@ class LicenseList
     unless licenses?
       licenses = @availableLicenses
     else
-      licenses = @availableLicenses = _.where licenses, { available: true }
+      @availableLicenses = licenses
 
     elements = {}
     for el in @list.children()

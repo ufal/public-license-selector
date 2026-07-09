@@ -27,6 +27,12 @@ To regenerate after editing `src/data/questions.coffee`:
 npm run generate-graph
 ```
 
+Maintainer note: you can also run the generator directly:
+
+```bash
+node scripts/generate-state-graph.js
+```
+
 ## Requirements
 
 **⚠️ BREAKING CHANGE (v0.1.4+):** This version requires **Node.js 20.10.0 or higher**.
@@ -328,6 +334,42 @@ List of licenses that can be chosen with default settings.
 - Tooltip text: `src/helpers/explanations.coffee`
 
 See `docs/extending.md` for step-by-step guidance on adding licenses, extending labels, or branching the wizard logic.
+
+## Maintainer Notes (Overhaul)
+
+### License Key Naming Convention
+
+- Canonical SPDX-like keys now use explicit suffixes:
+  - `-only` for fixed versions (for example `gpl-2.0-only`)
+  - `-or-later` for version-flexible families (for example `gpl-2.0-or-later`)
+- Legacy keys are still supported as aliases for backward compatibility (for example `gpl-2`, `gpl-2+`).
+- Canonical software-family entries include:
+  - `versionConstraint`: `fixed` or `flexible`
+  - `versionFamily`: family identifier such as `gpl`, `lgpl`, `agpl`
+
+### Version Compatibility Behavior
+
+- Matrix compatibility is defined in `src/data/compatibility.coffee`.
+- Interop selection logic is implemented in `src/data/questions.coffee` (`LicenseInteropSoftware`).
+- After matrix intersection, version post-processing enforces fixed-version intent:
+  - If a selected license has `versionConstraint: 'fixed'`, recommendation output is restricted to that exact key.
+- This prevents incorrect downgrade-equivalent recommendations and preserves explicit `-only` semantics.
+
+### Regenerating Maintainer Documentation
+
+When modifying `src/data/questions.coffee`, regenerate the graph doc:
+
+```bash
+node scripts/generate-state-graph.js
+```
+
+or:
+
+```bash
+npm run generate-graph
+```
+
+Then verify and commit `docs/state-graph.md`.
 
 ## Architecture Overview
 

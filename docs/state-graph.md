@@ -15,69 +15,85 @@ flowchart TD
 
     KindOfContent{"What do you want to deposit?"}
     DataCopyrightable(["Is your data within the scope of copyright
-and related rights?"])
+and/or special right of the database maker?"])
     class DataCopyrightable dataPath
-    OwnIPR{"Do you own copyright and similar rights in
-your dataset and all its constitutive parts?"}
-    class OwnIPR dataPath
-    AllowDerivativeWorks(["Do you allow others to make derivative works?"])
+    AllOriginalWork{"Is everything in the dataset your original
+work?"}
+    class AllOriginalWork dataPath
+    AllowDerivativeWorks{"Do you allow others to make derivative works?"}
     class AllowDerivativeWorks dataPath
-    ShareAlike(["Do you require others to share derivative
-works based on your data under a compatible
-license?"])
+    ShareAlike{"Do you require others to share derivative
+works based on your data under the same
+license?"}
     class ShareAlike dataPath
-    CommercialUse(["Do you allow others to make commercial use of
-you data?"])
+    CommercialUse(["Do you allow others to use your data
+commercially?"])
     class CommercialUse dataPath
-    DecideAttribute(["Do you want others to attribute your data to
-you?"])
-    class DecideAttribute dataPath
-    EnsureLicensing(["Are all the elements of your dataset licensed
-under a public license or in the Public
-Domain?"])
-    class EnsureLicensing dataPath
-    LicenseInteropData(["Choose licenses present in your dataset:"])
-    class LicenseInteropData dataPath
-    YourSoftware["Is your code based on existing software or is
-it your original work?"]
+    ThirdPartyPublic(["Is the third party content of the dataset
+licensed under a public license or in the
+public domain?"])
+    class ThirdPartyPublic dataPath
+    MadeChanges{"Have you made any changes to the third party
+content of the dataset?"}
+    class MadeChanges dataPath
+    ThirdPartyLicense(["Under which license was the third party
+content that you changed licensed?"])
+    class ThirdPartyLicense dataPath
+    ThirdPartyNCDerivatives(["Do you allow others to make derivative works?"])
+    class ThirdPartyNCDerivatives dataPath
+    ThirdPartyNCShareAlike(["Do you require others to share derivative
+works based on your data under the same
+license?"])
+    class ThirdPartyNCShareAlike dataPath
+    YourSoftware["Is your software based on existing code or is
+it all your original work?"]
     class YourSoftware softwarePath
+    ModifyingExisting(["Are you modifying the existing software or is
+the existing software only being used as a
+part of your larger work?"])
+    class ModifyingExisting softwarePath
     LicenseInteropSoftware(["Select licenses in your code:"])
     class LicenseInteropSoftware softwarePath
-    Copyleft(["Do you require others who modify your code to
-release it under a compatible licence?"])
+    Copyleft(["Do you require others who use your code in
+their software to release it under a
+compatible open-source license?"])
     class Copyleft softwarePath
-    StrongCopyleft(["Is your code used directly as an executable
-or are you licensing a library (your code
-will be linked)?"])
+    StrongCopyleft(["Do you require others to use a compatible
+license for the software as a whole or only
+for the parts that modified your code?"])
     class StrongCopyleft softwarePath
 
     KindOfContent -->YourSoftware
     KindOfContent -->DataCopyrightable
-    DataCopyrightable -->|"Yes"| OwnIPR
-    OwnIPR -->|"Yes"| AllowDerivativeWorks
-    OwnIPR -->|"No"| EnsureLicensing
+    DataCopyrightable -->|"Yes"| AllOriginalWork
+    AllOriginalWork -->|"Yes"| AllowDerivativeWorks
+    AllOriginalWork -->|"No"| ThirdPartyPublic
     AllowDerivativeWorks -->ShareAlike
     AllowDerivativeWorks -->CommercialUse
     ShareAlike -->CommercialUse
-    CommercialUse -->DecideAttribute
-    EnsureLicensing -->|"Yes"| LicenseInteropData
-    LicenseInteropData -->|"Option selected"| AllowDerivativeWorks
-    YourSoftware -->|"Based on existing software"| LicenseInteropSoftware
+    ThirdPartyPublic -->|"Yes"| MadeChanges
+    MadeChanges -->|"Yes"| ThirdPartyLicense
+    MadeChanges -->|"No"| AllowDerivativeWorks
+    ThirdPartyLicense -->|"Public Domain or CC Zero"| AllowDerivativeWorks
+    ThirdPartyLicense -->|"CC BY-NC"| ThirdPartyNCDerivatives
+    ThirdPartyNCDerivatives -->|"Yes"| ThirdPartyNCShareAlike
+    YourSoftware -->|"Based on existing software"| ModifyingExisting
     YourSoftware -->|"My own code"| Copyleft
+    ModifyingExisting -->|"Modifying the existing software"| LicenseInteropSoftware
     LicenseInteropSoftware -->|"Option selected"| Copyleft
     LicenseInteropSoftware -->|"Option selected"| StrongCopyleft
     Copyleft -->StrongCopyleft
     DataCopyrightable --> End([Select License])
-    AllowDerivativeWorks --> End([Select License])
-    ShareAlike --> End([Select License])
     CommercialUse --> End([Select License])
-    DecideAttribute --> End([Select License])
-    LicenseInteropData --> End([Select License])
+    ThirdPartyLicense --> End([Select License])
+    ThirdPartyNCDerivatives --> End([Select License])
+    ThirdPartyNCShareAlike --> End([Select License])
+    ModifyingExisting --> End([Select License])
     LicenseInteropSoftware --> End([Select License])
     Copyleft --> End([Select License])
     StrongCopyleft --> End([Select License])
-    EnsureLicensing --> Error([Cannot License])
-    LicenseInteropData --> Error([Cannot License])
+    ThirdPartyPublic --> Error([Cannot License])
+    ThirdPartyLicense --> Error([Cannot License])
     LicenseInteropSoftware --> Error([Cannot License])
 
     classDef dataPath fill:#e1f5ff,stroke:#01579b,stroke-width:2px,padding:15px,min-width:250px
@@ -95,63 +111,79 @@ flowchart TD
 
     KindOfContent{"What do you want to deposit?"}
     DataCopyrightable(["Is your data within the scope of copyright
-and related rights?"])
+and/or special right of the database maker?"])
     class DataCopyrightable dataPath
-    OwnIPR{"Do you own copyright and similar rights in
-your dataset and all its constitutive parts?"}
-    class OwnIPR dataPath
-    AllowDerivativeWorks(["Do you allow others to make derivative works?"])
+    AllOriginalWork{"Is everything in the dataset your original
+work?"}
+    class AllOriginalWork dataPath
+    AllowDerivativeWorks{"Do you allow others to make derivative works?"}
     class AllowDerivativeWorks dataPath
-    ShareAlike(["Do you require others to share derivative
-works based on your data under a compatible
-license?"])
+    ShareAlike{"Do you require others to share derivative
+works based on your data under the same
+license?"}
     class ShareAlike dataPath
-    CommercialUse(["Do you allow others to make commercial use of
-you data?"])
+    CommercialUse(["Do you allow others to use your data
+commercially?"])
     class CommercialUse dataPath
-    DecideAttribute(["Do you want others to attribute your data to
-you?"])
-    class DecideAttribute dataPath
-    EnsureLicensing(["Are all the elements of your dataset licensed
-under a public license or in the Public
-Domain?"])
-    class EnsureLicensing dataPath
-    LicenseInteropData(["Choose licenses present in your dataset:"])
-    class LicenseInteropData dataPath
+    ThirdPartyPublic(["Is the third party content of the dataset
+licensed under a public license or in the
+public domain?"])
+    class ThirdPartyPublic dataPath
+    MadeChanges{"Have you made any changes to the third party
+content of the dataset?"}
+    class MadeChanges dataPath
+    ThirdPartyLicense(["Under which license was the third party
+content that you changed licensed?"])
+    class ThirdPartyLicense dataPath
+    ThirdPartyNCDerivatives(["Do you allow others to make derivative works?"])
+    class ThirdPartyNCDerivatives dataPath
+    ThirdPartyNCShareAlike(["Do you require others to share derivative
+works based on your data under the same
+license?"])
+    class ThirdPartyNCShareAlike dataPath
+    ModifyingExisting(["Are you modifying the existing software or is
+the existing software only being used as a
+part of your larger work?"])
+    class ModifyingExisting softwarePath
     LicenseInteropSoftware(["Select licenses in your code:"])
     class LicenseInteropSoftware softwarePath
-    Copyleft(["Do you require others who modify your code to
-release it under a compatible licence?"])
+    Copyleft(["Do you require others who use your code in
+their software to release it under a
+compatible open-source license?"])
     class Copyleft softwarePath
-    StrongCopyleft(["Is your code used directly as an executable
-or are you licensing a library (your code
-will be linked)?"])
+    StrongCopyleft(["Do you require others to use a compatible
+license for the software as a whole or only
+for the parts that modified your code?"])
     class StrongCopyleft softwarePath
 
     KindOfContent -->DataCopyrightable
-    DataCopyrightable -->|"Yes"| OwnIPR
-    OwnIPR -->|"Yes"| AllowDerivativeWorks
-    OwnIPR -->|"No"| EnsureLicensing
+    DataCopyrightable -->|"Yes"| AllOriginalWork
+    AllOriginalWork -->|"Yes"| AllowDerivativeWorks
+    AllOriginalWork -->|"No"| ThirdPartyPublic
     AllowDerivativeWorks -->ShareAlike
     AllowDerivativeWorks -->CommercialUse
     ShareAlike -->CommercialUse
-    CommercialUse -->DecideAttribute
-    EnsureLicensing -->|"Yes"| LicenseInteropData
-    LicenseInteropData -->|"Option selected"| AllowDerivativeWorks
+    ThirdPartyPublic -->|"Yes"| MadeChanges
+    MadeChanges -->|"Yes"| ThirdPartyLicense
+    MadeChanges -->|"No"| AllowDerivativeWorks
+    ThirdPartyLicense -->|"Public Domain or CC Zero"| AllowDerivativeWorks
+    ThirdPartyLicense -->|"CC BY-NC"| ThirdPartyNCDerivatives
+    ThirdPartyNCDerivatives -->|"Yes"| ThirdPartyNCShareAlike
+    ModifyingExisting -->|"Modifying the existing software"| LicenseInteropSoftware
     LicenseInteropSoftware -->|"Option selected"| Copyleft
     LicenseInteropSoftware -->|"Option selected"| StrongCopyleft
     Copyleft -->StrongCopyleft
     DataCopyrightable --> End([Select License])
-    AllowDerivativeWorks --> End([Select License])
-    ShareAlike --> End([Select License])
     CommercialUse --> End([Select License])
-    DecideAttribute --> End([Select License])
-    LicenseInteropData --> End([Select License])
+    ThirdPartyLicense --> End([Select License])
+    ThirdPartyNCDerivatives --> End([Select License])
+    ThirdPartyNCShareAlike --> End([Select License])
+    ModifyingExisting --> End([Select License])
     LicenseInteropSoftware --> End([Select License])
     Copyleft --> End([Select License])
     StrongCopyleft --> End([Select License])
-    EnsureLicensing --> Error([Cannot License])
-    LicenseInteropData --> Error([Cannot License])
+    ThirdPartyPublic --> Error([Cannot License])
+    ThirdPartyLicense --> Error([Cannot License])
     LicenseInteropSoftware --> Error([Cannot License])
 
     classDef dataPath fill:#e1f5ff,stroke:#01579b,stroke-width:2px,padding:15px,min-width:250px
@@ -169,63 +201,63 @@ flowchart TD
 
     KindOfContent{"What do you want to deposit?"}
     DataCopyrightable(["Is your data within the scope of copyright
-and related rights?"])
+and/or special right of the database maker?"])
     class DataCopyrightable dataPath
-    AllowDerivativeWorks(["Do you allow others to make derivative works?"])
-    class AllowDerivativeWorks dataPath
-    ShareAlike(["Do you require others to share derivative
-works based on your data under a compatible
-license?"])
-    class ShareAlike dataPath
-    CommercialUse(["Do you allow others to make commercial use of
-you data?"])
+    CommercialUse(["Do you allow others to use your data
+commercially?"])
     class CommercialUse dataPath
-    DecideAttribute(["Do you want others to attribute your data to
-you?"])
-    class DecideAttribute dataPath
-    EnsureLicensing(["Are all the elements of your dataset licensed
-under a public license or in the Public
-Domain?"])
-    class EnsureLicensing dataPath
-    LicenseInteropData(["Choose licenses present in your dataset:"])
-    class LicenseInteropData dataPath
-    YourSoftware["Is your code based on existing software or is
-it your original work?"]
+    ThirdPartyPublic(["Is the third party content of the dataset
+licensed under a public license or in the
+public domain?"])
+    class ThirdPartyPublic dataPath
+    ThirdPartyLicense(["Under which license was the third party
+content that you changed licensed?"])
+    class ThirdPartyLicense dataPath
+    ThirdPartyNCDerivatives(["Do you allow others to make derivative works?"])
+    class ThirdPartyNCDerivatives dataPath
+    ThirdPartyNCShareAlike(["Do you require others to share derivative
+works based on your data under the same
+license?"])
+    class ThirdPartyNCShareAlike dataPath
+    YourSoftware["Is your software based on existing code or is
+it all your original work?"]
     class YourSoftware softwarePath
+    ModifyingExisting(["Are you modifying the existing software or is
+the existing software only being used as a
+part of your larger work?"])
+    class ModifyingExisting softwarePath
     LicenseInteropSoftware(["Select licenses in your code:"])
     class LicenseInteropSoftware softwarePath
-    Copyleft(["Do you require others who modify your code to
-release it under a compatible licence?"])
+    Copyleft(["Do you require others who use your code in
+their software to release it under a
+compatible open-source license?"])
     class Copyleft softwarePath
-    StrongCopyleft(["Is your code used directly as an executable
-or are you licensing a library (your code
-will be linked)?"])
+    StrongCopyleft(["Do you require others to use a compatible
+license for the software as a whole or only
+for the parts that modified your code?"])
     class StrongCopyleft softwarePath
 
     KindOfContent -->YourSoftware
     KindOfContent -->DataCopyrightable
-    AllowDerivativeWorks -->ShareAlike
-    AllowDerivativeWorks -->CommercialUse
-    ShareAlike -->CommercialUse
-    CommercialUse -->DecideAttribute
-    EnsureLicensing -->|"Yes"| LicenseInteropData
-    LicenseInteropData -->|"Option selected"| AllowDerivativeWorks
-    YourSoftware -->|"Based on existing software"| LicenseInteropSoftware
+    ThirdPartyLicense -->|"CC BY-NC"| ThirdPartyNCDerivatives
+    ThirdPartyNCDerivatives -->|"Yes"| ThirdPartyNCShareAlike
+    YourSoftware -->|"Based on existing software"| ModifyingExisting
     YourSoftware -->|"My own code"| Copyleft
+    ModifyingExisting -->|"Modifying the existing software"| LicenseInteropSoftware
     LicenseInteropSoftware -->|"Option selected"| Copyleft
     LicenseInteropSoftware -->|"Option selected"| StrongCopyleft
     Copyleft -->StrongCopyleft
     DataCopyrightable --> End([Select License])
-    AllowDerivativeWorks --> End([Select License])
-    ShareAlike --> End([Select License])
     CommercialUse --> End([Select License])
-    DecideAttribute --> End([Select License])
-    LicenseInteropData --> End([Select License])
+    ThirdPartyLicense --> End([Select License])
+    ThirdPartyNCDerivatives --> End([Select License])
+    ThirdPartyNCShareAlike --> End([Select License])
+    ModifyingExisting --> End([Select License])
     LicenseInteropSoftware --> End([Select License])
     Copyleft --> End([Select License])
     StrongCopyleft --> End([Select License])
-    EnsureLicensing --> Error([Cannot License])
-    LicenseInteropData --> Error([Cannot License])
+    ThirdPartyPublic --> Error([Cannot License])
+    ThirdPartyLicense --> Error([Cannot License])
     LicenseInteropSoftware --> Error([Cannot License])
 
     classDef dataPath fill:#e1f5ff,stroke:#01579b,stroke-width:2px,padding:15px,min-width:250px
@@ -239,18 +271,21 @@ will be linked)?"])
 | State | Question | Transitions | Type |
 |-------|----------|-------------|------|
 | KindOfContent | What do you want to deposit? | → YourSoftware<br>→ DataCopyrightable | Question |
-| DataCopyrightable | Is your data within the scope of copyright and related rights? | → OwnIPR | ✅ Terminal |
-| OwnIPR | Do you own copyright and similar rights in your dataset and all its constitutive parts? | → AllowDerivativeWorks<br>→ EnsureLicensing | Question |
-| AllowDerivativeWorks | Do you allow others to make derivative works? | → ShareAlike<br>→ CommercialUse | ✅ Terminal (Conditional) |
-| ShareAlike | Do you require others to share derivative works based on your data under a compatible license? | → CommercialUse<br>→ CommercialUse | ✅ Terminal (Conditional) |
-| CommercialUse | Do you allow others to make commercial use of you data? | → DecideAttribute | ✅ Terminal (Conditional) |
-| DecideAttribute | Do you want others to attribute your data to you? | N/A | ✅ Terminal |
-| EnsureLicensing | Are all the elements of your dataset licensed under a public license or in the Public Domain? | → LicenseInteropData | ❌ Error |
-| LicenseInteropData | Choose licenses present in your dataset: | → AllowDerivativeWorks<br>→ AllowDerivativeWorks<br>→ AllowDerivativeWorks | ❌ Error |
-| YourSoftware | Is your code based on existing software or is it your original work? | → LicenseInteropSoftware<br>→ Copyleft | Question |
+| DataCopyrightable | Is your data within the scope of copyright and/or special right of the database maker? | → AllOriginalWork | ✅ Terminal |
+| AllOriginalWork | Is everything in the dataset your original work? | → AllowDerivativeWorks<br>→ ThirdPartyPublic | Question |
+| AllowDerivativeWorks | Do you allow others to make derivative works? | → ShareAlike<br>→ CommercialUse | Question |
+| ShareAlike | Do you require others to share derivative works based on your data under the same license? | → CommercialUse<br>→ CommercialUse | Question |
+| CommercialUse | Do you allow others to use your data commercially? | N/A | ✅ Terminal |
+| ThirdPartyPublic | Is the third party content of the dataset licensed under a public license or in the public domain? | → MadeChanges | ❌ Error |
+| MadeChanges | Have you made any changes to the third party content of the dataset? | → ThirdPartyLicense<br>→ AllowDerivativeWorks | Question |
+| ThirdPartyLicense | Under which license was the third party content that you changed licensed? | → AllowDerivativeWorks<br>→ AllowDerivativeWorks<br>→ ThirdPartyNCDerivatives | ❌ Error |
+| ThirdPartyNCDerivatives | Do you allow others to make derivative works? | → ThirdPartyNCShareAlike | ✅ Terminal |
+| ThirdPartyNCShareAlike | Do you require others to share derivative works based on your data under the same license? | N/A | ✅ Terminal |
+| YourSoftware | Is your software based on existing code or is it all your original work? | → ModifyingExisting<br>→ Copyleft | Question |
+| ModifyingExisting | Are you modifying the existing software or is the existing software only being used as a part of your larger work? | → LicenseInteropSoftware | ✅ Terminal |
 | LicenseInteropSoftware | Select licenses in your code: | → Copyleft<br>→ StrongCopyleft | ❌ Error (Conditional) |
-| Copyleft | Do you require others who modify your code to release it under a compatible licence? | → StrongCopyleft | ✅ Terminal (Conditional) |
-| StrongCopyleft | Is your code used directly as an executable or are you licensing a library (your code will be linked)? | N/A | ✅ Terminal |
+| Copyleft | Do you require others who use your code in their software to release it under a compatible open-source license? | → StrongCopyleft | ✅ Terminal (Conditional) |
+| StrongCopyleft | Do you require others to use a compatible license for the software as a whole or only for the parts that modified your code? | N/A | ✅ Terminal |
 
 
 ## Legend
@@ -275,3 +310,4 @@ will be linked)?"])
 - **License Data**: `src/data/licenses.coffee`
 - **Compatibility Matrix**: `src/data/compatibility.coffee`
 - **Generator Script**: `scripts/generate-state-graph.js`
+- **Source Flowcharts**: `docs/license-selector-tree/LS_Flowchart_navrh_software_ENG.1 (1).pdf`, `LS_Flowchart_navrh_Data_ENG (4).pdf`

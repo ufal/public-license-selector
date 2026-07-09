@@ -16,16 +16,19 @@ QuestionDefinitions =
       @exclude 'software'
       @goto 'DataCopyrightable'
 
-  # Data
+  # ──────────────────────────────────────────────────────────────
+  # Data path
+  # ──────────────────────────────────────────────────────────────
+
   DataCopyrightable: ->
-    @question 'Is your data within the scope of copyright and related rights?'
-    @yes -> @goto 'OwnIPR'
+    @question 'Is your data within the scope of copyright and/or special right of the database maker?'
+    @yes -> @goto 'AllOriginalWork'
     @no -> @license 'cc-public-domain'
 
-  OwnIPR: ->
-    @question 'Do you own copyright and similar rights in your dataset and all its constitutive parts?'
+  AllOriginalWork: ->
+    @question 'Is everything in the dataset your original work?'
     @yes -> @goto 'AllowDerivativeWorks'
-    @no -> @goto 'EnsureLicensing'
+    @no -> @goto 'ThirdPartyPublic'
 
   AllowDerivativeWorks: ->
     @question 'Do you allow others to make derivative works?'
@@ -34,81 +37,75 @@ QuestionDefinitions =
       @goto 'ShareAlike'
     @no ->
       @include 'nd'
-      if @only 'nc'
-        @license()
-      else
-        @goto 'CommercialUse'
+      @goto 'CommercialUse'
 
   ShareAlike: ->
-    @question 'Do you require others to share derivative works based on your data under a compatible license?'
+    @question 'Do you require others to share derivative works based on your data under the same license?'
     @yes ->
       @include 'sa'
-      if @only 'nc'
-        @license()
-      else
-        @goto 'CommercialUse'
+      @goto 'CommercialUse'
     @no ->
       @exclude 'sa'
-      if @only 'nc'
-        @license()
-      else
-        @goto 'CommercialUse'
+      @goto 'CommercialUse'
 
   CommercialUse: ->
-    @question 'Do you allow others to make commercial use of you data?'
+    @question 'Do you allow others to use your data commercially?'
     @yes ->
       @exclude 'nc'
-      if @only 'by'
-        @license()
-      else
-        @goto 'DecideAttribute'
+      @license()
     @no ->
       @include 'nc'
       @include 'by'
       @license()
 
-  DecideAttribute: ->
-    @question 'Do you want others to attribute your data to you?'
-    @yes ->
-      @include 'by'
-      @license()
-    @no ->
-      @include 'public-domain'
-      @license()
-
-  EnsureLicensing: ->
-    @question 'Are all the elements of your dataset licensed under a public license or in the Public Domain?'
-    @yes -> @goto 'LicenseInteropData'
+  ThirdPartyPublic: ->
+    @question 'Is the third party content of the dataset licensed under a public license or in the public domain?'
+    @yes -> @goto 'MadeChanges'
     @no -> @cantlicense 'You need additional permission before you can deposit the data!'
 
-  LicenseInteropData: ->
-    @question 'Choose licenses present in your dataset:'
-    @option ['cc-public-domain', 'cc-zero', 'pddl'], -> @goto 'AllowDerivativeWorks'
-    @option ['cc-by', 'odc-by'], ->
-      @exclude 'public-domain'
-      @goto 'AllowDerivativeWorks'
-    @option ['cc-by-nc'], ->
-      @include 'nc'
-      @goto 'AllowDerivativeWorks'
-    @option ['cc-by-nc-sa'], ->
-      @license 'cc-by-nc-sa'
-    @option ['odbl'], -> @license 'odbl', 'cc-by-sa'
-    @option ['cc-by-sa'], -> @license 'cc-by-sa'
-    @option ['cc-by-nd', 'cc-by-nc-nd'], ->
-      @cantlicense "License doesn't allow derivative works. You need additional permission before you can deposit the data!"
-    nextAction = (state) ->
-      option = _(state.options).filter('selected').last()
-      return unless option?
-      option.action()
-    disabledCheck = (state) ->
-      !_.any state.options, (option) -> option.selected
-    @answer 'Next', nextAction, disabledCheck
+  MadeChanges: ->
+    @question 'Have you made any changes to the third party content of the dataset?'
+    @yes -> @goto 'ThirdPartyLicense'
+    @no -> @goto 'AllowDerivativeWorks'
 
-  # Software
+  ThirdPartyLicense: ->
+    @question 'Under which license was the third party content that you changed licensed?'
+    @answer 'Public Domain or CC Zero', -> @goto 'AllowDerivativeWorks'
+    @answer 'CC BY', -> @goto 'AllowDerivativeWorks'
+    @answer 'CC BY-NC', -> @goto 'ThirdPartyNCDerivatives'
+    @answer 'CC BY-SA', -> @license 'cc-by-sa'
+    @answer 'CC BY-NC-SA', ->
+      @cantlicense 'The license of the third party content does not allow redistribution under different terms.'
+    @answer 'CC BY-ND', ->
+      @cantlicense 'The license of the third party content does not allow derivative works.'
+    @answer 'CC BY-NC-ND', ->
+      @cantlicense 'The license of the third party content does not allow derivative works.'
+
+  ThirdPartyNCDerivatives: ->
+    @question 'Do you allow others to make derivative works?'
+    @yes -> @goto 'ThirdPartyNCShareAlike'
+    @no -> @license 'cc-by-nc-nd'
+
+  ThirdPartyNCShareAlike: ->
+    @question 'Do you require others to share derivative works based on your data under the same license?'
+    @yes -> @license 'cc-by-nc-sa'
+    @no -> @license 'cc-by-nc'
+
+  # ──────────────────────────────────────────────────────────────
+  # Software path
+  # ──────────────────────────────────────────────────────────────
+
   YourSoftware: ->
-    @question 'Is your code based on existing software or is it your original work?'
-    @answer 'Based on existing software', -> @goto 'LicenseInteropSoftware'
+    @question 'Is your software based on existing code or is it all your original work?'
+    @answer 'Based on existing software', -> @goto 'ModifyingExisting'
     @answer 'My own code', -> @goto 'Copyleft'
+
+  ModifyingExisting: ->
+    @question 'Are you modifying the existing software or is the existing software only being used as a part of your larger work?'
+    @answer 'Modifying the existing software', -> @goto 'LicenseInteropSoftware'
+    @answer 'Only being used as a part of your larger work', ->
+      @include 'weak'
+      @license()
 
   LicenseInteropSoftware: ->
     @question 'Select licenses in your code:'
@@ -118,6 +115,7 @@ QuestionDefinitions =
     nextAction = (state) ->
       licenses = _(state.options).filter('selected').pluck('licenses').flatten().valueOf()
       return if licenses.length is 0
+      selectedLicenses = licenses.slice()
       for license1 in licenses
         index1 = _.indexOf(LicenseCompatibility.columns, license1.key)
         for license2 in licenses
@@ -138,6 +136,13 @@ QuestionDefinitions =
         licenseKey = LicenseCompatibility.columns[index]
         licenses.push @licenses[licenseKey] if licenseKey && @licenses[licenseKey]?
 
+      # Enforce version constraints: if a selected license has a fixed version,
+      # restrict the result list to that exact license key.
+      for sel in selectedLicenses
+        if sel.versionConstraint is 'fixed'
+          licenses = (l for l in licenses when l.key is sel.key)
+          break
+
       @licensesList.update(licenses)
 
       if @has('copyleft') and @has('permissive')
@@ -150,7 +155,7 @@ QuestionDefinitions =
     @answer 'Next', nextAction, (state) -> !_.any state.options, (option) -> option.selected
 
   Copyleft: ->
-    @question 'Do you require others who modify your code to release it under a compatible licence?'
+    @question 'Do you require others who use your code in their software to release it under a compatible open-source license?'
     @yes ->
       @include 'copyleft'
       if @has('weak') and @has('strong')
@@ -163,11 +168,11 @@ QuestionDefinitions =
       @license()
 
   StrongCopyleft: ->
-    @question 'Is your code used directly as an executable or are you licensing a library (your code will be linked)?'
-    @answer 'Executable', ->
+    @question 'Do you require others to use a compatible license for the software as a whole or only for the parts that modified your code?'
+    @answer 'For the software as a whole', ->
       @include 'strong'
       @license()
-    @answer 'Library', ->
+    @answer 'Only for the parts that modified my code', ->
       @include 'weak'
       @license()
 
